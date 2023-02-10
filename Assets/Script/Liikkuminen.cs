@@ -4,7 +4,7 @@ using UnityEngine;
 // ©GameGurus - Heikkinen R., Hopeasaari J., Kantola J., Kettunen J., Kommio R, PC, Parviainen P., Rautiainen J.
 // Tekij‰: Kettunen. J
 // TODO: 
-// -
+// - Kiihtyvyys?
 // Luo hahmolle Character controllerin (ohjaimen) ja huolehtii hahmon liikkeest‰ pelialueella.
 public class Liikkuminen : MonoBehaviour
 {
@@ -12,14 +12,15 @@ public class Liikkuminen : MonoBehaviour
     public float pelaajanNopeus = 3.0f;
     public float hypynKorkeus = 1.0f;
     public float painovoima = 9.81f;
+    public float liikeIlmassaKerroin = 0.3f;
 
     // Privaatit muuttujat jotka eiv‰t n‰y Unityss‰
     private CharacterController ohjain;
     private float hyppyNopeus;
     private float maassaAjastin;
     private Vector3 liike;
+    private Vector3 viimeliike;
 
-    bool pelaajaMaassa;
     bool tuplahyppy;
 
     /// <summary>
@@ -35,19 +36,25 @@ public class Liikkuminen : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        pelaajaMaassa = ohjain.isGrounded;
-        if (pelaajaMaassa)
+        liike = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        if (ohjain.isGrounded)
         {
             // Annetaan pieni viive maassa olemisen tarkistukselle
             maassaAjastin = 0.2f;
+            viimeliike = liike;
         }
+        else
+        {
+            liike = viimeliike + ((viimeliike - liike) * -liikeIlmassaKerroin);
+        }
+
         if (maassaAjastin > 0)
         {
             maassaAjastin -= Time.deltaTime;
         }
 
         // Nollataan pelaajan pystysuuntainen nopeus maahan osuttaessa
-        if (pelaajaMaassa && hyppyNopeus < 0)
+        if (ohjain.isGrounded && hyppyNopeus < 0)
         {
             hyppyNopeus = 0f;
         }
@@ -55,18 +62,8 @@ public class Liikkuminen : MonoBehaviour
         // painovoima pelaajalle
         hyppyNopeus -= painovoima * Time.deltaTime;
 
-        // Lasketaan liikkeen suunta
-        liike = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-
         // skaalataan liike annetun nopeuden mukaiseksi
         liike *= pelaajanNopeus;
-
-
-        // Annetaan liikkeelle hystereesi‰
-        if (liike.magnitude > 0.05f)
-        {
-            gameObject.transform.forward = liike;
-        }
 
         // Hypp‰‰minen
         if (Input.GetButtonDown("Hyppy"))
@@ -77,13 +74,14 @@ public class Liikkuminen : MonoBehaviour
                 // Nollataan ajastin varmuuden vuoksi
                 maassaAjastin = 0;
 
-                // Hypyn nopeus laskettuna hyppykorkeuden ja painovoiman avulla.
+                // Hypyn nopeus/voima laskettuna hyppykorkeuden ja painovoiman avulla.
                 hyppyNopeus += Mathf.Sqrt(hypynKorkeus * 2 * painovoima);
-                tuplahyppy = true;
+                tuplahyppy = true; //sallii toisen hypyn
             }
             else if (tuplahyppy)
             {
-                // Hypyn nopeus laskettuna hyppykorkeuden ja painovoiman avulla.
+                hyppyNopeus = 0f;
+                // Hypyn nopeus/voima laskettuna hyppykorkeuden ja painovoiman avulla.
                 hyppyNopeus += Mathf.Sqrt(hypynKorkeus * 2 * painovoima);
                 tuplahyppy = false;
             }
