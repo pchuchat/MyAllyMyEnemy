@@ -41,12 +41,11 @@ GameObject:
   m_Component:
   - component: {fileID: 323129550835044740}
   - component: {fileID: 323129550835044741}
+  - component: {fileID: 7681525300652446687}
+  - component: {fileID: 7598341486325973947}
   - component: {fileID: 323129550835044742}
   - component: {fileID: 323129550835044743}
   - component: {fileID: 127861193528252065}
-  - component: {fileID: 4178816711611046779}
-  - component: {fileID: 2255202215977188635}
-  - component: {fileID: -3862678640795739618}
   m_Layer: 0
   m_Name: player
   m_TagString: Untagged
@@ -67,6 +66,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 323129550260297970}
+  - {fileID: 963194228}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -78,6 +78,83 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 323129550835044744}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &7681525300652446687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 323129550835044744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e00347e45f7832b42b32b8447f01df32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerSpeed: 6
+  jumpHeight: 1
+  gravityValue: -9.81
+--- !u!114 &7598341486325973947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 323129550835044744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 690d525f4f2362b4e8476c3f91042cee, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7681525300652446687}
+        m_TargetAssemblyTypeName: kokeilu, Assembly-CSharp
+        m_MethodName: onMove
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 57f26671-b3d8-4eb8-b9f5-8cdcf818dbc1
+    m_ActionName: Player/Movement[/DualShock4GamepadHID/leftStick,/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7681525300652446687}
+        m_TargetAssemblyTypeName: kokeilu, Assembly-CSharp
+        m_MethodName: onJump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b017ab7a-e0a4-4989-926c-5d9719b5071a
+    m_ActionName: Player/Jump[/Keyboard/space,/DualShock4GamepadHID/buttonSouth]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: Kaikkitomii
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!23 &323129550835044742
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -150,92 +227,67 @@ CharacterController:
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
+  m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4178816711611046779
-MonoBehaviour:
+--- !u!1001 &8484650840293467674
+PrefabInstance:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 323129550835044740}
+    m_Modifications:
+    - target: {fileID: 8484650840706009963, guid: e9358aa12ec534e42bdb559892745f03, type: 3}
+      propertyPath: m_Name
+      value: Main Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 8484650840706009966, guid: e9358aa12ec534e42bdb559892745f03, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8484650840706009966, guid: e9358aa12ec534e42bdb559892745f03, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -8.974922
+      objectReference: {fileID: 0}
+    - target: {fileID: 8484650840706009966, guid: e9358aa12ec534e42bdb559892745f03, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 22.919949
+      objectReference: {fileID: 0}
+    - target: {fileID: 8484650840706009966, guid: e9358aa12ec534e42bdb559892745f03, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -47.345543
+      objectReference: {fileID: 0}
+    - target: {fileID: 8484650840706009966, guid: e9358aa12ec534e42bdb559892745f03, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.97370136
+      objectReference: {fileID: 0}
+    - target: {fileID: 8484650840706009966, guid: e9358aa12ec534e42bdb559892745f03, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.19517152
+      objectReference: {fileID: 0}
+    - target: {fileID: 8484650840706009966, guid: e9358aa12ec534e42bdb559892745f03, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.11729892
+      objectReference: {fileID: 0}
+    - target: {fileID: 8484650840706009966, guid: e9358aa12ec534e42bdb559892745f03, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.0074027334
+      objectReference: {fileID: 0}
+    - target: {fileID: 8484650840706009966, guid: e9358aa12ec534e42bdb559892745f03, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 22.446
+      objectReference: {fileID: 0}
+    - target: {fileID: 8484650840706009966, guid: e9358aa12ec534e42bdb559892745f03, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 14.124
+      objectReference: {fileID: 0}
+    - target: {fileID: 8484650840706009966, guid: e9358aa12ec534e42bdb559892745f03, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 1.945
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e9358aa12ec534e42bdb559892745f03, type: 3}
+--- !u!4 &963194228 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8484650840706009966, guid: e9358aa12ec534e42bdb559892745f03, type: 3}
+  m_PrefabInstance: {fileID: 8484650840293467674}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 323129550835044744}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 1530c0f4aa450db49a8126fd3a36374e, type: 3}
-  m_NotificationBehavior: 2
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2255202215977188635}
-        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
-        m_MethodName: OnMove
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 54a8bcce-7204-444c-a046-00a60d47e0e0
-    m_ActionName: Liikkuminen/Move[/Keyboard/w,/Keyboard/a,/Keyboard/d]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: -3862678640795739618}
-        m_TargetAssemblyTypeName: JumpScript, Assembly-CSharp
-        m_MethodName: onJump
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 49d72dd3-3b26-4b7e-bf43-20c772665ae8
-    m_ActionName: Liikkuminen/Jump[/Keyboard/space,/DualShock4GamepadHID/rightStick]
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Liikkuminen
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
---- !u!114 &2255202215977188635
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 323129550835044744}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1bc80e2891718a44ba0b781d45bbaef8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
---- !u!114 &-3862678640795739618
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 323129550835044744}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f544f3910180e6947aa9445b5d76442f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

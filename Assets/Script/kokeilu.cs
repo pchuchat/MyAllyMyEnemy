@@ -1,32 +1,63 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(CharacterController))]
 public class kokeilu : MonoBehaviour
 {
+    [SerializeField]
+    private float playerSpeed = 2.0f;
+    [SerializeField]
+    private float jumpHeight = 1.0f;
+    [SerializeField]
+    private float gravityValue = -9.81f;
 
-    Rigidbody rb;
-    public float speed = 6f;
-    public float jumpForce = 5f;
+    private CharacterController controller;
+    private Vector3 playerVelocity;
+    private bool groundedPlayer;
 
+    private Vector2 movementInput = Vector2.zero;
+    private bool canDoubleJump = false;
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        controller = gameObject.GetComponent<CharacterController>();
     }
 
-
-    private void Update()
+    public void onMove(InputAction.CallbackContext context)
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
+        movementInput = context.ReadValue<Vector2>();
+    }
 
-        rb.velocity = new Vector3(horizontalInput * speed, rb.velocity.y, verticalInput * speed);
-
-        if (Input.GetButtonDown("Jump"))
+    public void onJump(InputAction.CallbackContext context)
+    {
+        if (context.performed)
         {
-            rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
+            if (groundedPlayer)
+            {
+                playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+                canDoubleJump = true;
+            }
+            else if (canDoubleJump)
+            {
+                playerVelocity.y = Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+                canDoubleJump = false;
+            }
+        }
+    }
+
+    void Update()
+    {
+        groundedPlayer = controller.isGrounded;
+        if (groundedPlayer && playerVelocity.y < 0)
+        {
+            playerVelocity.y = 0f;
+            canDoubleJump = false;
         }
 
+        Vector3 move = new Vector3(movementInput.x, 0, movementInput.y);
+        controller.Move(move * Time.deltaTime * playerSpeed);
+
+        playerVelocity.y += gravityValue * Time.deltaTime;
+        controller.Move(playerVelocity * Time.deltaTime);
     }
 }
