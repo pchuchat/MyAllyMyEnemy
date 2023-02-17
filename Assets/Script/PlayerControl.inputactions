@@ -18,7 +18,7 @@
                     "name": "Jump",
                     "type": "Value",
                     "id": "49d72dd3-3b26-4b7e-bf43-20c772665ae8",
-                    "expectedControlType": "Vector2",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -104,8 +104,8 @@
                 },
                 {
                     "name": "",
-                    "id": "4fb0e020-709c-4fdd-948d-ccf508997218",
-                    "path": "<DualShockGamepad>/rightStick",
+                    "id": "02542b14-7935-440a-adf0-ac9cca45e25b",
+                    "path": "<DualShockGamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
