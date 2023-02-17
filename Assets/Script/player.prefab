@@ -128,8 +128,8 @@ GameObject:
   - component: {fileID: 323129550835044742}
   - component: {fileID: 323129550835044743}
   - component: {fileID: 127861193528252065}
-  - component: {fileID: 2435125369842689695}
   - component: {fileID: 4178816711611046779}
+  - component: {fileID: 2255202215977188635}
   m_Layer: 0
   m_Name: player
   m_TagString: Untagged
@@ -236,19 +236,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2435125369842689695
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 323129550835044744}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1bc80e2891718a44ba0b781d45bbaef8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
 --- !u!114 &4178816711611046779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -276,7 +263,7 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2435125369842689695}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
         m_MethodName: OnMove
         m_Mode: 0
@@ -299,3 +286,17 @@ MonoBehaviour:
   m_DefaultActionMap: Liikkuminen
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &2255202215977188635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 323129550835044744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bc80e2891718a44ba0b781d45bbaef8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+  jumpForce: 5
