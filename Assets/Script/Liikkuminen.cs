@@ -89,4 +89,14 @@ public class Liikkuminen : MonoBehaviour
         liike.y = hyppyNopeus;
         ohjain.Move(liike * Time.deltaTime);
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("vihunpaa"))
+        {
+            Destroy(collision.transform.parent.gameObject);
+            Debug.Log("vihokuoli");
+        }
+        
+    }
 }
