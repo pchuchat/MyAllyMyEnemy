@@ -11,13 +11,15 @@ public class kokeilu : MonoBehaviour
     [SerializeField]
     private float gravityValue = -9.81f;
     [SerializeField]
-    private AudioSource aaniLahto; //Lis‰sin hyppy‰‰nt‰ varten J.K.
-    [SerializeField]
     private AudioClip hyppyAani; //Lis‰sin hyppy‰‰nt‰ varten J.K.
+    [SerializeField]
+    private AudioClip tuplahyppyAani; //Lis‰sin hyppy‰‰nt‰ varten J.K.
 
     private CharacterController controller;
     private Vector3 playerVelocity;
     private bool groundedPlayer;
+
+    private AudioSource aaniLahto; //Lis‰sin hyppy‰‰nt‰ varten J.K.
 
     private Vector2 movementInput = Vector2.zero;
     private bool canDoubleJump = false;
@@ -40,25 +42,25 @@ public class kokeilu : MonoBehaviour
         {
             if (groundedPlayer)
             {
-                HyppyAani(); //Lis‰sin hyppy‰‰nt‰ varten J.K.
+                //Lis‰sin hyppy‰‰nt‰ varten J.K.
+                aaniLahto.clip = hyppyAani;
+                aaniLahto.Play();
+
                 playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
                 canDoubleJump = true;
             }
             else if (canDoubleJump)
             {
-                HyppyAani(); //Lis‰sin hyppy‰‰nt‰ varten J.K.
+                //Lis‰sin hyppy‰‰nt‰ varten J.K.
+                aaniLahto.clip = tuplahyppyAani;
+                aaniLahto.Play();
+
                 playerVelocity.y = Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
                 canDoubleJump = false;
             }
         }
     }
 
-    //Lis‰sin hyppy‰‰nt‰ varten J.K.
-    public void HyppyAani()
-    {
-        aaniLahto.clip = hyppyAani;
-        aaniLahto.Play();
-    }
 
     void Update()
     {
