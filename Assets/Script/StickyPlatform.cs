@@ -6,7 +6,7 @@ public class StickyPlatform : MonoBehaviour
 {
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.name == "player")
+        if (collision.gameObject.name == "player(Clone)") 
         {
             collision.gameObject.transform.SetParent(transform);
         }
@@ -14,7 +14,7 @@ public class StickyPlatform : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.name == "player")
+        if (collision.gameObject.name == "player(Clone)")
         {
             collision.gameObject.transform.SetParent(null);
         }
