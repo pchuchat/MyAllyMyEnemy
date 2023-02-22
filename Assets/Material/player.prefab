@@ -94,8 +94,8 @@ MonoBehaviour:
   playerSpeed: 6
   jumpHeight: 1
   gravityValue: -9.81
-  hyppyAani: {fileID: 0}
-  tuplahyppyAani: {fileID: 0}
+  hyppyAani: {fileID: 8300000, guid: 29bde6326b4c34ad8a12da475f79b50a, type: 3}
+  tuplahyppyAani: {fileID: 8300000, guid: 4b4dd7245f6104c8c8eb07ccf6b386ed, type: 3}
 --- !u!114 &7598341486325973947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,7 +244,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.25
   m_Pitch: 1
   Loop: 0
   Mute: 0
