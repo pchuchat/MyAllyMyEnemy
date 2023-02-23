@@ -154,7 +154,7 @@ MonoBehaviour:
     m_ActionId: b017ab7a-e0a4-4989-926c-5d9719b5071a
     m_ActionName: Player/Jump[/Keyboard/space,/DualShock4GamepadHID/buttonSouth]
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Kaikkitomii
+  m_DefaultControlScheme: Pleikka
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
