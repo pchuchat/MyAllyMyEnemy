@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 1665556982349371277}
   - component: {fileID: 5794690144069161343}
   m_Layer: 0
-  m_Name: player 2
+  m_Name: Kipina
   m_TagString: player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
