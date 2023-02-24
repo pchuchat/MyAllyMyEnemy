@@ -92,7 +92,7 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""WADS"",
+                    ""name"": ""WASD"",
                     ""id"": ""28c98de9-4524-4e73-ad12-48025deb709f"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
@@ -138,7 +138,7 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""right"",
                     ""id"": ""4aa1e87b-bfda-4998-bdd1-fcc59a285376"",
-                    ""path"": ""<Keyboard>/s"",
+                    ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller2;Pleikka;Kaikkitomii"",
