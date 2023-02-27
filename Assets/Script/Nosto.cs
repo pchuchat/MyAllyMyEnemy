@@ -15,11 +15,6 @@ public class Nosto : MonoBehaviour
 
     private void Start()
     {
-        controller = gameObject.GetComponent<CharacterController>();
-    }
-
-    public void onNosto(InputAction.CallbackContext context)
-    {
-        Debug.Log("Nostetaan!");
+       
     }
 }
