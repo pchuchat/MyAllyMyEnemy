@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
-public class kokeilu : MonoBehaviour
+public class PlayerMovement: MonoBehaviour
 {
     [SerializeField]
     private float playerSpeed = 2.0f;
