@@ -1,3 +1,6 @@
 # MyAllyMyEnemy
 TODO
-Testaillaan
+Sticky platform toimimaan
+Kokeilu- ja characterSwitcher-scriptien nimet kuvaavammiksi
+Kommentoimattomien scriptien kommentointi
+

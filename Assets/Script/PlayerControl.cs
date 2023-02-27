@@ -71,6 +71,17 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""73cbb2dc-09b3-4e9b-b429-569ab43dd729"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Pleikka;Kaikkitomii"",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""37aed7ae-b288-45a4-bba4-5881e7912c47"",
                     ""path"": ""<DualShockGamepad>/leftStick"",
                     ""interactions"": """",
@@ -81,7 +92,7 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""WADS"",
+                    ""name"": ""WASD"",
                     ""id"": ""28c98de9-4524-4e73-ad12-48025deb709f"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
@@ -127,7 +138,7 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""right"",
                     ""id"": ""4aa1e87b-bfda-4998-bdd1-fcc59a285376"",
-                    ""path"": ""<Keyboard>/s"",
+                    ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller2;Pleikka;Kaikkitomii"",
@@ -189,6 +200,17 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3d4d3208-9cdd-4329-8a13-bdd774b41690"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Kaikkitomii;Pleikka"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
