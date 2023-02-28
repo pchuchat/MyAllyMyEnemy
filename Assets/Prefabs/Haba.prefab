@@ -108,6 +108,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb6fe11ddb556ca459f7c8d8bab2a4d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 5576888401921507567, guid: dc00194bfc658df4581e93c6d4b3d915, type: 3}
+  force: 10
 --- !u!114 &7598341486325973947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,7 +238,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 323129550835044744}
   m_Material: {fileID: 13400000, guid: 667889b4221b39a48b84e6df098c0743, type: 2}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5
   m_Height: 2

@@ -11,7 +11,13 @@ using UnityEngine.InputSystem; // katsotaan kohta onko tarpeellinan
 
 public class LiftObject : MonoBehaviour
 {
+    // Public attributes visible in unity
     private CharacterController controller;
+
+    private bool canLift = false; //a bool to see if you can or cant pick up the item
+    public GameObject target; // Kohde, mikä halutaan nostaa
+    public float force; //Kuinka paljon esinettä nostetaan kerralla
+    float forcecontrol;
 
     private void Start()
     {
@@ -20,7 +26,29 @@ public class LiftObject : MonoBehaviour
 
     public void onLift(InputAction.CallbackContext context)
     {
-        Debug.Log("Nostetaan!");
+        Debug.Log("Nostetaanko?");
+        if (string.Equals(target.tag,"liftable"))
+        {
+            canLift = true;
+            Debug.Log("oikea tag!");
+        }
+
+        if(canLift == true)
+        {
+            target.GetComponent<Rigidbody>().AddForce(Vector3.up * force);
+            //target.transform.Translate(Vector3.up * force * Time.deltaTime, Space.World);
+            Debug.Log("Nostetaan!");
+        }
+    }
+
+    private void Update()
+    {
+        forcecontrol = Input.GetAxis("Vertical");
+    }
+
+    private void FixedUpdate()
+    {
+        target.GetComponent<Rigidbody>().AddForce(Vector3.up * forcecontrol* force);
     }
 }
 
