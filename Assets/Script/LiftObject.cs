@@ -9,7 +9,7 @@ using UnityEngine.InputSystem; // katsotaan kohta onko tarpeellinan
 // - Haba lifts an object by repeatedly clicking the interact-button
 // Huom huom huom muista tarkistaa että esineellä on tag "Nostettava"
 
-public class Nosto : MonoBehaviour
+public class LiftObject : MonoBehaviour
 {
     private CharacterController controller;
 
