@@ -24,7 +24,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Nosto",
+                    "name": "Lift",
                     "type": "Button",
                     "id": "8d6d92bf-79bc-4608-809f-2a91e984bb96",
                     "expectedControlType": "Button",
@@ -206,7 +206,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Nosto",
+                    "action": "Lift",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
