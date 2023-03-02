@@ -4,16 +4,17 @@ using UnityEngine;
 // TODO:
 //  -preventing players from moving off-camera
 //  -limiting camera movement to level boundaries
-//  -limiting vertical camera movement
 //
 // Finds the objects tagged as player in the scene and follows their midpoint with the camera(rig)
 public class CameraMovement : MonoBehaviour
 {
+    public float zoomFactor = 15f;
+    public float cameraHeight = 10f;
+
     private GameObject[] players;
-    private Camera mainCamera;
     void Start()
     {
-        mainCamera = Camera.main;
+
     }
 
     /// <summary>
@@ -21,7 +22,6 @@ public class CameraMovement : MonoBehaviour
     /// </summary>
     public void MoveCamera()
     {
-        float zoomFactor = 10f;
         float followTimeDelta = 0.8f;
         if (players.Length == 2)
         {
@@ -29,8 +29,9 @@ public class CameraMovement : MonoBehaviour
             Vector3 midpoint = (players[0].transform.position + players[1].transform.position) / 2f;
 
             // Moving the camera
-            Vector3 cameraDestination = midpoint - mainCamera.transform.forward * zoomFactor;
-            mainCamera.transform.position = Vector3.Slerp(mainCamera.transform.position, cameraDestination, followTimeDelta);
+            Vector3 cameraDestination = midpoint - transform.forward * zoomFactor;
+            cameraDestination.y = cameraHeight;
+            transform.position = Vector3.Slerp(transform.position, cameraDestination, followTimeDelta);
         }
         if (players.Length == 1) //Added for testing with one player
         {
@@ -38,14 +39,17 @@ public class CameraMovement : MonoBehaviour
             Vector3 cameraTarget = players[0].transform.position;
 
             // Moving the camera
-            Vector3 cameraDestination = cameraTarget - mainCamera.transform.forward * zoomFactor;
-            mainCamera.transform.position = Vector3.Slerp(mainCamera.transform.position, cameraDestination, followTimeDelta);
+            Vector3 cameraDestination = cameraTarget - transform.forward * zoomFactor;
+            cameraDestination.y = cameraHeight;
+            transform.position = Vector3.Slerp(transform.position, cameraDestination, followTimeDelta);
         }
     }
 
     void Update()
     {
+        //Finding the players from the scene
         players = GameObject.FindGameObjectsWithTag("player");
+
         MoveCamera();
     }
     
