@@ -4,6 +4,7 @@ using UnityEngine;
 // TODO:
 //  -preventing players from moving off-camera
 //  -limiting camera movement to level boundaries
+//  -limiting vertical camera movement
 //
 // Finds the objects tagged as player in the scene and follows their midpoint with the camera(rig)
 public class CameraMovement : MonoBehaviour
@@ -22,14 +23,24 @@ public class CameraMovement : MonoBehaviour
     {
         float zoomFactor = 10f;
         float followTimeDelta = 0.8f;
-        
+        if (players.Length == 2)
+        {
             // Calculating the midpoint of the players
             Vector3 midpoint = (players[0].transform.position + players[1].transform.position) / 2f;
 
             // Moving the camera
             Vector3 cameraDestination = midpoint - mainCamera.transform.forward * zoomFactor;
             mainCamera.transform.position = Vector3.Slerp(mainCamera.transform.position, cameraDestination, followTimeDelta);
+        }
+        if (players.Length == 1) //Added for testing with one player
+        {
+            // Getting the position of the player
+            Vector3 cameraTarget = players[0].transform.position;
 
+            // Moving the camera
+            Vector3 cameraDestination = cameraTarget - mainCamera.transform.forward * zoomFactor;
+            mainCamera.transform.position = Vector3.Slerp(mainCamera.transform.position, cameraDestination, followTimeDelta);
+        }
     }
 
     void Update()
