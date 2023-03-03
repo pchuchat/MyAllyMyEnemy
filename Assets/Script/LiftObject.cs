@@ -7,17 +7,17 @@ using UnityEngine.InputSystem; // katsotaan kohta onko tarpeellinan
 // By: Parviainen P
 // TODO: 
 // - Haba lifts an object by repeatedly clicking the interact-button
-// Huom huom huom muista tarkistaa että esineellä on tag "Nostettava"
 
 public class LiftObject : MonoBehaviour
 {
     // Public attributes (visible in Unity)    
     public float force; //Kuinka paljon esinettä nostetaan kerralla
     public float distance; //kuinka lähellä nostettava esine saa olla (TODO: tarkista onko nämä metreissä?)
+    // Onko float näihin fiksu vai kannattaisiko olla joku muu?
 
     // Private attributes
     private CharacterController controller;
-    private bool canLift = false; //a bool to see if you can or cant pick up the item
+    private bool canLift = false; //a bool to see if you can up the target item
     private GameObject target; // Kohde, mikä halutaan nostaa
 
     // Poistettavia jos ei käytetäkkään
@@ -32,10 +32,17 @@ public class LiftObject : MonoBehaviour
     {
 
         // Mieluummin jonnekin muualle? Muuten tarkistaa joka napinpainalluksella. Pelaajalle state?
+        // Kömpelö eka ratkaisu? -> Jos target null -> Aliohjelmaan joka laittaa targettiin lähellä olevan esineen
+        // ===> Samalla kun laitetaan targettiin esine tarkistetaan onko oikea tag?
+        // Ongelmia: Jos on aiemmin nostettu toista esinettä target ei ole null --> Nullaa target kun esine pudotetaan?
+        //           Samalla myös nullataan canlift?
+        // Plussia: Ei tarvitsisi joka napinpainalluksella tarkistaa etäisyyttä gameobjectiin, objectin tagia ja onko canlift true
+        //          Tarkistettaisiin vain onko target TAI canlift null/false (vai molemmat hmm)
+
         // Todo: Rajaa distance niin, että se ottaa vain pelaajan edestä
-        if (2 < distance) //todo: pelaajan etäisyys objektiin < distance
+        if (2 < distance) //todo: pelaajan etäisyys objectiin < distance
         {
-            //target = lähellä oleva gameobject
+            //target = lähellä oleva gameobject --> hae lähellä olevat gameobjectit? Ellei voi ottaa if-lauseen omaa
         }
 
         Debug.Log("Nostetaanko?");
@@ -54,7 +61,7 @@ public class LiftObject : MonoBehaviour
 
     private void Update()
     {
-        
+
     }
 }
 
