@@ -11,21 +11,33 @@ using UnityEngine.InputSystem; // katsotaan kohta onko tarpeellinan
 
 public class LiftObject : MonoBehaviour
 {
-    // Public attributes visible in unity
-    private CharacterController controller;
-
-    private bool canLift = false; //a bool to see if you can or cant pick up the item
-    public GameObject target; // Kohde, mik‰ halutaan nostaa
+    // Public attributes (visible in Unity)    
     public float force; //Kuinka paljon esinett‰ nostetaan kerralla
-    float forcecontrol;
+    public float distance; //kuinka l‰hell‰ nostettava esine saa olla (TODO: tarkista onko n‰m‰ metreiss‰?)
+
+    // Private attributes
+    private CharacterController controller;
+    private bool canLift = false; //a bool to see if you can or cant pick up the item
+    private GameObject target; // Kohde, mik‰ halutaan nostaa
+
+    // Poistettavia jos ei k‰ytet‰kk‰‰n
+    float forcecontrol; // ei k‰ytet‰ atm miss‰‰n mutta ohjeessa updatessa nostovoima kerrottiin viel‰ t‰ll‰
 
     private void Start()
     {
         controller = gameObject.GetComponent<CharacterController>();
     }
 
-    public void onLift(InputAction.CallbackContext context)
+    public void OnLift(InputAction.CallbackContext context)
     {
+
+        // Mieluummin jonnekin muualle? Muuten tarkistaa joka napinpainalluksella. Pelaajalle state?
+        // Todo: Rajaa distance niin, ett‰ se ottaa vain pelaajan edest‰
+        if (2 < distance) //todo: pelaajan et‰isyys objektiin < distance
+        {
+            //target = l‰hell‰ oleva gameobject
+        }
+
         Debug.Log("Nostetaanko?");
         if (string.Equals(target.tag,"liftable"))
         {
