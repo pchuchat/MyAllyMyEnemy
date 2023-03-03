@@ -36,19 +36,13 @@ public class LiftObject : MonoBehaviour
         if(canLift == true)
         {
             target.GetComponent<Rigidbody>().AddForce(Vector3.up * force);
-            //target.transform.Translate(Vector3.up * force * Time.deltaTime, Space.World);
             Debug.Log("Nostetaan!");
         }
     }
 
     private void Update()
     {
-        forcecontrol = Input.GetAxis("Vertical");
-    }
-
-    private void FixedUpdate()
-    {
-        target.GetComponent<Rigidbody>().AddForce(Vector3.up * forcecontrol* force);
+        
     }
 }
 
