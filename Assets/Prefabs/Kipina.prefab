@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3141626264398370797}
   - component: {fileID: 1876757266315235643}
-  - component: {fileID: -2268557042280284814}
   - component: {fileID: 3260999780800181183}
+  - component: {fileID: -2268557042280284814}
   - component: {fileID: 1533952752647032251}
   - component: {fileID: 584553580116275655}
   - component: {fileID: 1665556982349371277}
@@ -47,6 +47,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7914690069507361137}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &3260999780800181183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7914690069507361137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e00347e45f7832b42b32b8447f01df32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerSpeed: 6
+  jumpHeight: 1
+  gravityValue: -9.81
+  hyppyAani: {fileID: 8300000, guid: ffb159a21c8a04135a5616979c828fab, type: 3}
+  tuplahyppyAani: {fileID: 8300000, guid: 2c5292ba5cf254919a6b9e2b18e04f49, type: 3}
 --- !u!114 &-2268557042280284814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104,28 +121,15 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: b017ab7a-e0a4-4989-926c-5d9719b5071a
     m_ActionName: Player/Jump[/Keyboard/space,/DualShock4GamepadHID/buttonSouth]
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Kaikkitomii
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2ad2077c-925c-40ea-9122-549ca29a267c
+    m_ActionName: Player/Interact[/XInputControllerWindows/buttonEast,/Keyboard/k,/Keyboard/numpad2]
+  m_NeverAutoSwitchControlSchemes: 1
+  m_DefaultControlScheme: Player2
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &3260999780800181183
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7914690069507361137}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e00347e45f7832b42b32b8447f01df32, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerSpeed: 6
-  jumpHeight: 1
-  gravityValue: -9.81
-  hyppyAani: {fileID: 8300000, guid: ffb159a21c8a04135a5616979c828fab, type: 3}
-  tuplahyppyAani: {fileID: 8300000, guid: 2c5292ba5cf254919a6b9e2b18e04f49, type: 3}
 --- !u!23 &1533952752647032251
 MeshRenderer:
   m_ObjectHideFlags: 0

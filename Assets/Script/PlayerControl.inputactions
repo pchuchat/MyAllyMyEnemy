@@ -2,11 +2,11 @@
     "name": "PlayerControl",
     "maps": [
         {
-            "name": "Player",
+            "name": "Default",
             "id": "ec248a72-9b73-4558-97e8-d5869afb0cf2",
             "actions": [
                 {
-                    "name": "Movement",
+                    "name": "Move",
                     "type": "PassThrough",
                     "id": "57f26671-b3d8-4eb8-b9f5-8cdcf818dbc1",
                     "expectedControlType": "Vector2",
@@ -22,50 +22,59 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Interact",
+                    "type": "Button",
+                    "id": "2ad2077c-925c-40ea-9122-549ca29a267c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "552f225f-f3eb-4b4a-ad24-b1b02ddc27a5",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Pleikka;Controller2;Controller1;Kaikkitomii",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "20a53144-b1c0-4aa4-9c78-253a14fdc096",
-                    "path": "<DualShockGamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Pleikka;Kaikkitomii",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "",
                     "id": "73cbb2dc-09b3-4e9b-b429-569ab43dd729",
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Pleikka;Kaikkitomii",
+                    "groups": "Player2;Player1",
                     "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "37aed7ae-b288-45a4-bba4-5881e7912c47",
-                    "path": "<DualShockGamepad>/leftStick",
+                    "id": "552f225f-f3eb-4b4a-ad24-b1b02ddc27a5",
+                    "path": "<Keyboard>/j",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Pleikka;Kaikkitomii",
-                    "action": "Movement",
+                    "groups": "Player1",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1902f914-df66-40b5-992b-1411d2a9b324",
+                    "path": "<Keyboard>/numpad1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Player2",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3d4d3208-9cdd-4329-8a13-bdd774b41690",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Player1;Player2",
+                    "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -76,7 +85,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Movement",
+                    "action": "Move",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -86,8 +95,8 @@
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Controller2;Pleikka;Kaikkitomii",
-                    "action": "Movement",
+                    "groups": "Player1",
+                    "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -97,8 +106,8 @@
                     "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Controller2;Pleikka;Kaikkitomii",
-                    "action": "Movement",
+                    "groups": "Player1",
+                    "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -108,8 +117,8 @@
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Controller2;Pleikka;Kaikkitomii",
-                    "action": "Movement",
+                    "groups": "Player1",
+                    "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -119,19 +128,19 @@
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Controller2;Pleikka;Kaikkitomii",
-                    "action": "Movement",
+                    "groups": "Player1",
+                    "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "2D Vector",
+                    "name": "Arrow keys",
                     "id": "f82a6d17-864c-4085-83ff-c1386e827391",
                     "path": "2DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Movement",
+                    "action": "Move",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -141,8 +150,8 @@
                     "path": "<Keyboard>/upArrow",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Controller1;Kaikkitomii",
-                    "action": "Movement",
+                    "groups": "Player2",
+                    "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -152,8 +161,8 @@
                     "path": "<Keyboard>/downArrow",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Controller1;Kaikkitomii",
-                    "action": "Movement",
+                    "groups": "Player2",
+                    "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -163,8 +172,8 @@
                     "path": "<Keyboard>/leftArrow",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Controller1;Kaikkitomii",
-                    "action": "Movement",
+                    "groups": "Player2",
+                    "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -174,19 +183,41 @@
                     "path": "<Keyboard>/rightArrow",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Controller1;Kaikkitomii",
-                    "action": "Movement",
+                    "groups": "Player2",
+                    "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "",
-                    "id": "3d4d3208-9cdd-4329-8a13-bdd774b41690",
-                    "path": "<Gamepad>/leftStick",
+                    "id": "febfa2e1-7a42-49e3-ad1c-6df389685bae",
+                    "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Kaikkitomii;Pleikka",
-                    "action": "Movement",
+                    "groups": "Player1;Player2",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e26332e1-9e3d-47d6-aaea-204a8a238d29",
+                    "path": "<Keyboard>/k",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Player1",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "49e08d3d-4938-42f6-8cfb-e04f1e32e23b",
+                    "path": "<Keyboard>/numpad2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Player2",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -195,30 +226,36 @@
     ],
     "controlSchemes": [
         {
-            "name": "Controller1",
-            "bindingGroup": "Controller1",
-            "devices": []
-        },
-        {
-            "name": "Controller2",
-            "bindingGroup": "Controller2",
-            "devices": []
-        },
-        {
-            "name": "Pleikka",
-            "bindingGroup": "Pleikka",
+            "name": "Player1",
+            "bindingGroup": "Player1",
             "devices": [
                 {
                     "devicePath": "<Gamepad>",
+                    "isOptional": true,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<Keyboard>",
                     "isOptional": false,
                     "isOR": false
                 }
             ]
         },
         {
-            "name": "Kaikkitomii",
-            "bindingGroup": "Kaikkitomii",
-            "devices": []
+            "name": "Player2",
+            "bindingGroup": "Player2",
+            "devices": [
+                {
+                    "devicePath": "<Gamepad>",
+                    "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": true,
+                    "isOR": false
+                }
+            ]
         }
     ]
 }

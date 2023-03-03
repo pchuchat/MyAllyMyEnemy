@@ -152,8 +152,12 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: b017ab7a-e0a4-4989-926c-5d9719b5071a
     m_ActionName: Player/Jump[/Keyboard/space,/DualShock4GamepadHID/buttonSouth]
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Pleikka
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2ad2077c-925c-40ea-9122-549ca29a267c
+    m_ActionName: Player/Interact[/XInputControllerWindows/buttonEast,/Keyboard/k,/Keyboard/numpad2]
+  m_NeverAutoSwitchControlSchemes: 1
+  m_DefaultControlScheme: Player1
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
