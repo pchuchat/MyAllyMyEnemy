@@ -1,7 +1,8 @@
-using System.Collections;
+
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem; // katsotaan kohta onko tarpeellinan
+using System.Collections;
 
 // ©GameGurus - Heikkinen R., Hopeasaari J., Kantola J., Kettunen J., Kommio R, PC, Parviainen P., Rautiainen J.
 // By: Parviainen P
@@ -45,6 +46,8 @@ public class LiftObject : MonoBehaviour
             //target = l‰hell‰ oleva gameobject --> hae l‰hell‰ olevat gameobjectit? Ellei voi ottaa if-lauseen omaa
         }
 
+        target = GameObject.FindWithTag("liftable");
+
         Debug.Log("Nostetaanko?");
         if (string.Equals(target.tag,"liftable"))
         {
@@ -54,7 +57,8 @@ public class LiftObject : MonoBehaviour
 
         if(canLift == true)
         {
-            target.GetComponent<Rigidbody>().AddForce(Vector3.up * force);
+            //target.GetComponent<Rigidbody>().AddForce(Vector3.up * force);
+            target.transform.Translate(1, 1, 1); //Nyt vaan siirt‰‰ sit‰ jotenkin lol
             Debug.Log("Nostetaan!");
         }
     }
