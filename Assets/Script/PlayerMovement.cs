@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-// ©GameGurus - Heikkinen R., Hopeasaari J., Kantola J., Kettunen J., Kommio R, PC, Parviainen P., Rautiainen J.
+// ¬©GameGurus - Heikkinen R., Hopeasaari J., Kantola J., Kettunen J., Kommio R, PC, Parviainen P., Rautiainen J.
 // Creator: PC, Phatchanon Chuchat and J.K, Janne Kettunen
 // PlayerMovement
 
@@ -20,10 +19,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float gravityValue = -9.81f;
 
     // AudioClip for single jump
-    [SerializeField] private AudioClip hyppyAani;//Lis‰sin hyppy‰‰nt‰ varten J.K.
+    [SerializeField] private AudioClip hyppyAani;//Lis√§sin hyppy√§√§nt√§ varten J.K.
 
     // AudioClip for double jump
-    [SerializeField] private AudioClip tuplahyppyAani;//Lis‰sin hyppy‰‰nt‰ varten J.K.
+    [SerializeField] private AudioClip tuplahyppyAani;//Lis√§sin hyppy√§√§nt√§ varten J.K.
 
     // Reference to the CharacterController component
     private CharacterController controller;
@@ -35,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
     private bool groundedPlayer;
 
     // AudioSource for jump sounds
-    private AudioSource aaniLahto; //Lis‰sin hyppy‰‰nt‰ varten J.K.
+    private AudioSource aaniLahto; //Lis√§sin hyppy√§√§nt√§ varten J.K.
 
     // Input value for movement direction
     private Vector2 movementInput = Vector2.zero;
@@ -50,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
         controller = gameObject.GetComponent<CharacterController>();
 
         // Get the AudioSource component on this object
-        aaniLahto = GetComponent<AudioSource>();  //Lis‰sin hyppy‰‰nt‰ varten J.K.
+        aaniLahto = GetComponent<AudioSource>();  //Lis√§sin hyppy√§√§nt√§ varten J.K.
     }
 
     public void onMove(InputAction.CallbackContext context)
@@ -78,12 +77,12 @@ public class PlayerMovement : MonoBehaviour
             else if (canDoubleJump)
             {
                 // Play double jump sound
-                //Lis‰sin hyppy‰‰nt‰ varten J.K.
+                //Lis√§sin hyppy√§√§nt√§ varten J.K.
                 aaniLahto.clip = tuplahyppyAani;
                 aaniLahto.Play();
 
                 // Set player velocity for double jump
-                //Lis‰sin hyppy‰‰nt‰ varten J.K.
+                //Lis√§sin hyppy√§√§nt√§ varten J.K.
                 playerVelocity.y = Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
 
                 // Disable double jump until next grounded state
