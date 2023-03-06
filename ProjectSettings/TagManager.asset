@@ -6,6 +6,7 @@ TagManager:
   tags:
   - vihollineruumi
   - player
+  - pushable_object
   layers:
   - Default
   - TransparentFX
