@@ -24,6 +24,9 @@ public class PlayerMovement : MonoBehaviour
     // AudioClip for double jump
     [SerializeField] private AudioClip doublejumpSound;
 
+    private bool facingRight = true; // added variable to keep track of facing direction
+
+
     // Reference to the CharacterController component
     private CharacterController controller;
 
@@ -34,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
     private bool groundedPlayer;
 
     // AudioSource for jump sounds
-    private AudioSource audiosource;
+    private AudioSource audioSource;
 
     // Input value for movement direction
     private Vector2 movementInput = Vector2.zero;
@@ -49,7 +52,7 @@ public class PlayerMovement : MonoBehaviour
         controller = gameObject.GetComponent<CharacterController>();
 
         // Get the AudioSource component on this object
-        audiosource = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void onMove(InputAction.CallbackContext context)
@@ -65,8 +68,8 @@ public class PlayerMovement : MonoBehaviour
             if (groundedPlayer)
             {
                 // Play single jump sound
-                audiosource.clip = jumpSound;
-                audiosource.Play();
+                audioSource.clip = jumpSound;
+                audioSource.Play();
 
                 // Set player velocity for single jump
                 playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
@@ -77,8 +80,8 @@ public class PlayerMovement : MonoBehaviour
             else if (canDoubleJump)
             {
                 // Play double jump sound
-                audiosource.clip = doublejumpSound;
-                audiosource.Play();
+                audioSource.clip = doublejumpSound;
+                audioSource.Play();
 
                 // Set player velocity for double jump
                 playerVelocity.y = Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
@@ -107,8 +110,27 @@ public class PlayerMovement : MonoBehaviour
         Vector3 move = new Vector3(movementInput.x, 0, movementInput.y);
         controller.Move(move * Time.deltaTime * playerSpeed);
 
+        if (move != Vector3.zero) // added code to face the player in the direction of movement
+        {
+            transform.forward = move.normalized;
+            if (facingRight && move.x < 0)
+            {
+                Flip();
+            }
+            else if (!facingRight && move.x > 0)
+            {
+                Flip();
+            }
+        }
+
         // Apply gravity to the player's velocity and move the player
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
+    }
+
+    private void Flip() // added function to flip the character horizontally
+    {
+        facingRight = !facingRight;
+        transform.Rotate(0f, 180f, 0f);
     }
 }
