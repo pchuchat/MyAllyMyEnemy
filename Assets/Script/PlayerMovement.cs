@@ -19,10 +19,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float gravityValue = -9.81f;
 
     // AudioClip for single jump
-    [SerializeField] private AudioClip hyppyAani;//Lisäsin hyppyääntä varten J.K.
+    [SerializeField] private AudioClip jumpSound;
 
     // AudioClip for double jump
-    [SerializeField] private AudioClip tuplahyppyAani;//Lisäsin hyppyääntä varten J.K.
+    [SerializeField] private AudioClip doublejumpSound;
 
     // Reference to the CharacterController component
     private CharacterController controller;
@@ -34,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
     private bool groundedPlayer;
 
     // AudioSource for jump sounds
-    private AudioSource aaniLahto; //Lisäsin hyppyääntä varten J.K.
+    private AudioSource audiosource;
 
     // Input value for movement direction
     private Vector2 movementInput = Vector2.zero;
@@ -49,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
         controller = gameObject.GetComponent<CharacterController>();
 
         // Get the AudioSource component on this object
-        aaniLahto = GetComponent<AudioSource>();  //Lisäsin hyppyääntä varten J.K.
+        audiosource = GetComponent<AudioSource>();
     }
 
     public void onMove(InputAction.CallbackContext context)
@@ -65,8 +65,8 @@ public class PlayerMovement : MonoBehaviour
             if (groundedPlayer)
             {
                 // Play single jump sound
-                aaniLahto.clip = hyppyAani;
-                aaniLahto.Play();
+                audiosource.clip = jumpSound;
+                audiosource.Play();
 
                 // Set player velocity for single jump
                 playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
@@ -77,12 +77,10 @@ public class PlayerMovement : MonoBehaviour
             else if (canDoubleJump)
             {
                 // Play double jump sound
-                //Lisäsin hyppyääntä varten J.K.
-                aaniLahto.clip = tuplahyppyAani;
-                aaniLahto.Play();
+                audiosource.clip = doublejumpSound;
+                audiosource.Play();
 
                 // Set player velocity for double jump
-                //Lisäsin hyppyääntä varten J.K.
                 playerVelocity.y = Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
 
                 // Disable double jump until next grounded state
