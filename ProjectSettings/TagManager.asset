@@ -6,6 +6,8 @@ TagManager:
   tags:
   - vihollineruumi
   - player
+  - liftable
+  - atMaxHeight
   layers:
   - Default
   - TransparentFX
