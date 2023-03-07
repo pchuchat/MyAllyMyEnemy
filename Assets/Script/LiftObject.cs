@@ -40,19 +40,21 @@ public class LiftObject : MonoBehaviour
 
         if(canLift == true)
         {
-            //target.GetComponent<Rigidbody>().AddForce(Vector3.up * force); t‰m‰ ei toimi mutta eh
             target.transform.Translate(0, force, 0);
 
+            // TODO: Olisi parempi vertailla n‰iden et‰isyyksi‰ toisistaan?
             if (target.transform.position.y > maxHeight.y)
             {
                 target.transform.position = maxHeight;
+                target.tag = "atMaxHeight";
                 // sitten kun ollaan t‰‰ll‰ pit‰isi tarkistaa kuinka kauan painallusten v‰lill‰ aikaa....
+                // tag pit‰‰ muistaa vaihtaa takaisin alkuper‰iseen kun esine on taas maassa
             }
         }
     }
 
     /// <summary>
-    /// Checks if there is an object in front of the player within a spesific distance. 
+    /// Checks if there is an object in front of the player within a spesific distance and returns a bool value. 
     /// If there is one, then checks if the object has the tag "liftable". If the object that is close has
     /// the correct tag then sets it to be the target-gameobject;
     /// The object has to have a rigidbody.
@@ -64,8 +66,8 @@ public class LiftObject : MonoBehaviour
     {
         RaycastHit hit;
 
-        if (Physics.Raycast(transform.position, rayDirection, out hit, distance))
-        {
+        if (Physics.Raycast(transform.position, rayDirection, out hit, distance)) 
+        {                                                                         
             GameObject hitGameobject = hit.transform.gameObject;
             if (target != null)
             {
@@ -76,18 +78,18 @@ public class LiftObject : MonoBehaviour
             }
             if (hitGameobject.tag == "liftable")
             {
-                target = hitGameobject;
-                target.GetComponent<Rigidbody>().useGravity = false;
-                maxHeight = target.transform.position;
+                target = hitGameobject;                                     
+                target.GetComponent<Rigidbody>().useGravity = false;        
+                maxHeight = target.transform.position;                      
                 maxHeight.y = (target.transform.position.y) + stopAtHeight;
                 return true;
             }
 
             return false;
         }
-        else 
+        else
         {
-            target = null;// hmm t‰m‰ ei kiva t‰ss‰ mutta on nyt v‰liaikaisesti
+            target = null;
             return false;
         }
     }
