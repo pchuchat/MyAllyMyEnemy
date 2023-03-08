@@ -13,42 +13,48 @@ using System.Collections;
 public class LiftObject : MonoBehaviour
 {
     // Public attributes (visible in Unity)    
-    public float force; //Kuinka paljon esinett‰ nostetaan kerralla
-    public float distance;
-    public float stopAtHeight;
+    public float force; // How much the object is lifted with each click
+    public float distance; // How far away the object can be from Haba
+    public float stopAtHeight; // How high Haba can lift an object
+    public int time; // How long without clicking until Haba drops the object
 
-    // Private attributes
-    
-    private bool canLift; //a bool to see if you can up the target item
-    private GameObject target; // Kohde, mik‰ halutaan nostaa
-    private Vector3 maxHeight;// targetin maksiminostokorkeus
-    private Vector3 rayDirection = new Vector3(0, 1, 1); // ...k‰‰ntyykˆ t‰m‰ pelaajan mukana....
+    // Private attributes    
+    private bool canLift; // a bool to see if you can up the target item
+    private GameObject target; // The object Haba is lifting
+    private Vector3 maxHeight;// The height where object stops lifting
+    private Vector3 ogHeight;
+    private Vector3 rayDirection = new Vector3(0, 0, 1); // ...k‰‰ntyykˆ t‰m‰ pelaajan mukana? TODO tarkista kun p‰ivitetty liikkumisscript
+    private int timer;
 
-    // Poistettavia jos ei k‰ytet‰kk‰‰n
-    float forcecontrol; // ei k‰ytet‰ atm miss‰‰n mutta ohjeessa updatessa nostovoima kerrottiin viel‰ t‰ll‰
-    private CharacterController controller;
-    
+    PlayerInput input;
+
+
     private void Start()
     {
-        //controller = gameObject.GetComponent<CharacterController>(); //Poista jos turha
     }
 
+    /// <summary>
+    /// Lifts the target object and stops at a certain height
+    /// </summary>
+    /// <param name="context"></param>
     public void OnLift(InputAction.CallbackContext context)
     {
+        if(target == null)
+        {
+            canLift = GetObjectInfront();
+        }
         
-        canLift = GetObjectInfront(); // Olisi kiva jos t‰nne ei tarvisi aina menn‰... Nostokin olisi parempi
-
         if(canLift == true)
         {
+            input.actions.FindAction("Movement").Disable();
+            input.actions.FindAction("Jump").Disable();
+            timer = time;
             target.transform.Translate(0, force, 0);
 
-            // TODO: Olisi parempi vertailla n‰iden et‰isyyksi‰ toisistaan?
             if (target.transform.position.y > maxHeight.y)
             {
                 target.transform.position = maxHeight;
                 target.tag = "atMaxHeight";
-                // sitten kun ollaan t‰‰ll‰ pit‰isi tarkistaa kuinka kauan painallusten v‰lill‰ aikaa....
-                // tag pit‰‰ muistaa vaihtaa takaisin alkuper‰iseen kun esine on taas maassa
             }
         }
     }
@@ -69,17 +75,13 @@ public class LiftObject : MonoBehaviour
         if (Physics.Raycast(transform.position, rayDirection, out hit, distance)) 
         {                                                                         
             GameObject hitGameobject = hit.transform.gameObject;
-            if (target != null)
-            {
-                if (hitGameobject.transform.gameObject.GetInstanceID() == target.GetInstanceID())
-                {
-                    return true;
-                }
-            }
+
             if (hitGameobject.tag == "liftable")
             {
+                input = GetComponent<PlayerInput>();
                 target = hitGameobject;                                     
-                target.GetComponent<Rigidbody>().useGravity = false;        
+                target.GetComponent<Rigidbody>().useGravity = false;
+                ogHeight = target.transform.position;
                 maxHeight = target.transform.position;                      
                 maxHeight.y = (target.transform.position.y) + stopAtHeight;
                 return true;
@@ -89,15 +91,27 @@ public class LiftObject : MonoBehaviour
         }
         else
         {
-            target = null;
             return false;
         }
     }
 
+    /// <summary>
+    /// Counts time and drops the object if the player doesn't use the interact button again before timer runs out
+    /// </summary>
     private void Update()
     {
-        
-        
+        timer--;
+        if (timer <= 0)
+        {
+            input.actions.FindAction("Movement").Enable();
+            input.actions.FindAction("Jump").Enable();
+            target.GetComponent<Rigidbody>().useGravity = true;
+            if (target.transform.position.y < ogHeight.y)
+            {
+                target.tag = "liftable";
+                target = null;
+            }            
+        }
     }
 }
 
