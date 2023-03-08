@@ -101,12 +101,18 @@ public class LiftObject : MonoBehaviour
     private void Update()
     {
         timer--;
+        
+    }
+
+    private void FixedUpdate()
+    {
         if (timer <= 0)
         {
             input.actions.FindAction("Movement").Enable();
             input.actions.FindAction("Jump").Enable();
-            target.GetComponent<Rigidbody>().useGravity = true;
-            if (target.transform.position.y < ogHeight.y)
+            target.GetComponent<Rigidbody>().useGravity = true; // kun t‰m‰n laittaa p‰‰lle se v‰h‰n kusee
+
+            if (target.transform.position.y <= ogHeight.y)
             {
                 target.tag = "liftable";
                 target = null;

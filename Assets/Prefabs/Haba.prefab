@@ -111,7 +111,7 @@ MonoBehaviour:
   force: 0.2
   distance: 5
   stopAtHeight: 2
-  time: 10
+  time: 15
 --- !u!114 &7598341486325973947
 MonoBehaviour:
   m_ObjectHideFlags: 0
