@@ -69,7 +69,7 @@ public class PlayerPushPull : MonoBehaviour
     /// Checks if there is a pushable object in front of the player
     /// and if it is within reach defined by the length of the ray
     /// </summary>
-    private void checkForPushableObject()
+    private void CheckForPushableObject()
     {
         RaycastHit hit;
         // Checking if the object hit with the ray is also pushable
@@ -132,7 +132,7 @@ public class PlayerPushPull : MonoBehaviour
     }
     void FixedUpdate()
     {
-        checkForPushableObject();
+        CheckForPushableObject();
     }
 
 }
