@@ -74,7 +74,7 @@ public class LiftObject : MonoBehaviour
     {
         RaycastHit hit;
 
-        if (Physics.Raycast(transform.position, rayDirection, out hit, distance) && controller.isGrounded) 
+        if (Physics.Raycast(transform.position, rayDirection, out hit, distance) && controller.isGrounded) //TODO ray vain eteen
         {                                                                         
             GameObject hitGameobject = hit.transform.gameObject;
 
