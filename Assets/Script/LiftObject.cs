@@ -25,12 +25,14 @@ public class LiftObject : MonoBehaviour
     private Vector3 ogHeight;
     private Vector3 rayDirection = new Vector3(0, 0, 1); // ...kääntyykö tämä pelaajan mukana? TODO tarkista kun päivitetty liikkumisscript
     private int timer;
+    private CharacterController controller;
 
-    PlayerInput input;
+    PlayerInput input; // todo
 
 
     private void Start()
     {
+        controller = gameObject.GetComponent<CharacterController>();
     }
 
     /// <summary>
@@ -72,7 +74,7 @@ public class LiftObject : MonoBehaviour
     {
         RaycastHit hit;
 
-        if (Physics.Raycast(transform.position, rayDirection, out hit, distance)) 
+        if (Physics.Raycast(transform.position, rayDirection, out hit, distance) && controller.isGrounded) 
         {                                                                         
             GameObject hitGameobject = hit.transform.gameObject;
 
@@ -96,7 +98,7 @@ public class LiftObject : MonoBehaviour
     }
 
     /// <summary>
-    /// Counts time and drops the object if the player doesn't use the interact button again before timer runs out
+    /// Counts time (frames) and drops the object if the player doesn't use the interact button again before timer runs out
     /// </summary>
     private void Update()
     {
@@ -110,10 +112,12 @@ public class LiftObject : MonoBehaviour
         {
             input.actions.FindAction("Movement").Enable();
             input.actions.FindAction("Jump").Enable();
-            target.GetComponent<Rigidbody>().useGravity = true; // kun tämän laittaa päälle se vähän kusee
+            target.GetComponent<Rigidbody>().useGravity = true;
+            canLift = false;
 
             if (target.transform.position.y <= ogHeight.y)
             {
+                Debug.Log("target nullattu");
                 target.tag = "liftable";
                 target = null;
             }            
