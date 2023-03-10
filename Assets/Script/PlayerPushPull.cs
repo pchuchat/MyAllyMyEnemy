@@ -16,6 +16,7 @@ public class PlayerPushPull : MonoBehaviour
 
     public PlayerMovement playerMovement;
     private CharacterController controller;
+    private PlayerInput input;
 
     private Vector2 movementInput;
     private bool pushing = false;
@@ -26,6 +27,8 @@ public class PlayerPushPull : MonoBehaviour
     {
         //Gets the controller of the parent player
         controller = gameObject.GetComponent<CharacterController>();
+        input = GetComponentInParent<PlayerInput>();
+        //controls = gameObject.GetComponent<PlayerControl>();
     }
     /// <summary>
     /// Callback for Interact button pressed:
@@ -39,12 +42,14 @@ public class PlayerPushPull : MonoBehaviour
     {
         if(context.started && pushableObject != null)
         {
+            input.actions.FindAction("Jump").Disable();
             playerMovement.enabled = false;
             controller.transform.SetParent(pushableObject.transform);
             pushing = true;
         }
         if (context.canceled && pushing)
         {
+            input.actions.FindAction("Jump").Enable();
             playerMovement.enabled = true;
             controller.transform.parent = null;
             pushing = false;
@@ -64,7 +69,7 @@ public class PlayerPushPull : MonoBehaviour
     /// Checks if there is a pushable object in front of the player
     /// and if it is within reach defined by the length of the ray
     /// </summary>
-    private void checkForPushableObject()
+    private void CheckForPushableObject()
     {
         RaycastHit hit;
         // Checking if the object hit with the ray is also pushable
@@ -127,7 +132,7 @@ public class PlayerPushPull : MonoBehaviour
     }
     void FixedUpdate()
     {
-        checkForPushableObject();
+        CheckForPushableObject();
     }
 
 }
