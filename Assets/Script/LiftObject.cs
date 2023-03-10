@@ -108,19 +108,22 @@ public class LiftObject : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (timer <= 0)
-        {           
-            target.GetComponent<Rigidbody>().useGravity = true;
-            canLift = false;
-
-            if (target.transform.position.y <= ogHeight.y) //TODO: korjaa tämä!!!
+        if (target != null)
+        {
+            if (timer <= 0)
             {
-                input.actions.FindAction("Movement").Enable();
-                input.actions.FindAction("Jump").Enable();
-                target.tag = "liftable";
-                target = null;
-            }            
-        }
+                target.GetComponent<Rigidbody>().useGravity = true;
+                canLift = false;
+
+                if (target.transform.position.y <= ogHeight.y) //TODO: korjaa tämä!!!
+                {
+                    input.actions.FindAction("Movement").Enable();
+                    input.actions.FindAction("Jump").Enable();
+                    target.tag = "liftable";
+                    target = null;
+                }
+            }
+        }       
     }
 }
 
