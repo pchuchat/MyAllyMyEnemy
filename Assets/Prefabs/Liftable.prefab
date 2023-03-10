@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5576888401921507566}
   - component: {fileID: -2710053340146958024}
   m_Layer: 0
-  m_Name: NostettavaEsine
+  m_Name: Liftable
   m_TagString: liftable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

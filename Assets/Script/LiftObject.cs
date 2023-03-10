@@ -23,7 +23,7 @@ public class LiftObject : MonoBehaviour
     private GameObject target; // The object Haba is lifting
     private Vector3 maxHeight;// The height where object stops lifting
     private Vector3 ogHeight;
-    private Vector3 rayDirection = new Vector3(0, 0, 1); // ...kääntyykö tämä pelaajan mukana? TODO tarkista kun päivitetty liikkumisscript
+    private Vector3 rayDirection = Vector3.forward; // ...kääntyykö tämä pelaajan mukana? TODO tarkista kun päivitetty liikkumisscript
     private int timer;
     private CharacterController controller;
 
