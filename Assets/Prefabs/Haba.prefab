@@ -42,7 +42,6 @@ GameObject:
   - component: {fileID: 323129550835044740}
   - component: {fileID: 323129550835044741}
   - component: {fileID: 7681525300652446687}
-  - component: {fileID: 6232927768573440566}
   - component: {fileID: 7598341486325973947}
   - component: {fileID: 323129550835044742}
   - component: {fileID: 323129550835044743}
@@ -96,22 +95,6 @@ MonoBehaviour:
   gravityValue: -9.81
   hyppyAani: {fileID: 8300000, guid: 29bde6326b4c34ad8a12da475f79b50a, type: 3}
   tuplahyppyAani: {fileID: 8300000, guid: 4b4dd7245f6104c8c8eb07ccf6b386ed, type: 3}
---- !u!114 &6232927768573440566
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 323129550835044744}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb6fe11ddb556ca459f7c8d8bab2a4d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  force: 0.2
-  distance: 5
-  stopAtHeight: 2
-  time: 20
 --- !u!114 &7598341486325973947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,7 +154,7 @@ MonoBehaviour:
     m_ActionName: Player/Jump[/Keyboard/space,/DualShock4GamepadHID/buttonSouth]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6232927768573440566}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: LiftObject, Assembly-CSharp
         m_MethodName: OnLift
         m_Mode: 0
