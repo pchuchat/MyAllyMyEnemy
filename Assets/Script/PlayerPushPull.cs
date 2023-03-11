@@ -128,17 +128,13 @@ public class PlayerPushPull : MonoBehaviour
             if (hitDirectionX)
             {
                 magnitude = Vector3.Dot(movementInputV3, pushableObject.transform.right);
-                Debug.Log(magnitude);
-
                 pushableObject.transform.Translate(magnitude * pushSpeed * Time.deltaTime * Vector3.right, Space.Self);
             }
             else
             {
                 magnitude = Vector3.Dot(movementInputV3, pushableObject.transform.forward) ;
-                Debug.Log(magnitude);
                 pushableObject.transform.Translate(magnitude * pushSpeed * Time.deltaTime * Vector3.forward, Space.Self);
             }
         }
     }
-
 }
