@@ -55,13 +55,13 @@ public class PlayerMovement : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-    public void onMove(InputAction.CallbackContext context)
+    public void OnMove(InputAction.CallbackContext context)
     {
         // Read the value of the movement input and store it in movementInput
         movementInput = context.ReadValue<Vector2>();
     }
 
-    public void onJump(InputAction.CallbackContext context)
+    public void OnJump(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
@@ -107,8 +107,8 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Calculate the player's movement vector and move the player
-        Vector3 move = new Vector3(movementInput.x, 0, movementInput.y);
-        controller.Move(move * Time.deltaTime * playerSpeed);
+        Vector3 move = new(movementInput.x, 0, movementInput.y);
+        controller.Move(playerSpeed * Time.deltaTime * move);
 
         if (move != Vector3.zero) // added code to face the player in the direction of movement
         {

@@ -224,8 +224,8 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 7681525300652446687}
-        m_TargetAssemblyTypeName: kokeilu, Assembly-CSharp
-        m_MethodName: onMove
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+        m_MethodName: OnMove
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -252,8 +252,8 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 7681525300652446687}
-        m_TargetAssemblyTypeName: kokeilu, Assembly-CSharp
-        m_MethodName: onJump
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+        m_MethodName: OnJump
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -297,6 +297,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 821db7a3-11f3-4ca7-a24c-546ee687d103
     m_ActionName: Player/Lift[/DualShock4GamepadHID/buttonEast]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d8d347a7-a7ce-4ec1-b07e-cb9c0ba0c5f5
+    m_ActionName: Player/Attack[/DualShock4GamepadHID/buttonWest]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Pleikka
   m_DefaultActionMap: Player
