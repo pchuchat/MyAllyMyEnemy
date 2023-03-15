@@ -10,7 +10,7 @@ using System.Collections;
 // - Haba lifts an object to a certain position and keeps it there by repeatedly clicking the interact-button.
 // If the player stops clicking the button, after a certain time Haba will drop the object.
 
-public class LiftObject : MonoBehaviour
+public class PlayerLiftObject : MonoBehaviour
 {
     // Public attributes (visible in Unity)    
     public float force; // How much the object is lifted with each click
