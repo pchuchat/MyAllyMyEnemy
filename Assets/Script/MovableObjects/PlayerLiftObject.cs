@@ -102,12 +102,17 @@ public class PlayerLiftObject : MonoBehaviour
 
         if (target != null)
         {
-            if (timer <= 0)
+            if (timer == 0)
             {
                 target.GetComponent<Rigidbody>().useGravity = true;
                 canLift = false;
+                controller.Move(transform.forward*-0.5f);
 
-                if (Vector3.Distance(target.transform.position, ogHeight) <= 0.1f)
+                
+            }
+            if (timer <= 0)
+            {
+                if (Vector3.Distance(target.transform.position, ogHeight) <= 0.2f)
                 {
                     input.actions.FindAction("Movement").Enable();
                     input.actions.FindAction("Jump").Enable();
