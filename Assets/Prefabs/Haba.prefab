@@ -140,6 +140,7 @@ GameObject:
   - component: {fileID: 323129550835044741}
   - component: {fileID: 7681525300652446687}
   - component: {fileID: 7598341486325973947}
+  - component: {fileID: 2210187075978687484}
   - component: {fileID: 1752433261407351242}
   - component: {fileID: -2295498896310718508}
   - component: {fileID: 323129550835044742}
@@ -301,11 +302,42 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: d8d347a7-a7ce-4ec1-b07e-cb9c0ba0c5f5
     m_ActionName: Player/Attack[/DualShock4GamepadHID/buttonWest]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2210187075978687484}
+        m_TargetAssemblyTypeName: PlayerCarryItem, Assembly-CSharp
+        m_MethodName: OnPickUp
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 61bf9f41-3a1b-41bb-bc24-1f9800e7d042
+    m_ActionName: Player/PickUp[/DualShock4GamepadHID/buttonEast,/DualShock4GamepadHID1/buttonEast]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Pleikka
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &2210187075978687484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 323129550835044744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95a96f9a0dc474a4c93077d1495a0aeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactDistance: 1
+  throwForce: 7
+  throwForceUp: 2
 --- !u!114 &1752433261407351242
 MonoBehaviour:
   m_ObjectHideFlags: 0
