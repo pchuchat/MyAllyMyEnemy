@@ -10,6 +10,9 @@ TagManager:
   - liftable
   - atMaxHeight
   - Enemy
+  - movable_object_spawner
+  - movable_object
+  - target_area
   layers:
   - Default
   - TransparentFX
