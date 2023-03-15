@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,7 +14,7 @@ public class CharcterSwitcher : MonoBehaviour
     int index = 0;
 
     // List of fighter GameObjects to be spawned
-    [SerializeField] List<GameObject> fighters = new List<GameObject>();
+    [SerializeField] List<GameObject> fighters = new();
 
     // Reference to the PlayerInputManager component
     PlayerInputManager manager;
@@ -31,6 +32,10 @@ public class CharcterSwitcher : MonoBehaviour
     // Method that switches to the next fighter in the list
     public void SwitchNextSpawnCharacter(PlayerInput input)
     {
+        if (input is null)
+        {
+            throw new ArgumentNullException(nameof(input));
+        }
         // Increment the index to select the next fighter in the list
         index++;
 

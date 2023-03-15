@@ -29,13 +29,31 @@
                     "id": "94f86286-01c1-45cd-98ea-3367081bacb3",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press(behavior=1)",
+                    "interactions": "Press",
                     "initialStateCheck": false
                 },
                 {
                     "name": "Lift",
                     "type": "Button",
                     "id": "821db7a3-11f3-4ca7-a24c-546ee687d103",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Attack",
+                    "type": "Button",
+                    "id": "d8d347a7-a7ce-4ec1-b07e-cb9c0ba0c5f5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "PickUp",
+                    "type": "Button",
+                    "id": "61bf9f41-3a1b-41bb-bc24-1f9800e7d042",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -238,6 +256,50 @@
                     "processors": "",
                     "groups": "",
                     "action": "Lift",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "80cac0b8-d6c8-4787-ba0e-641548ff02f6",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8e8fb9b3-2bd5-4e26-b51b-d8dfc5547e2b",
+                    "path": "<DualShockGamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d3828357-bdc8-44c4-bf7a-0b6cff75c1ca",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Kaikkitomii;Pleikka",
+                    "action": "PickUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "00cbc3c2-ab9a-41e6-920b-470ad0b69673",
+                    "path": "<DualShockGamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Pleikka;Kaikkitomii",
+                    "action": "PickUp",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

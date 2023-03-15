@@ -9,6 +9,9 @@ TagManager:
   - pushable_object
   - liftable
   - atMaxHeight
+  - Enemy
+  - movable_object_spawner
+  - target_area
   layers:
   - Default
   - TransparentFX
