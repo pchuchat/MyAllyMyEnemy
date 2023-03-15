@@ -12,11 +12,11 @@ using System.Collections;
 
 public class PlayerLiftObject : MonoBehaviour
 {
-    // Public attributes (visible in Unity)    
-    public float force; // How much the object is lifted with each click
-    public float distance; // How far away the object can be from Haba
-    public float stopAtHeight; // How high Haba can lift an object
-    public int time; // How long without clicking until Haba drops the object
+    // Attributes visible in Unity    
+    [Tooltip("How much the Haba lifts an object per buttonpress")] [SerializeField] private float force = 0.2f;
+    [Tooltip("How far away the object can be from Haba to lift")] [SerializeField] private float distance = 1f;
+    [Tooltip("How high Haba can lift an object")] [SerializeField] private float stopAtHeight = 1f;
+    [Tooltip("How long until Haba drops the object")] [SerializeField] private int time = 20;
 
     // Private attributes    
     private bool canLift; // a bool to see if you can up the target item
@@ -37,10 +37,11 @@ public class PlayerLiftObject : MonoBehaviour
     /// <summary>
     /// Lifts the target object and stops at a certain height
     /// </summary>
-    /// <param name="context"></param>
+    /// <param name="_1">Interact button click(Unused parameter that can not be removed)</param>
     public void OnLift(InputAction.CallbackContext _1)
     {
-        if(target == null)
+
+        if (target == null)
         {
             canLift = GetObjectInfront();
         }
@@ -95,17 +96,10 @@ public class PlayerLiftObject : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Counts time (frames) and drops the object if the player doesn't use the interact button again before timer runs out
-    /// </summary>
-    private void Update()
-    {
-        timer--;
-        
-    }
-
     private void FixedUpdate()
     {
+        timer--;
+
         if (target != null)
         {
             if (timer <= 0)
@@ -113,7 +107,7 @@ public class PlayerLiftObject : MonoBehaviour
                 target.GetComponent<Rigidbody>().useGravity = true;
                 canLift = false;
 
-                if (Vector3.Distance(target.transform.position, ogHeight) <= 0.5)
+                if (Vector3.Distance(target.transform.position, ogHeight) <= 0.1f)
                 {
                     input.actions.FindAction("Movement").Enable();
                     input.actions.FindAction("Jump").Enable();
