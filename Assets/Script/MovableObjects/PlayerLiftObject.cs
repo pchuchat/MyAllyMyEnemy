@@ -23,7 +23,6 @@ public class PlayerLiftObject : MonoBehaviour
     private GameObject target; // The object Haba is lifting
     private Vector3 maxHeight;// The height where object stops lifting
     private Vector3 ogHeight;
-    private Vector3 rayDirection = Vector3.forward; // ...kääntyykö tämä pelaajan mukana? TODO tarkista kun päivitetty liikkumisscript
     private int timer;
     private CharacterController controller;
 
@@ -39,7 +38,7 @@ public class PlayerLiftObject : MonoBehaviour
     /// Lifts the target object and stops at a certain height
     /// </summary>
     /// <param name="context"></param>
-    public void OnLift(InputAction.CallbackContext context)
+    public void OnLift(InputAction.CallbackContext _1)
     {
         if(target == null)
         {
@@ -72,13 +71,12 @@ public class PlayerLiftObject : MonoBehaviour
     ///          True if a gameobject is close enough and has the correct tag</returns>
     private bool GetObjectInfront()
     {
-        RaycastHit hit;
 
-        if (Physics.Raycast(transform.position, rayDirection, out hit, distance) && controller.isGrounded) //TODO ray vain eteen
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hit, distance) && controller.isGrounded) //TODO ray vain eteen
         {                                                                         
             GameObject hitGameobject = hit.transform.gameObject;
 
-            if (hitGameobject.tag == "liftable")
+            if (hitGameobject.CompareTag("liftable"))
             {
                 input = GetComponent<PlayerInput>();
                 target = hitGameobject;                                     
@@ -115,7 +113,7 @@ public class PlayerLiftObject : MonoBehaviour
                 target.GetComponent<Rigidbody>().useGravity = true;
                 canLift = false;
 
-                if (target.transform.position.y <= ogHeight.y) //TODO: korjaa tämä!!!
+                if (Vector3.Distance(target.transform.position, ogHeight) <= 0.5)
                 {
                     input.actions.FindAction("Movement").Enable();
                     input.actions.FindAction("Jump").Enable();
