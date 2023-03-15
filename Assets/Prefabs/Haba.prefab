@@ -366,8 +366,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: 0.2
-  distance: 2
-  stopAtHeight: 2
+  distance: 1
+  stopAtHeight: 1.5
   time: 20
 --- !u!23 &323129550835044742
 MeshRenderer:
