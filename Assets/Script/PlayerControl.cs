@@ -276,7 +276,7 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Pleikka"",
+                    ""groups"": ""Pleikka;Kaikkitomii"",
                     ""action"": ""Lift"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false

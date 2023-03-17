@@ -18,49 +18,57 @@ public class PlayerLiftObject : MonoBehaviour
     [Tooltip("How high Haba can lift an object")] [SerializeField] private float stopAtHeight = 1.5f;
     [Tooltip("How long until Haba drops the object")] [SerializeField] private int time = 20;
 
-
+    // Sounds
+    private AudioSource audioSource; // Audiosource for the sounds below
+    [Tooltip("The sound Haba makes when lifting object")] [SerializeField] private AudioClip liftSound;
+    [Tooltip("The sound Haba makes when drops lifted object")] [SerializeField] private AudioClip dropSound;
+    [Tooltip("The sound the dropped object makes when hitting the ground")] [SerializeField] private AudioClip objectGroundSound;
 
     // Private attributes    
     private bool canLift; // a bool to see if you can up the target item
     private GameObject target; // The object Haba is lifting
-    private Vector3 maxHeight;// The height where object stops lifting
-    private Vector3 ogHeight;
+    private Vector3 maxHeight; // The height where object stops lifting
+    private Vector3 ogHeight; // The original position of target object
     private int timer;
     private CharacterController controller;
-
-    PlayerInput input; // todo
+    private PlayerInput input; // Used to disable movement and jump while lifting
 
 
     private void Start()
     {
         controller = gameObject.GetComponent<CharacterController>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     /// <summary>
-    /// Lifts the target object and stops at a certain height
+    /// Lifts the target object a certain amount per button press and stops at a certain height
     /// </summary>
     /// <param name="_1">Interact button click(Unused parameter that can not be removed)</param>
-    public void OnLift(InputAction.CallbackContext _1)
+    public void OnLift(InputAction.CallbackContext context)
     {
-
-        if (target == null)
+        if (context.performed)
         {
-            canLift = GetObjectInfront();
-        }
-        
-        if(canLift == true)
-        {
-            input.actions.FindAction("Movement").Disable();
-            input.actions.FindAction("Jump").Disable();
-            timer = time;
-            target.transform.Translate(0, force, 0);
-
-            if (target.transform.position.y > maxHeight.y)
+            if (target == null)
             {
-                target.transform.position = maxHeight;
-                target.tag = "atMaxHeight";
+                canLift = GetObjectInfront();
             }
-        }
+
+            if (canLift == true)
+            {
+                input.actions.FindAction("Movement").Disable();
+                input.actions.FindAction("Jump").Disable();
+                timer = time;
+                audioSource.clip = liftSound;
+                audioSource.Play();
+                target.transform.Translate(0, force, 0);
+
+                if (target.transform.position.y > maxHeight.y)
+                {
+                    target.transform.position = maxHeight;
+                    target.tag = "atMaxHeight";
+                }
+            }
+        }   
     }
 
     /// <summary>
@@ -109,8 +117,8 @@ public class PlayerLiftObject : MonoBehaviour
                 target.GetComponent<Rigidbody>().useGravity = true;
                 canLift = false;
                 controller.Move(transform.forward*-0.5f);
-
-                
+                audioSource.clip = dropSound;
+                audioSource.Play();
             }
             if (timer <= 0)
             {
@@ -120,6 +128,8 @@ public class PlayerLiftObject : MonoBehaviour
                     input.actions.FindAction("Jump").Enable();
                     target.tag = "liftable";
                     target = null;
+                    audioSource.clip = objectGroundSound;
+                    audioSource.Play();
                 }
             }
         }       
