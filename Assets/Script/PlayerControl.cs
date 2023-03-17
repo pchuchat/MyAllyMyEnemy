@@ -243,7 +243,7 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Kaikkitomii;Pleikka"",
+                    ""groups"": ""Pleikka;Kaikkitomii"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -276,7 +276,7 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Pleikka;Kaikkitomii"",
                     ""action"": ""Lift"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false

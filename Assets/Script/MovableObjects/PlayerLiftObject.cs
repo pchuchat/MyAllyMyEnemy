@@ -10,55 +10,65 @@ using System.Collections;
 // - Haba lifts an object to a certain position and keeps it there by repeatedly clicking the interact-button.
 // If the player stops clicking the button, after a certain time Haba will drop the object.
 
-public class LiftObject : MonoBehaviour
+public class PlayerLiftObject : MonoBehaviour
 {
-    // Public attributes (visible in Unity)    
-    public float force; // How much the object is lifted with each click
-    public float distance; // How far away the object can be from Haba
-    public float stopAtHeight; // How high Haba can lift an object
-    public int time; // How long without clicking until Haba drops the object
+    // Attributes visible in Unity    
+    [Tooltip("How much the Haba lifts an object per buttonpress")] [SerializeField] private float force = 0.2f;
+    [Tooltip("How far away the object can be from Haba to lift")] [SerializeField] private float distance = 1f;
+    [Tooltip("How high Haba can lift an object")] [SerializeField] private float stopAtHeight = 1.5f;
+    [Tooltip("How long until Haba drops the object")] [SerializeField] private int time = 20;
+
+    // Sounds
+    private AudioSource audioSource; // Audiosource for the sounds below
+    [Tooltip("The sound Haba makes when lifting object")] [SerializeField] private AudioClip liftSound;
+    [Tooltip("The sound Haba makes when drops lifted object")] [SerializeField] private AudioClip dropSound;
+    [Tooltip("The sound the dropped object makes when hitting the ground")] [SerializeField] private AudioClip objectGroundSound;
 
     // Private attributes    
     private bool canLift; // a bool to see if you can up the target item
     private GameObject target; // The object Haba is lifting
-    private Vector3 maxHeight;// The height where object stops lifting
-    private Vector3 ogHeight;
-    private Vector3 rayDirection = Vector3.forward; // ...kääntyykö tämä pelaajan mukana? TODO tarkista kun päivitetty liikkumisscript
+    private Vector3 maxHeight; // The height where object stops lifting
+    private Vector3 ogHeight; // The original position of target object
     private int timer;
     private CharacterController controller;
-
-    PlayerInput input; // todo
+    private PlayerInput input; // Used to disable movement and jump while lifting
 
 
     private void Start()
     {
         controller = gameObject.GetComponent<CharacterController>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     /// <summary>
-    /// Lifts the target object and stops at a certain height
+    /// Lifts the target object a certain amount per button press and stops at a certain height
     /// </summary>
-    /// <param name="context"></param>
+    /// <param name="_1">Interact button click(Unused parameter that can not be removed)</param>
     public void OnLift(InputAction.CallbackContext context)
     {
-        if(target == null)
+        if (context.performed)
         {
-            canLift = GetObjectInfront();
-        }
-        
-        if(canLift == true)
-        {
-            input.actions.FindAction("Movement").Disable();
-            input.actions.FindAction("Jump").Disable();
-            timer = time;
-            target.transform.Translate(0, force, 0);
-
-            if (target.transform.position.y > maxHeight.y)
+            if (target == null)
             {
-                target.transform.position = maxHeight;
-                target.tag = "atMaxHeight";
+                canLift = GetObjectInfront();
             }
-        }
+
+            if (canLift == true)
+            {
+                input.actions.FindAction("Movement").Disable();
+                input.actions.FindAction("Jump").Disable();
+                timer = time;
+                audioSource.clip = liftSound;
+                audioSource.Play();
+                target.transform.Translate(0, force, 0);
+
+                if (target.transform.position.y > maxHeight.y)
+                {
+                    target.transform.position = maxHeight;
+                    target.tag = "atMaxHeight";
+                }
+            }
+        }   
     }
 
     /// <summary>
@@ -72,13 +82,12 @@ public class LiftObject : MonoBehaviour
     ///          True if a gameobject is close enough and has the correct tag</returns>
     private bool GetObjectInfront()
     {
-        RaycastHit hit;
 
-        if (Physics.Raycast(transform.position, rayDirection, out hit, distance) && controller.isGrounded) 
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hit, distance) && controller.isGrounded) //TODO ray vain eteen
         {                                                                         
             GameObject hitGameobject = hit.transform.gameObject;
 
-            if (hitGameobject.tag == "liftable")
+            if (hitGameobject.CompareTag("liftable"))
             {
                 input = GetComponent<PlayerInput>();
                 target = hitGameobject;                                     
@@ -97,30 +106,30 @@ public class LiftObject : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Counts time (frames) and drops the object if the player doesn't use the interact button again before timer runs out
-    /// </summary>
-    private void Update()
-    {
-        timer--;
-        
-    }
-
     private void FixedUpdate()
     {
+        timer--;
+
         if (target != null)
         {
-            if (timer <= 0)
+            if (timer == 0)
             {
                 target.GetComponent<Rigidbody>().useGravity = true;
                 canLift = false;
-
-                if (target.transform.position.y <= ogHeight.y) //TODO: korjaa tämä!!!
+                controller.Move(transform.forward*-0.5f);
+                audioSource.clip = dropSound;
+                audioSource.Play();
+            }
+            if (timer <= 0)
+            {
+                if (Vector3.Distance(target.transform.position, ogHeight) <= 0.2f)
                 {
                     input.actions.FindAction("Movement").Enable();
                     input.actions.FindAction("Jump").Enable();
                     target.tag = "liftable";
                     target = null;
+                    audioSource.clip = objectGroundSound;
+                    audioSource.Play();
                 }
             }
         }       

@@ -366,9 +366,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: 0.2
-  distance: 2
-  stopAtHeight: 2
+  distance: 1
+  stopAtHeight: 1.5
   time: 20
+  liftSound: {fileID: 8300000, guid: ffb159a21c8a04135a5616979c828fab, type: 3}
+  dropSound: {fileID: 8300000, guid: d46323e22e74e46baa241cbf48c85671, type: 3}
+  objectGroundSound: {fileID: 8300000, guid: 7e26c9daf4c32483b9c2790e662d3f1b, type: 3}
 --- !u!23 &323129550835044742
 MeshRenderer:
   m_ObjectHideFlags: 0
