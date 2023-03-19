@@ -195,8 +195,8 @@ MonoBehaviour:
   playerSpeed: 6
   jumpHeight: 1
   gravityValue: -9.81
-  jumpSound: {fileID: 8300000, guid: ffb159a21c8a04135a5616979c828fab, type: 3}
-  doublejumpSound: {fileID: 8300000, guid: 2c5292ba5cf254919a6b9e2b18e04f49, type: 3}
+  jumpSound: {fileID: 8300000, guid: 0725eceb7443e204084682773c4d1940, type: 3}
+  doublejumpSound: {fileID: 8300000, guid: e814f67823cbed546a43473c6121421e, type: 3}
 --- !u!114 &7598341486325973947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -369,8 +369,8 @@ MonoBehaviour:
   distance: 1
   stopAtHeight: 1.5
   time: 20
-  liftSound: {fileID: 8300000, guid: ffb159a21c8a04135a5616979c828fab, type: 3}
-  dropSound: {fileID: 8300000, guid: d46323e22e74e46baa241cbf48c85671, type: 3}
+  liftSound: {fileID: 8300000, guid: c0669de6f2a344548a3e846786539376, type: 3}
+  dropSound: {fileID: 8300000, guid: 3fa6b943bec685c42bbb726da130bd51, type: 3}
   objectGroundSound: {fileID: 8300000, guid: 7e26c9daf4c32483b9c2790e662d3f1b, type: 3}
 --- !u!23 &323129550835044742
 MeshRenderer:

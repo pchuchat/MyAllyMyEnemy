@@ -327,6 +327,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: d8d347a7-a7ce-4ec1-b07e-cb9c0ba0c5f5
     m_ActionName: Player/Attack[/DualShock4GamepadHID/buttonWest]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 61bf9f41-3a1b-41bb-bc24-1f9800e7d042
+    m_ActionName: Player/PickUp[/DualShock4GamepadHID/buttonEast,/DualSenseGamepadHID/buttonEast]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Kaikkitomii
   m_DefaultActionMap: Player
@@ -361,8 +365,8 @@ MonoBehaviour:
   playerSpeed: 6
   jumpHeight: 1
   gravityValue: -9.81
-  jumpSound: {fileID: 8300000, guid: ffb159a21c8a04135a5616979c828fab, type: 3}
-  doublejumpSound: {fileID: 8300000, guid: 2c5292ba5cf254919a6b9e2b18e04f49, type: 3}
+  jumpSound: {fileID: 8300000, guid: f2a9cce93cc358447879559b12c39d53, type: 3}
+  doublejumpSound: {fileID: 8300000, guid: 96adf54aade650b43a01dd1ffba908a2, type: 3}
 --- !u!23 &1533952752647032251
 MeshRenderer:
   m_ObjectHideFlags: 0
