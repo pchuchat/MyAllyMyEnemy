@@ -12,6 +12,7 @@ TagManager:
   - Enemy
   - movable_object_spawner
   - target_area
+  - movable_object
   layers:
   - Default
   - TransparentFX
