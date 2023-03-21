@@ -28,16 +28,20 @@ public class PlayerLiftObject : MonoBehaviour
     private bool canLift; // a bool to see if you can up the target item
     private GameObject target; // The object Haba is lifting
     private Vector3 maxHeight; // The height where object stops lifting
-    private Vector3 ogHeight; // The original position of target object
+    //private Vector3 ogHeight; // The original position of target object     //Tämä otettiin pois kun target sijainnin sijaan katsotaan nyt liikkuuko target
     private int timer;
     private CharacterController controller;
     private PlayerInput input; // Used to disable movement and jump while lifting
 
+    private Vector3 movementUp;
+    private Rigidbody rb;
+
+    private float speed;
 
     private void Start()
     {
         controller = gameObject.GetComponent<CharacterController>();
-        audioSource = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();        
     }
 
     /// <summary>
@@ -60,11 +64,18 @@ public class PlayerLiftObject : MonoBehaviour
                 timer = time;
                 audioSource.clip = liftSound;
                 audioSource.Play();
-                target.transform.Translate(0, force, 0);
+
+                
+                movementUp = new Vector3 (0, force, 0);
+                rb.AddForce(movementUp - rb.velocity, ForceMode.VelocityChange);
+                //target.transform.Translate(0, force, 0);
 
                 if (target.transform.position.y > maxHeight.y)
                 {
-                    target.transform.position = maxHeight;
+                    rb.position = maxHeight;
+                    rb.constraints = RigidbodyConstraints.FreezeAll;
+                    //gamepad.SetMotorSpeeds(0.123f, 0.234f);
+                    //target.transform.position = maxHeight;
                     target.tag = "atMaxHeight";
                 }
             }
@@ -82,7 +93,6 @@ public class PlayerLiftObject : MonoBehaviour
     ///          True if a gameobject is close enough and has the correct tag</returns>
     private bool GetObjectInfront()
     {
-
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hit, distance) && controller.isGrounded) //TODO ray vain eteen
         {                                                                         
             GameObject hitGameobject = hit.transform.gameObject;
@@ -90,9 +100,11 @@ public class PlayerLiftObject : MonoBehaviour
             if (hitGameobject.CompareTag("liftable"))
             {
                 input = GetComponent<PlayerInput>();
-                target = hitGameobject;                                     
-                target.GetComponent<Rigidbody>().useGravity = false;
-                ogHeight = target.transform.position;
+                target = hitGameobject;
+                rb = target.gameObject.GetComponent<Rigidbody>();
+                rb.useGravity = false;
+                rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
+                //ogHeight = target.transform.position; //Tämä otettiin pois kun target sijainnin sijaan katsotaan nyt liikkuuko target
                 maxHeight = target.transform.position;                      
                 maxHeight.y = (target.transform.position.y) + stopAtHeight;
                 return true;
@@ -109,12 +121,14 @@ public class PlayerLiftObject : MonoBehaviour
     private void FixedUpdate()
     {
         timer--;
+        speed = rb.velocity.magnitude;
 
         if (target != null)
         {
             if (timer == 0)
             {
-                target.GetComponent<Rigidbody>().useGravity = true;
+                rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
+                rb.useGravity = true;
                 canLift = false;
                 controller.Move(transform.forward*-0.5f);
                 audioSource.clip = dropSound;
@@ -122,14 +136,18 @@ public class PlayerLiftObject : MonoBehaviour
             }
             if (timer <= 0)
             {
-                if (Vector3.Distance(target.transform.position, ogHeight) <= 0.2f)
+                //if (Vector3.Distance(target.transform.position, ogHeight) <= 0.2f) // TÄÄ PAREMMAKSI!!! Nyt esine noisee koko ajan! Liian pieni ja haba jää jumiin
+                if(speed <= 0.01 && timer <= -5) // tämäkään ei toimi
                 {
                     input.actions.FindAction("Movement").Enable();
                     input.actions.FindAction("Jump").Enable();
+                    rb.constraints = RigidbodyConstraints.FreezeAll;
                     target.tag = "liftable";
                     target = null;
+                    rb = null;
                     audioSource.clip = objectGroundSound;
                     audioSource.Play();
+
                 }
             }
         }       
