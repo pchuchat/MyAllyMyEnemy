@@ -5,9 +5,8 @@ using UnityEngine.InputSystem;
 
 // ©GameGurus - Heikkinen R., Hopeasaari J., Kantola J., Kettunen J., Kommio R, PC, Parviainen P., Rautiainen J.
 // By: Parviainen P
-//
-// TODO:
-// - Kipinä can charge devices that activate some action in the level
+// Kipinä charges the device in front and activates it.
+// Activation of devices cause some action in the game. The action depends on what script is attached to the device.
 
 public class PlayerChargeDevice : MonoBehaviour
 {
@@ -16,11 +15,11 @@ public class PlayerChargeDevice : MonoBehaviour
 
     // Sounds
     private AudioSource audioSource; // Audiosource for the sounds below
-    [Tooltip("The sound Haba makes when lifting object")] [SerializeField] private AudioClip chargeSound;
+    [Tooltip("The sound Kipinä makes when charging devices")] [SerializeField] private AudioClip chargeSound;
 
     private CharacterController controller; // Playercharacter
-    private bool canCharge;
-    private GameObject device;
+    private bool canCharge;                 // Wether or not the device in front can be activated
+    private GameObject device;              // The device in front of the player
 
     void Start()
     {
