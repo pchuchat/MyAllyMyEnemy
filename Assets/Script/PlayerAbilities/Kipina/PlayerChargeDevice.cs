@@ -20,6 +20,7 @@ public class PlayerChargeDevice : MonoBehaviour
 
     private CharacterController controller; // Playercharacter
     private bool canCharge;
+    private GameObject device;
 
     void Start()
     {
@@ -30,6 +31,10 @@ public class PlayerChargeDevice : MonoBehaviour
     public void OnCharge(InputAction.CallbackContext context)
     {
         canCharge = GetObjectInfront();
+        if(canCharge == true)
+        {
+
+        }
     }
 
     private bool GetObjectInfront()
@@ -41,6 +46,7 @@ public class PlayerChargeDevice : MonoBehaviour
             if (hitGameobject.CompareTag("noCharge"))
             {
                 Debug.Log("Chargeable device in front of player");
+                device = hitGameobject;
                 return true;
             }
             Debug.Log("Some other object in front of player");
