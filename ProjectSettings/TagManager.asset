@@ -13,11 +13,12 @@ TagManager:
   - movable_object_spawner
   - target_area
   - movable_object
+  - ElectricLine
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - ElectricLine
   - Water
   - UI
   - Ground
