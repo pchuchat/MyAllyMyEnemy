@@ -6,9 +6,15 @@ using System.Collections;
 
 // ©GameGurus - Heikkinen R., Hopeasaari J., Kantola J., Kettunen J., Kommio R, PC, Parviainen P., Rautiainen J.
 // By: Parviainen P
-// TODO: 
-// - Haba lifts an object to a certain position and keeps it there by repeatedly clicking the interact-button.
+//  
+// Haba lifts an object to a certain position and keeps it there by repeatedly clicking the interact-button.
 // If the player stops clicking the button, after a certain time Haba will drop the object.
+//
+// TODO:
+// - Better timer for dropping the object. Current "timer" actually counts frames instead of time
+// - Object will not be dropped if anything is underneath it
+// - When something is underneatht the dropped object it will act as if it hit the ground -> Sound plays, Haba is able to move and object locks in space
+// (This will be fixed when object can not be dropped if something is underneath it)
 
 public class PlayerLiftObject : MonoBehaviour
 {
@@ -25,18 +31,21 @@ public class PlayerLiftObject : MonoBehaviour
     [Tooltip("The sound the dropped object makes when hitting the ground")] [SerializeField] private AudioClip objectGroundSound;
 
     // Private attributes    
-    private bool canLift; // a bool to see if you can up the target item
-    private GameObject target; // The object Haba is lifting
-    private Vector3 maxHeight; // The height where object stops lifting
-    //private Vector3 ogHeight; // The original position of target object     //Tämä otettiin pois kun target sijainnin sijaan katsotaan nyt liikkuuko target
-    private int timer;
-    private CharacterController controller;
+    private bool canLift;       // A bool to see if you can lift up the target item
+    private GameObject target;  // The object Haba is lifting
+    private Rigidbody rb;       // Rigidbody of the target-object
+    private Vector3 maxHeight;  // The height where object stops lifting
+    private Vector3 movementUp; // Used to give the target upwards force  
+    private float speed;        // Speed of the target-object
+    private int timer;          // "Timer" that counts if buttonpressing stops (actually counts frames)
     private PlayerInput input; // Used to disable movement and jump while lifting
+    private CharacterController controller; // Playercharacter
 
-    private Vector3 movementUp;
-    private Rigidbody rb;
-
-    private float speed;
+    //This is here just in case. It was removed because now lifting stops if dropped object is no longer moving
+    //Earlier lifting stopped if the lifted object was in the same position (or close enough) to it's original position before lifting
+    //private Vector3 ogHeight; // The original position of target object
+    // This was removed at the same time. This was in GetObjectInFront() where all variables are given values
+    //ogHeight = target.transform.position;
 
     private void Start()
     {
@@ -104,7 +113,6 @@ public class PlayerLiftObject : MonoBehaviour
                 rb = target.gameObject.GetComponent<Rigidbody>();
                 rb.useGravity = false;
                 rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
-                //ogHeight = target.transform.position; //Tämä otettiin pois kun target sijainnin sijaan katsotaan nyt liikkuuko target
                 maxHeight = target.transform.position;                      
                 maxHeight.y = (target.transform.position.y) + stopAtHeight;
                 return true;
@@ -133,8 +141,7 @@ public class PlayerLiftObject : MonoBehaviour
             audioSource.Play();
             if (timer <= 0)
             {
-                //if (Vector3.Distance(target.transform.position, ogHeight) <= 0.2f) // TÄÄ PAREMMAKSI!!! Nyt esine noisee koko ajan! Liian pieni ja haba jää jumiin
-                if(speed <= 0.01 && timer <= -5) // tämäkään ei toimi
+                if(speed <= 0.01 && timer <= -5)
                 {
                     input.actions.FindAction("Movement").Enable();
                     input.actions.FindAction("Jump").Enable();
