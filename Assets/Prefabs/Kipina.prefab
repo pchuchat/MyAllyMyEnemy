@@ -338,7 +338,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 1
-  chargeSound: {fileID: 0}
+  chargeSound: {fileID: 8300000, guid: 9c509ae0aada60e4c9302000f6921298, type: 3}
 --- !u!114 &2251022623129124305
 MonoBehaviour:
   m_ObjectHideFlags: 0

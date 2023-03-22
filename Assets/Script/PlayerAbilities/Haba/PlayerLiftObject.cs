@@ -56,7 +56,7 @@ public class PlayerLiftObject : MonoBehaviour
     /// <summary>
     /// Lifts the target object a certain amount per button press and stops at a certain height
     /// </summary>
-    /// <param name="_1">Interact button click(Unused parameter that can not be removed)</param>
+    /// <param name="context">Interact button click</param>
     public void OnLift(InputAction.CallbackContext context)
     {
         if (context.performed)

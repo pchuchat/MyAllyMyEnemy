@@ -28,15 +28,42 @@ public class PlayerChargeDevice : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
+    /// <summary>
+    /// Activates the device in front of the player and calls the script attached to the devie
+    /// Also plays the sound of the charge-ability
+    /// Is called when interact button is clicked
+    /// </summary>
+    /// <param name="context">Interact button click</param>
     public void OnCharge(InputAction.CallbackContext context)
     {
-        canCharge = GetObjectInfront();
-        if(canCharge == true)
+        if (context.performed)
         {
-
-        }
+            if(device == null)
+            {
+                canCharge = GetObjectInfront();
+            }           
+            if (canCharge == true)
+            {
+                device.tag = "charged";
+                device.GetComponent<DeviceCharged>().enabled = true;
+                device.GetComponent<DeviceCharged>().ActivateDevice();
+                audioSource.clip = chargeSound;
+                audioSource.Play();
+                canCharge = false;
+                device = null;
+            }
+        }           
     }
 
+    /// <summary>
+    /// Checks if there is an object in front of the player within a spesific distance and returns a bool value. 
+    /// If there is one, then checks if the object has the tag "noCharge". If the object that is close has
+    /// the correct tag then sets it to be the device-gameobject;
+    /// The object has to have a rigidbody.
+    /// </summary>
+    /// <returns>False if there is no object in front of the player
+    ///          False if the object in front of the player doesn't have the correct tag
+    ///          True if a gameobject is close enough and has the correct tag</returns>
     private bool GetObjectInfront()
     {
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hit, distance) && controller.isGrounded)
@@ -45,23 +72,14 @@ public class PlayerChargeDevice : MonoBehaviour
 
             if (hitGameobject.CompareTag("noCharge"))
             {
-                Debug.Log("Chargeable device in front of player");
                 device = hitGameobject;
                 return true;
             }
-            Debug.Log("Some other object in front of player");
             return false;
         }
         else
         {
-            Debug.Log("No object in front of player");
             return false;
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
