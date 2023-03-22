@@ -1,7 +1,7 @@
 
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem; // katsotaan kohta onko tarpeellinan
+using UnityEngine.InputSystem;
 using System.Collections;
 
 // ©GameGurus - Heikkinen R., Hopeasaari J., Kantola J., Kettunen J., Kommio R, PC, Parviainen P., Rautiainen J.
@@ -77,14 +77,11 @@ public class PlayerLiftObject : MonoBehaviour
                 
                 movementUp = new Vector3 (0, force, 0);
                 rb.AddForce(movementUp - rb.velocity, ForceMode.VelocityChange);
-                //target.transform.Translate(0, force, 0);
 
                 if (target.transform.position.y > maxHeight.y)
                 {
                     rb.position = maxHeight;
                     rb.constraints = RigidbodyConstraints.FreezeAll;
-                    //gamepad.SetMotorSpeeds(0.123f, 0.234f);
-                    //target.transform.position = maxHeight;
                     target.tag = "atMaxHeight";
                 }
             }
@@ -102,7 +99,7 @@ public class PlayerLiftObject : MonoBehaviour
     ///          True if a gameobject is close enough and has the correct tag</returns>
     private bool GetObjectInfront()
     {
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hit, distance) && controller.isGrounded) //TODO ray vain eteen
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hit, distance) && controller.isGrounded)
         {                                                                         
             GameObject hitGameobject = hit.transform.gameObject;
 
@@ -130,15 +127,18 @@ public class PlayerLiftObject : MonoBehaviour
     {
         timer--;
 
-        if (target != null && timer == 0)
+        if (target != null)
         {
             speed = rb.velocity.magnitude;
-            rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
-            rb.useGravity = true;
-            canLift = false;
-            controller.Move(transform.forward*-0.5f);
-            audioSource.clip = dropSound;
-            audioSource.Play();
+            if (timer == 0)
+            {
+                rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
+                rb.useGravity = true;
+                canLift = false;
+                controller.Move(transform.forward * -0.5f);
+                audioSource.clip = dropSound;
+                audioSource.Play();
+            }           
             if (timer <= 0)
             {
                 if(speed <= 0.01 && timer <= -5)
