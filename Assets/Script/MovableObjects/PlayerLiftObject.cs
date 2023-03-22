@@ -121,19 +121,16 @@ public class PlayerLiftObject : MonoBehaviour
     private void FixedUpdate()
     {
         timer--;
-        speed = rb.velocity.magnitude;
 
-        if (target != null)
+        if (target != null && timer == 0)
         {
-            if (timer == 0)
-            {
-                rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
-                rb.useGravity = true;
-                canLift = false;
-                controller.Move(transform.forward*-0.5f);
-                audioSource.clip = dropSound;
-                audioSource.Play();
-            }
+            speed = rb.velocity.magnitude;
+            rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
+            rb.useGravity = true;
+            canLift = false;
+            controller.Move(transform.forward*-0.5f);
+            audioSource.clip = dropSound;
+            audioSource.Play();
             if (timer <= 0)
             {
                 //if (Vector3.Distance(target.transform.position, ogHeight) <= 0.2f) // TÄÄ PAREMMAKSI!!! Nyt esine noisee koko ajan! Liian pieni ja haba jää jumiin
