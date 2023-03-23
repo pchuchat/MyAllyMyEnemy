@@ -17,6 +17,7 @@ public class PlayerPushPull : MonoBehaviour
     private bool pushing = false;
     private bool hitDirectionX;
     private GameObject pushableObject;
+    private InteractionHint hint;
 
     void Start()
     {
@@ -115,6 +116,16 @@ public class PlayerPushPull : MonoBehaviour
 
     void Update()
     {
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hit, interactDistance)
+               && hit.collider.gameObject.CompareTag("pushable_object") && controller.isGrounded && !pushing)
+        {
+            hint = hit.collider.gameObject.GetComponentInChildren<InteractionHint>();
+            hint.Activate();
+        }
+        else if (hint != null)
+        {
+            hint.DeActivate();
+        }
         if (pushing)
         {
             //Player movement input to vector3
