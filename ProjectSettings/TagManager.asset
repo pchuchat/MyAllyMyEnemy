@@ -14,6 +14,8 @@ TagManager:
   - target_area
   - movable_object
   - ElectricLine
+  - noCharge
+  - charged
   layers:
   - Default
   - TransparentFX
