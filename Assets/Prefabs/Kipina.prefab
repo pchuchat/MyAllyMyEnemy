@@ -384,8 +384,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeed: 6
-  jumpHeight: 1
-  gravityValue: -9.81
+  jumpHeight: 1.2
+  gravityValue: -19.62
   jumpSound: {fileID: 8300000, guid: f2a9cce93cc358447879559b12c39d53, type: 3}
   doublejumpSound: {fileID: 8300000, guid: 96adf54aade650b43a01dd1ffba908a2, type: 3}
 --- !u!23 &8508339662242141726

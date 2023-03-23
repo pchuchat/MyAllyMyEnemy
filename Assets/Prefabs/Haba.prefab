@@ -193,8 +193,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeed: 6
-  jumpHeight: 1
-  gravityValue: -9.81
+  jumpHeight: 1.2
+  gravityValue: -19.62
   jumpSound: {fileID: 8300000, guid: 0725eceb7443e204084682773c4d1940, type: 3}
   doublejumpSound: {fileID: 8300000, guid: e814f67823cbed546a43473c6121421e, type: 3}
 --- !u!114 &7598341486325973947
@@ -318,6 +318,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 61bf9f41-3a1b-41bb-bc24-1f9800e7d042
     m_ActionName: Player/PickUp[/DualShock4GamepadHID/buttonEast,/DualShock4GamepadHID1/buttonEast]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c1c82458-de33-42d6-8324-ce9bf8319616
+    m_ActionName: Player/Charge[/XInputControllerWindows/buttonEast]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Pleikka
   m_DefaultActionMap: Player
