@@ -323,8 +323,8 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: c1c82458-de33-42d6-8324-ce9bf8319616
     m_ActionName: Player/Charge[/XInputControllerWindows/buttonEast]
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Pleikka
+  m_NeverAutoSwitchControlSchemes: 1
+  m_DefaultControlScheme: 
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
