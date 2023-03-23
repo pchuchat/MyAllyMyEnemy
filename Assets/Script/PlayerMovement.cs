@@ -15,6 +15,9 @@ public class PlayerMovement : MonoBehaviour
     // Height of the player's jump
     [SerializeField] private float jumpHeight = 1.0f;
 
+    // Ratio of the height of the players double jump
+    [SerializeField] private float doublejumpRatio = 1.0f;
+
     // Strength of gravity affecting the player
     [SerializeField] private float gravityValue = -9.81f;
 
@@ -23,8 +26,6 @@ public class PlayerMovement : MonoBehaviour
 
     // AudioClip for double jump
     [SerializeField] private AudioClip doublejumpSound;
-
-    private bool facingRight = true; // added variable to keep track of facing direction
 
 
     // Reference to the CharacterController component
@@ -83,8 +84,16 @@ public class PlayerMovement : MonoBehaviour
                 audioSource.clip = doublejumpSound;
                 audioSource.Play();
 
-                // Set player velocity for double jump
-                playerVelocity.y = Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+                // Set player velocity for double jump when going up
+                if (playerVelocity.y >= 0)
+                {
+                    playerVelocity.y = Mathf.Sqrt(jumpHeight * doublejumpRatio * -3.0f * gravityValue);
+                }
+                // Set player velocity for double jump when going down (only lowers downwards momentum to it's square root before adding the updwards momentum)
+                else
+                {
+                    playerVelocity.y = -Mathf.Sqrt(-playerVelocity.y) + Mathf.Sqrt(jumpHeight * doublejumpRatio * -3.0f * gravityValue);
+                }
 
                 // Disable double jump until next grounded state
                 canDoubleJump = false;
@@ -110,17 +119,10 @@ public class PlayerMovement : MonoBehaviour
         Vector3 move = new(movementInput.x, 0, movementInput.y);
         controller.Move(playerSpeed * Time.deltaTime * move);
 
-        if (move != Vector3.zero) // added code to face the player in the direction of movement
+        // Face the player in the direction of movement
+        if (move != Vector3.zero)
         {
-            transform.forward = move.normalized;
-            if (facingRight && move.x < 0)
-            {
-                Flip();
-            }
-            else if (!facingRight && move.x > 0)
-            {
-                Flip();
-            }
+            transform.rotation = Quaternion.LookRotation(move);
         }
 
         // Apply gravity to the player's velocity and move the player
@@ -128,9 +130,4 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(playerVelocity * Time.deltaTime);
     }
 
-    private void Flip() // added function to flip the character horizontally
-    {
-        facingRight = !facingRight;
-        transform.Rotate(0f, 180f, 0f);
-    }
 }

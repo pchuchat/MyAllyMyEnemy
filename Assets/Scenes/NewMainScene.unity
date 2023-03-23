@@ -190,6 +190,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Haba
       objectReference: {fileID: 0}
+    - target: {fileID: 7681525300652446687, guid: 857a26a4c6b54574e837f9b58f74a976, type: 3}
+      propertyPath: jumpHeight
+      value: 1.3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 857a26a4c6b54574e837f9b58f74a976, type: 3}
 --- !u!1 &1377410711
