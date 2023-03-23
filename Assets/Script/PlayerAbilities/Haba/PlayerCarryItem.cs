@@ -18,6 +18,7 @@ public class PlayerCarryItem : MonoBehaviour
     private PlayerInput input;
     private CharacterController controller;
     private bool carrying = false;
+    private InteractionHint hint;
 
 
 
@@ -106,10 +107,21 @@ public class PlayerCarryItem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward + Vector3.down), out RaycastHit hit, interactDistance)
+            && hit.collider.gameObject.CompareTag("movable_object_spawner") && controller.isGrounded && !carrying)
+        {
+            hint = hit.collider.gameObject.GetComponentInChildren<InteractionHint>();
+            hint.Activate();
+        }
+        else if (hint != null)
+        {
+            hint.DeActivate();
+        }
+
         //Checking if there is a target area below the movable object while the player is carrying it
         //if said target is found removes the object from the player and snaps it in the middle of the target area.
-        if (carrying && Physics.Raycast(movableObject.transform.position, transform.TransformDirection(Vector3.down), out RaycastHit hit, 5f)
-            && hit.collider.gameObject.CompareTag("target_area"))
+        if (carrying && Physics.Raycast(movableObject.transform.position, transform.TransformDirection(Vector3.down), out RaycastHit hit1, 5f)
+            && hit1.collider.gameObject.CompareTag("target_area"))
         {
             movableObject.transform.SetParent(null);
             movableObject.GetComponent<BoxCollider>().enabled = true;
