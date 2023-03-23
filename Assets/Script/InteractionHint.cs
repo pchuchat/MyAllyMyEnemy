@@ -1,30 +1,34 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-
+// ©GameGurus - Heikkinen R., Hopeasaari J., Kantola J., Kettunen J., Kommio R, PC, Parviainen P., Rautiainen J.
+// Creator: Kettunen. J
+//
+// Creates hints for interactions
 public class InteractionHint : MonoBehaviour
 {
-    [Tooltip("The content of the textfield")] [SerializeField] private string message = "example";
+    [Tooltip("The content of the textfield")] [SerializeField] private string message;
     [Tooltip("Fontsize")] [SerializeField] private float fontSize = 3f;
     [Tooltip("Distance above target")] [SerializeField] private float offsetY = 1f;
 
+    //Variables for canvas element
     private GameObject canvasObject;
     private Canvas hintCanvas;
     private RectTransform canvasrectTransform;
 
+    //Variables for textfield
     private GameObject textObject;
     private TextMeshPro textField;
     private RectTransform textrectTransform;
 
+    //Target for position
     private GameObject target;
 
-    // Start is called before the first frame update
     void Start()
     {
         target = transform.gameObject;
-        Debug.Log(target.name);
 
-        // Canvas
+        // Setting up the canvas
         canvasObject = new GameObject();
         canvasObject.transform.parent = target.transform;
         canvasObject.name = "HintCanvas";
@@ -38,13 +42,12 @@ public class InteractionHint : MonoBehaviour
         canvasrectTransform = canvasObject.GetComponent<RectTransform>();
         canvasrectTransform.localPosition = new Vector3(0, 0, 0);
 
-        // Text
+        // Setting up the text field
         textObject = new GameObject();
         textObject.transform.parent = canvasObject.transform;
         textObject.name = "text";
 
         textField = textObject.AddComponent<TextMeshPro>();
-        //textField.font = (Font)Resources.Load("MyFont");
         textField.text = message;
         textField.fontSize = fontSize;
         textField.alignment = TextAlignmentOptions.Center;
@@ -56,10 +59,16 @@ public class InteractionHint : MonoBehaviour
         textField.enabled = false;
     }
 
+    /// <summary>
+    /// Activates the hint
+    /// </summary>
     public void Activate()
     {
         textField.enabled = true;
     }
+    /// <summary>
+    /// Deactivates the hint
+    /// </summary>
     public void DeActivate()
     {
         textField.enabled = false;
