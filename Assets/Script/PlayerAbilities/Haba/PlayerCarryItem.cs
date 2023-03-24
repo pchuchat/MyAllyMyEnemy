@@ -62,6 +62,7 @@ public class PlayerCarryItem : MonoBehaviour
     /// </summary>
     private void ThrowObject()
     {
+        movableObject.gameObject.GetComponent<MovableObject>().PlayThrowSound();
         //Calculating the throwforce and throwing the object
         Vector3 forceOfThrow = transform.forward * throwForce + transform.up * throwForceUp;
         movableObject.GetComponent<Rigidbody>().AddForce(forceOfThrow, ForceMode.Impulse);
@@ -87,6 +88,7 @@ public class PlayerCarryItem : MonoBehaviour
         movableObject.transform.SetParent(transform);
         carrying = true;
         input.actions.FindAction("Jump").Disable();
+        movableObject.gameObject.GetComponent<MovableObject>().PlayPickUpSound();
     }
 
     /// <summary>
