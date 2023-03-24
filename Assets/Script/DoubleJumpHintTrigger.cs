@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DoubleJumpHintTrigger : MonoBehaviour
@@ -12,7 +10,7 @@ public class DoubleJumpHintTrigger : MonoBehaviour
         hint = GetComponentInParent<InteractionHint>();
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("player"))
         {
@@ -26,10 +24,5 @@ public class DoubleJumpHintTrigger : MonoBehaviour
         {
             hint.DeActivate();
         }
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
