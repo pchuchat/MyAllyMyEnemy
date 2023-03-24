@@ -20,6 +20,7 @@ public class MovableObject : MonoBehaviour
             keepThisOne = true;
             rb.velocity = Vector3.zero;
             rb.constraints = RigidbodyConstraints.FreezePosition;
+            rb.freezeRotation = true;
             transform.position = collider.gameObject.transform.position;
             collider.gameObject.tag = "Untagged";
             transform.forward = collider.gameObject.transform.forward;
