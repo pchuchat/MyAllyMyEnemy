@@ -8,7 +8,8 @@ using UnityEngine.UI;
 public class InteractionHint : MonoBehaviour
 {
     [Tooltip("The content of the textfield")] [SerializeField] private string message;
-    [Tooltip("Fontsize")] [SerializeField] private float fontSize = 3f;
+    //[Tooltip("Fontsize")] [SerializeField]
+    private float fontSize = 5f;
     [Tooltip("Distance above target")] [SerializeField] private float offsetY = 1f;
 
     //Variables for canvas element
@@ -50,6 +51,7 @@ public class InteractionHint : MonoBehaviour
         textField = textObject.AddComponent<TextMeshPro>();
         textField.text = message;
         textField.fontSize = fontSize;
+        textField.color = new Color(0,0,0);
         textField.alignment = TextAlignmentOptions.Center;
 
         // Text position

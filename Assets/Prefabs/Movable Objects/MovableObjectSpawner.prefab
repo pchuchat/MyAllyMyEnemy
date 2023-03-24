@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 148435224927931779}
   m_Layer: 0
   m_Name: MovableObjectSpawner
-  m_TagString: movable_object
+  m_TagString: movable_object_spawner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 5994058634364569098}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -41.98, y: 1.44, z: -45.23}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -100,8 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   message: Press O to pick up
-  fontSize: 3
-  offsetY: 1
+  offsetY: 2
 --- !u!65 &4586040908994215878
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -142,5 +141,5 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 122
+  m_Constraints: 126
   m_CollisionDetection: 0

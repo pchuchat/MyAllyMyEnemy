@@ -22,6 +22,7 @@ public class MovableObject : MonoBehaviour
             rb.constraints = RigidbodyConstraints.FreezePosition;
             transform.position = collider.gameObject.transform.position;
             collider.gameObject.tag = "Untagged";
+            transform.forward = collider.gameObject.transform.forward;
         }
     }
 
