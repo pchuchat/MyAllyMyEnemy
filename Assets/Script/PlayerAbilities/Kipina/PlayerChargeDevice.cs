@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 // ©GameGurus - Heikkinen R., Hopeasaari J., Kantola J., Kettunen J., Kommio R, PC, Parviainen P., Rautiainen J.
 // By: Parviainen P
+// Edited: Kettunen J
 // Kipinä charges the device in front and activates it.
 // Activation of devices cause some action in the game. The action depends on what script is attached to the device.
 
@@ -20,6 +21,7 @@ public class PlayerChargeDevice : MonoBehaviour
     private CharacterController controller; // Playercharacter
     private bool canCharge;                 // Wether or not the device in front can be activated
     private GameObject device;              // The device in front of the player
+    private InteractionHint hint;
 
     void Start()
     {
@@ -79,6 +81,19 @@ public class PlayerChargeDevice : MonoBehaviour
         else
         {
             return false;
+        }
+    }
+    void Update()
+    {
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), 
+            out RaycastHit hit, distance) && hit.collider.gameObject.CompareTag("noCharge") && controller.isGrounded)
+        {
+            hint = hit.collider.gameObject.GetComponentInChildren<InteractionHint>();
+            hint.Activate();
+        }
+        else if (hint != null)
+        {
+            hint.DeActivate();
         }
     }
 }
