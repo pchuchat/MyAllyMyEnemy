@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   message: Hold O to move
-  fontSize: 3
+  offsetY: 1
 --- !u!65 &8908426679152239274
 BoxCollider:
   m_ObjectHideFlags: 0

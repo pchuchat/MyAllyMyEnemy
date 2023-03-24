@@ -39,7 +39,7 @@ public class PlayerPushPull : MonoBehaviour
         {
             CheckForPushableObject();
         }
-        if(context.started && pushableObject != null)
+        if (context.started && pushableObject != null)
         {
             input.actions.FindAction("Jump").Disable();
             playerMovement.enabled = false;
@@ -70,7 +70,7 @@ public class PlayerPushPull : MonoBehaviour
     /// Assigns the value false to hitDirection x if the object was hit along the z axis
     /// </summary>
     /// <param name="hit">hit from raycast ect.</param>
-    private void SetDirectionOfHit (RaycastHit hit)
+    private void SetDirectionOfHit(RaycastHit hit)
     {
         //Determining the axis of the hit, to move accordingly.
         //True means the object was hit along the x axis,
@@ -143,7 +143,7 @@ public class PlayerPushPull : MonoBehaviour
             }
             else
             {
-                magnitude = Vector3.Dot(movementInputV3, pushableObject.transform.forward) ;
+                magnitude = Vector3.Dot(movementInputV3, pushableObject.transform.forward);
                 pushableObject.transform.Translate(magnitude * pushSpeed * Time.deltaTime * Vector3.forward, Space.Self);
             }
         }
