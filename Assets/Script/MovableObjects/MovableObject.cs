@@ -15,15 +15,16 @@ public class MovableObject : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.CompareTag("target_area"))
+        if (collider.gameObject.CompareTag("target_area") && gameObject.CompareTag("movable_object"))
         {
             keepThisOne = true;
             rb.velocity = Vector3.zero;
             rb.constraints = RigidbodyConstraints.FreezePosition;
             rb.freezeRotation = true;
             transform.position = collider.gameObject.transform.position;
-            collider.gameObject.tag = "Untagged";
             transform.forward = collider.gameObject.transform.forward;
+            collider.gameObject.tag = "Untagged";
+            gameObject.tag = "Untagged";
         }
     }
 
@@ -33,5 +34,9 @@ public class MovableObject : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+    private void LateUpdate()
+    {
+        
     }
 }
