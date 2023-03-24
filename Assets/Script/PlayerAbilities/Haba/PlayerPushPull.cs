@@ -17,6 +17,8 @@ public class PlayerPushPull : MonoBehaviour
     private bool pushing = false;
     private bool hitDirectionX;
     private GameObject pushableObject;
+    private Rigidbody pushableObjectRb;
+
     private InteractionHint hint;
 
     void Start()
@@ -41,16 +43,16 @@ public class PlayerPushPull : MonoBehaviour
         }
         if (context.started && pushableObject != null)
         {
+            pushableObjectRb.constraints = RigidbodyConstraints.FreezeRotation;
             input.actions.FindAction("Jump").Disable();
             playerMovement.enabled = false;
-            controller.transform.SetParent(pushableObject.transform);
             pushing = true;
         }
         if (context.canceled && pushing)
         {
+            pushableObjectRb.constraints = RigidbodyConstraints.FreezeAll;
             input.actions.FindAction("Jump").Enable();
             playerMovement.enabled = true;
-            controller.transform.parent = null;
             pushing = false;
             pushableObject = null;
         }
@@ -105,7 +107,7 @@ public class PlayerPushPull : MonoBehaviour
         {
             //Getting the object from collision
             pushableObject = hit.collider.gameObject;
-
+            pushableObjectRb = pushableObject.GetComponent<Rigidbody>();
             SetDirectionOfHit(hit);
         }
         else
@@ -116,20 +118,28 @@ public class PlayerPushPull : MonoBehaviour
 
     void Update()
     {
+        if (hint != null)
+        {
+            hint.DeActivate();
+        }
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hit, interactDistance)
                && hit.collider.gameObject.CompareTag("pushable_object") && controller.isGrounded && !pushing)
         {
             hint = hit.collider.gameObject.GetComponentInChildren<InteractionHint>();
             hint.Activate();
         }
-        else if (hint != null)
+        if (pushing)
         {
-            hint.DeActivate();
         }
+    }
+    private void FixedUpdate()
+    {
+
         if (pushing)
         {
             //Player movement input to vector3
             Vector3 movementInputV3 = new(movementInput.x, 0, movementInput.y);
+            Vector3 direction;
 
             //The magnitude of player input towards the direction of pushing
             float magnitude;
@@ -138,14 +148,16 @@ public class PlayerPushPull : MonoBehaviour
             //and movin the object together with the player.
             if (hitDirectionX)
             {
-                magnitude = Vector3.Dot(movementInputV3, pushableObject.transform.right);
-                pushableObject.transform.Translate(magnitude * pushSpeed * Time.deltaTime * Vector3.right, Space.Self);
+                direction = Vector3.right;
+                magnitude = Vector3.Dot(movementInputV3, pushableObjectRb.transform.right);
             }
             else
             {
-                magnitude = Vector3.Dot(movementInputV3, pushableObject.transform.forward);
-                pushableObject.transform.Translate(magnitude * pushSpeed * Time.deltaTime * Vector3.forward, Space.Self);
+                direction = Vector3.forward;
+                magnitude = Vector3.Dot(movementInputV3, pushableObjectRb.transform.forward);
             }
+            controller.Move(pushableObjectRb.velocity * Time.fixedDeltaTime);
+            pushableObjectRb.AddRelativeForce(direction * magnitude * pushSpeed - pushableObject.transform.InverseTransformDirection(pushableObjectRb.velocity), ForceMode.VelocityChange);
         }
     }
 }
