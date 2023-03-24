@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 9066024022495620346}
   - component: {fileID: 7288850608731709070}
   - component: {fileID: 4920549545274718688}
+  - component: {fileID: 4574357300711311179}
   - component: {fileID: 4619430327006741037}
   - component: {fileID: 2002666687265246199}
   - component: {fileID: -8426542700838290077}
@@ -57,7 +58,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbbb55844f912464d9f494530e3eeac2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  times: 4
+  height: 3
+  force: 0.02
   chargedDeviceSound: {fileID: 8300000, guid: 84e427d6b66ab4066b6a4dcd0ce819ee, type: 3}
+--- !u!114 &4574357300711311179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1184416725749755638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad48c56d46ee2424eb6bd0dbd7d60ae1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  message: Press O to interact
+  offsetY: 1
 --- !u!23 &4619430327006741037
 MeshRenderer:
   m_ObjectHideFlags: 0

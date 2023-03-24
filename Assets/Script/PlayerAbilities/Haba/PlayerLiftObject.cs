@@ -6,6 +6,7 @@ using System.Collections;
 
 // ©GameGurus - Heikkinen R., Hopeasaari J., Kantola J., Kettunen J., Kommio R, PC, Parviainen P., Rautiainen J.
 // By: Parviainen P
+// Edited: Kettunen J
 //  
 // Haba lifts an object to a certain position and keeps it there by repeatedly clicking the interact-button.
 // If the player stops clicking the button, after a certain time Haba will drop the object.
@@ -40,6 +41,7 @@ public class PlayerLiftObject : MonoBehaviour
     private int timer;          // "Timer" that counts if buttonpressing stops (actually counts frames)
     private PlayerInput input; // Used to disable movement and jump while lifting
     private CharacterController controller; // Playercharacter
+    private InteractionHint hint;
 
     //This is here just in case. It was removed because now lifting stops if dropped object is no longer moving
     //Earlier lifting stopped if the lifted object was in the same position (or close enough) to it's original position before lifting
@@ -123,6 +125,19 @@ public class PlayerLiftObject : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward),
+            out RaycastHit hit, distance) && hit.collider.gameObject.CompareTag("liftable") && controller.isGrounded && target == null)
+        {
+            hint = hit.collider.gameObject.GetComponentInChildren<InteractionHint>();
+            hint.Activate();
+        }
+        else if (hint != null)
+        {
+            hint.DeActivate();
+        }
+    }
     private void FixedUpdate()
     {
         timer--;
