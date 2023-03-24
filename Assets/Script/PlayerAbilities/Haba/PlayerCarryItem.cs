@@ -81,7 +81,8 @@ public class PlayerCarryItem : MonoBehaviour
     private void PickUpObject()
     {
         movableObject.GetComponent<Rigidbody>().useGravity = false;
-        Vector3 targetPos = transform.position + transform.forward * 0.5f;
+        movableObject.transform.forward = controller.transform.forward;
+        Vector3 targetPos = transform.position + transform.forward * (movableObject.transform.localScale.z/2 + transform.localScale.z/2);
         movableObject.transform.position = targetPos;
         movableObject.transform.SetParent(transform);
         carrying = true;
