@@ -57,7 +57,7 @@ public class InteractionHint : MonoBehaviour
         // Text position
         textrectTransform = textObject.GetComponent<RectTransform>();
         textrectTransform.localPosition = new Vector3(0, (target.transform.localScale.y/2 + offsetY), 0);
-        textrectTransform.sizeDelta = new Vector2(2, 2);
+        textrectTransform.sizeDelta = new Vector2(3, 3);
         textField.enabled = false;
     }
 
