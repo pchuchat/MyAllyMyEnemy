@@ -18,6 +18,7 @@ public class PlayerPushPull : MonoBehaviour
     private bool hitDirectionX;
     private GameObject pushableObject;
     private Rigidbody pushableObjectRb;
+    private AudioSource pushableObjAudioSource;
 
     private InteractionHint hint;
 
@@ -50,11 +51,13 @@ public class PlayerPushPull : MonoBehaviour
         }
         if (context.canceled && pushing)
         {
+            pushableObjAudioSource.Stop();
             pushableObjectRb.constraints = RigidbodyConstraints.FreezeAll;
             input.actions.FindAction("Jump").Enable();
             playerMovement.enabled = true;
             pushing = false;
             pushableObject = null;
+            pushableObjAudioSource = null;
         }
     }
     /// <summary>
@@ -107,6 +110,8 @@ public class PlayerPushPull : MonoBehaviour
         {
             //Getting the object from collision
             pushableObject = hit.collider.gameObject;
+            pushableObjAudioSource = pushableObject.GetComponent<AudioSource>();
+            pushableObjAudioSource.loop = true;
             pushableObjectRb = pushableObject.GetComponent<Rigidbody>();
             SetDirectionOfHit(hit);
         }
@@ -158,6 +163,13 @@ public class PlayerPushPull : MonoBehaviour
             }
             controller.Move(pushableObjectRb.velocity * Time.fixedDeltaTime);
             pushableObjectRb.AddRelativeForce(direction * magnitude * pushSpeed - pushableObject.transform.InverseTransformDirection(pushableObjectRb.velocity), ForceMode.VelocityChange);
+            if (pushableObjectRb.velocity.magnitude != 0 && !pushableObjAudioSource.isPlaying)
+            {
+                pushableObjAudioSource.Play();
+            }else if (magnitude == 0)
+            {
+                pushableObjAudioSource.Stop();
+            }
         }
     }
 }
