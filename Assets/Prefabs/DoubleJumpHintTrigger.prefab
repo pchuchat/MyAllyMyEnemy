@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 6917568950793315821}
   - component: {fileID: 1452181559311186770}
   - component: {fileID: 4010567375552551249}
-  - component: {fileID: 1439525847368997482}
   - component: {fileID: 5286874404043580745}
   - component: {fileID: 4967016642906986422}
   m_Layer: 0
@@ -56,19 +55,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed073c42f4db8184bba2042060a0221b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1439525847368997482
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 11311791242201273}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad48c56d46ee2424eb6bd0dbd7d60ae1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   message: Press jump again to doublejump
+  fontSize: 5
   offsetY: 2
 --- !u!23 &5286874404043580745
 MeshRenderer:

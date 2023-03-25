@@ -2734,6 +2734,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: DoubleJumpHintTrigger
       objectReference: {fileID: 0}
+    - target: {fileID: 4010567375552551249, guid: 26956faebe323a24c8cddbc4c4a529ec, type: 3}
+      propertyPath: message
+      value: Press jump again to doublejump
+      objectReference: {fileID: 0}
+    - target: {fileID: 4010567375552551249, guid: 26956faebe323a24c8cddbc4c4a529ec, type: 3}
+      propertyPath: offsetY
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4967016642906986422, guid: 26956faebe323a24c8cddbc4c4a529ec, type: 3}
       propertyPath: m_IsTrigger
       value: 1
@@ -2790,7 +2798,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1439525847368997482, guid: 26956faebe323a24c8cddbc4c4a529ec, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 26956faebe323a24c8cddbc4c4a529ec, type: 3}
 --- !u!1001 &5921681356607560795
 PrefabInstance:

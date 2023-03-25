@@ -10,17 +10,19 @@ using UnityEngine.InputSystem;
 // Gives the player the ability to carry and throw items given from spawners
 public class PlayerCarryItem : MonoBehaviour
 {
+    [Header("Carrying attributes")]
     [Tooltip("From how far the player can pick up objects")] [SerializeField] private float interactDistance = 1f;
     [Tooltip("Throwing force of the player")] [SerializeField] private float throwForce = 5f;
     [Tooltip("Defines the upwards component of throwforce")] [SerializeField] private float throwForceUp = 1f;
 
-    private GameObject movableObject;
+    //Player
+    private CharacterController controller;     
     private PlayerInput input;
-    private CharacterController controller;
-    private bool carrying = false;
-    private InteractionHint hint;
+    private bool carrying = false;      //whether the player is carrying an object or not
 
-
+    //Movable object
+    private GameObject movableObject;
+    private InteractionHint hint;       //hint that is displayed when player can interact with something
 
     // Start is called before the first frame update
     void Start()
@@ -58,11 +60,32 @@ public class PlayerCarryItem : MonoBehaviour
     }
 
     /// <summary>
+    /// Picks up the movable object and sets neccessary parameters
+    /// </summary>
+    private void PickUpObject()
+    {
+        //Removing gravity from object and making sure it is held in the right orientation
+        movableObject.GetComponent<Rigidbody>().useGravity = false;
+        movableObject.transform.forward = controller.transform.forward;
+
+        //Calculating and setting the position for carrying item
+        Vector3 targetPos = transform.position + transform.forward * (movableObject.transform.localScale.z/2 + transform.localScale.z/2);
+        movableObject.transform.position = targetPos;
+
+        movableObject.transform.SetParent(transform);
+        carrying = true;
+        input.actions.FindAction("Jump").Disable();
+        movableObject.gameObject.GetComponent<MovableObject>().PlayPickUpSound();
+    }
+
+    /// <summary>
     /// Throws the object that player is carrying with given force
     /// </summary>
     private void ThrowObject()
     {
+        //Playing the sound for throwing item
         movableObject.gameObject.GetComponent<MovableObject>().PlayThrowSound();
+
         //Calculating the throwforce and throwing the object
         Vector3 forceOfThrow = transform.forward * throwForce + transform.up * throwForceUp;
         movableObject.GetComponent<Rigidbody>().AddForce(forceOfThrow, ForceMode.Impulse);
@@ -77,21 +100,6 @@ public class PlayerCarryItem : MonoBehaviour
     }
 
     /// <summary>
-    /// Picks up the movable object and sets neccessary parameters
-    /// </summary>
-    private void PickUpObject()
-    {
-        movableObject.GetComponent<Rigidbody>().useGravity = false;
-        movableObject.transform.forward = controller.transform.forward;
-        Vector3 targetPos = transform.position + transform.forward * (movableObject.transform.localScale.z/2 + transform.localScale.z/2);
-        movableObject.transform.position = targetPos;
-        movableObject.transform.SetParent(transform);
-        carrying = true;
-        input.actions.FindAction("Jump").Disable();
-        movableObject.gameObject.GetComponent<MovableObject>().PlayPickUpSound();
-    }
-
-    /// <summary>
     /// Checks if there is a movable object spawner in front of the player
     /// </summary>
     private void CheckForMovabeObjectSpawner()
@@ -100,7 +108,7 @@ public class PlayerCarryItem : MonoBehaviour
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward + Vector3.down), out RaycastHit hit, interactDistance)
             && hit.collider.gameObject.CompareTag("movable_object_spawner") && controller.isGrounded)
         {
-            //Getting the object from the spawner
+            //Getting the object from the spawner and pickng it up
             movableObject = hit.collider.gameObject.GetComponent<MovableObjectSpawner>().GetMovableObject();
             PickUpObject();
         }
@@ -110,6 +118,7 @@ public class PlayerCarryItem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Activating and deactivating hints when player comes near a movable object
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward + Vector3.down), out RaycastHit hit, interactDistance)
             && hit.collider.gameObject.CompareTag("movable_object_spawner") && controller.isGrounded && !carrying)
         {

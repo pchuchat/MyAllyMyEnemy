@@ -52,7 +52,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickUpSound: {fileID: 8300000, guid: ffb159a21c8a04135a5616979c828fab, type: 3}
   throwSound: {fileID: 8300000, guid: 2c5292ba5cf254919a6b9e2b18e04f49, type: 3}
-  targetSound: {fileID: 8300000, guid: 3fa6b943bec685c42bbb726da130bd51, type: 3}
+  targetHitSound: {fileID: 8300000, guid: 3fa6b943bec685c42bbb726da130bd51, type: 3}
   destructionSound: {fileID: 8300000, guid: 7e26c9daf4c32483b9c2790e662d3f1b, type: 3}
 --- !u!33 &5706477544760214611
 MeshFilter:
