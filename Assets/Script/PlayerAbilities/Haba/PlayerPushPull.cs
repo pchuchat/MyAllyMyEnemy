@@ -6,34 +6,41 @@ using UnityEngine.InputSystem;
 // Gives the player the ability to push and pull objects that have the tag pushable_object
 public class PlayerPushPull : MonoBehaviour
 {
+    [Header("Pushing attributes")]
     [Tooltip("From how far the player can push objects")] [SerializeField] private float interactDistance = 1f;
     [Tooltip("The speed that the player can push objects")] [SerializeField] private float pushSpeed = 4.0f;
 
-    public PlayerMovement playerMovement;
+    [Header("Sounds")]
+    [Tooltip("The sound Haba makes when starting pushing")] [SerializeField] private AudioClip startPushingSound;
+    [Tooltip("The sound Haba makes when stopping pushing")] [SerializeField] private AudioClip stopPushingSound;
+
+    //Player
     private CharacterController controller;
     private PlayerInput input;
-
+    private AudioSource playerAudioSource;
+    private PlayerMovement playerMovement;
     private Vector2 movementInput;
     private bool pushing = false;
+
+    //Pushable object
     private bool hitDirectionX;
     private GameObject pushableObject;
     private Rigidbody pushableObjectRb;
     private AudioSource pushableObjAudioSource;
-
     private InteractionHint hint;
 
     void Start()
     {
-        //Gets the controller of the parent player
-        controller = gameObject.GetComponent<CharacterController>();
-        input = GetComponentInParent<PlayerInput>();
+        playerMovement = GetComponent<PlayerMovement>();
+        controller = GetComponent<CharacterController>();
+        input = GetComponent<PlayerInput>();
+        playerAudioSource = GetComponent<AudioSource>();
     }
     /// <summary>
     /// Callback for Interact button pressed:
     /// If the Raycast detects a pushable object, and interact button is pressed
     /// sets the player as parent of the movable object, so the object determines the direction.
     /// And disable player movement for the duration of the press.
-    /// When player releases interact button, removes the child/parent relation and activates player movement again.
     /// </summary>
     /// <param name="context">interact button</param>
     public void OnInteract(InputAction.CallbackContext context)
@@ -51,7 +58,12 @@ public class PlayerPushPull : MonoBehaviour
         }
         if (context.canceled && pushing)
         {
-            pushableObjAudioSource.Stop();
+            if(pushableObjAudioSource.isPlaying)
+            {
+                pushableObjAudioSource.Stop();
+                playerAudioSource.clip = stopPushingSound;
+                playerAudioSource.Play();
+            }
             pushableObjectRb.constraints = RigidbodyConstraints.FreezeAll;
             input.actions.FindAction("Jump").Enable();
             playerMovement.enabled = true;
@@ -133,9 +145,6 @@ public class PlayerPushPull : MonoBehaviour
             hint = hit.collider.gameObject.GetComponentInChildren<InteractionHint>();
             hint.Activate();
         }
-        if (pushing)
-        {
-        }
     }
     private void FixedUpdate()
     {
@@ -163,12 +172,18 @@ public class PlayerPushPull : MonoBehaviour
             }
             controller.Move(pushableObjectRb.velocity * Time.fixedDeltaTime);
             pushableObjectRb.AddRelativeForce(direction * magnitude * pushSpeed - pushableObject.transform.InverseTransformDirection(pushableObjectRb.velocity), ForceMode.VelocityChange);
-            if (pushableObjectRb.velocity.magnitude != 0 && !pushableObjAudioSource.isPlaying)
+            
+            if (magnitude != 0 && !pushableObjAudioSource.isPlaying)
             {
+                playerAudioSource.clip = startPushingSound;
+                playerAudioSource.Play();
                 pushableObjAudioSource.Play();
-            }else if (magnitude == 0)
+            }
+            else if (magnitude == 0 && pushableObjAudioSource.isPlaying)
             {
                 pushableObjAudioSource.Stop();
+                playerAudioSource.clip = stopPushingSound;
+                playerAudioSource.Play();
             }
         }
     }
