@@ -2,7 +2,7 @@ using UnityEngine;
 // ©GameGurus - Heikkinen R., Hopeasaari J., Kantola J., Kettunen J., Kommio R, PC, Parviainen P., Rautiainen J.
 // Creator: Kettunen. J
 //
-// Makes the parent gameobject a movable object spawner, that can be used to give the player object to throw.
+// Makes the parent gameobject a movable object spawner, that can be used to give the player objects to carry and  throw.
 public class MovableObjectSpawner : MonoBehaviour
 {
     [Tooltip("The object that is spawned for the player")] [SerializeField] private GameObject movableObject;

@@ -357,7 +357,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactDistance: 1
   pushSpeed: 4
-  playerMovement: {fileID: 7681525300652446687}
+  startPushingSound: {fileID: 8300000, guid: c0669de6f2a344548a3e846786539376, type: 3}
+  stopPushingSound: {fileID: 8300000, guid: c0669de6f2a344548a3e846786539376, type: 3}
 --- !u!114 &-2295498896310718508
 MonoBehaviour:
   m_ObjectHideFlags: 0

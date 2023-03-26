@@ -8,8 +8,7 @@ using UnityEngine.UI;
 public class InteractionHint : MonoBehaviour
 {
     [Tooltip("The content of the textfield")] [SerializeField] private string message;
-    //[Tooltip("Fontsize")] [SerializeField]
-    private float fontSize = 5f;
+    [Tooltip("Fontsize")] [SerializeField] private float fontSize = 5f;
     [Tooltip("Distance above target")] [SerializeField] private float offsetY = 1f;
 
     //Variables for canvas element
@@ -59,6 +58,18 @@ public class InteractionHint : MonoBehaviour
         textrectTransform.localPosition = new Vector3(0, (target.transform.localScale.y/2 + offsetY), 0);
         textrectTransform.sizeDelta = new Vector2(3, 3);
         textField.enabled = false;
+    }
+    /// <summary>
+    /// Sets attributes for hint
+    /// </summary>
+    /// <param name="message">message for hint</param>
+    /// <param name="fontSize">fontsize of hint</param>
+    /// <param name="offsetY">how high above the target hint is shown</param>
+    public void SetValues(string message, float fontSize, float offsetY)
+    {
+        this.message = message;
+        this.fontSize = fontSize;
+        this.offsetY = offsetY;
     }
 
     /// <summary>

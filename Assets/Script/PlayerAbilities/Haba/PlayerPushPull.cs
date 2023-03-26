@@ -6,33 +6,42 @@ using UnityEngine.InputSystem;
 // Gives the player the ability to push and pull objects that have the tag pushable_object
 public class PlayerPushPull : MonoBehaviour
 {
+    [Header("Pushing attributes")]
     [Tooltip("From how far the player can push objects")] [SerializeField] private float interactDistance = 1f;
     [Tooltip("The speed that the player can push objects")] [SerializeField] private float pushSpeed = 4.0f;
 
-    public PlayerMovement playerMovement;
+    [Header("Pushing sounds")]
+    [Tooltip("The sound Haba makes when starting pushing")] [SerializeField] private AudioClip startPushingSound;
+    [Tooltip("The sound Haba makes when stopping pushing")] [SerializeField] private AudioClip stopPushingSound;
+
+    //Player
     private CharacterController controller;
     private PlayerInput input;
-
+    private AudioSource playerAudioSource;
+    private PlayerMovement playerMovement;
     private Vector2 movementInput;
     private bool pushing = false;
+
+    //Pushable object
     private bool hitDirectionX;
     private GameObject pushableObject;
     private Rigidbody pushableObjectRb;
-
+    private AudioSource pushableObjAudioSource;
     private InteractionHint hint;
 
     void Start()
     {
-        //Gets the controller of the parent player
-        controller = gameObject.GetComponent<CharacterController>();
-        input = GetComponentInParent<PlayerInput>();
+        //Getting the neccessary components from player
+        playerMovement = GetComponent<PlayerMovement>();
+        controller = GetComponent<CharacterController>();
+        input = GetComponent<PlayerInput>();
+        playerAudioSource = GetComponent<AudioSource>();
     }
     /// <summary>
     /// Callback for Interact button pressed:
     /// If the Raycast detects a pushable object, and interact button is pressed
     /// sets the player as parent of the movable object, so the object determines the direction.
     /// And disable player movement for the duration of the press.
-    /// When player releases interact button, removes the child/parent relation and activates player movement again.
     /// </summary>
     /// <param name="context">interact button</param>
     public void OnInteract(InputAction.CallbackContext context)
@@ -50,11 +59,18 @@ public class PlayerPushPull : MonoBehaviour
         }
         if (context.canceled && pushing)
         {
+            if(pushableObjAudioSource.isPlaying)
+            {
+                pushableObjAudioSource.Stop();
+                playerAudioSource.clip = stopPushingSound;
+                playerAudioSource.Play();
+            }
             pushableObjectRb.constraints = RigidbodyConstraints.FreezeAll;
             input.actions.FindAction("Jump").Enable();
             playerMovement.enabled = true;
             pushing = false;
             pushableObject = null;
+            pushableObjAudioSource = null;
         }
     }
     /// <summary>
@@ -105,8 +121,10 @@ public class PlayerPushPull : MonoBehaviour
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hit, interactDistance)
             && hit.collider.gameObject.CompareTag("pushable_object") && controller.isGrounded)
         {
-            //Getting the object from collision
+            //Getting the neccessary object and components from collision
             pushableObject = hit.collider.gameObject;
+            pushableObjAudioSource = pushableObject.GetComponent<AudioSource>();
+            pushableObjAudioSource.loop = true;
             pushableObjectRb = pushableObject.GetComponent<Rigidbody>();
             SetDirectionOfHit(hit);
         }
@@ -118,6 +136,7 @@ public class PlayerPushPull : MonoBehaviour
 
     void Update()
     {
+        //Showing the hint for picking up object when it is possible
         if (hint != null)
         {
             hint.DeActivate();
@@ -128,24 +147,18 @@ public class PlayerPushPull : MonoBehaviour
             hint = hit.collider.gameObject.GetComponentInChildren<InteractionHint>();
             hint.Activate();
         }
-        if (pushing)
-        {
-        }
     }
     private void FixedUpdate()
     {
-
         if (pushing)
         {
             //Player movement input to vector3
             Vector3 movementInputV3 = new(movementInput.x, 0, movementInput.y);
+
+            float magnitude;
             Vector3 direction;
 
-            //The magnitude of player input towards the direction of pushing
-            float magnitude;
-
-            //Calculating the player input magnitude along the given axis,
-            //and movin the object together with the player.
+            //Calculating the player input magnitude along the given axis and movin the object.
             if (hitDirectionX)
             {
                 direction = Vector3.right;
@@ -156,8 +169,23 @@ public class PlayerPushPull : MonoBehaviour
                 direction = Vector3.forward;
                 magnitude = Vector3.Dot(movementInputV3, pushableObjectRb.transform.forward);
             }
+            //Moving the object and player
             controller.Move(pushableObjectRb.velocity * Time.fixedDeltaTime);
             pushableObjectRb.AddRelativeForce(direction * magnitude * pushSpeed - pushableObject.transform.InverseTransformDirection(pushableObjectRb.velocity), ForceMode.VelocityChange);
+            
+            //Playing the sounds for pushing
+            if (magnitude != 0 && !pushableObjAudioSource.isPlaying)
+            {
+                playerAudioSource.clip = startPushingSound;
+                playerAudioSource.Play();
+                pushableObjAudioSource.Play();
+            }
+            else if (magnitude == 0 && pushableObjAudioSource.isPlaying)
+            {
+                pushableObjAudioSource.Stop();
+                playerAudioSource.clip = stopPushingSound;
+                playerAudioSource.Play();
+            }
         }
     }
 }

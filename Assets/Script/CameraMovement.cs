@@ -4,18 +4,13 @@ using UnityEngine;
 // TODO:
 //  -preventing players from moving off-camera
 //  -limiting camera movement to level boundaries
-//
 // Finds the objects tagged as player in the scene and follows their midpoint with the camera(rig)
 public class CameraMovement : MonoBehaviour
 {
-    public float zoomFactor = 15f;
-    public float cameraHeight = 10f;
+    [Tooltip("How far the camera is away from players")] [SerializeField] private float zoomFactor = 15f;
+    [Tooltip("The height of the camera from groundlevel")] [SerializeField] private float cameraHeight = 13f;
 
     private GameObject[] players;
-    void Start()
-    {
-
-    }
 
     /// <summary>
     /// Moves the camera according to the center point of the two players
