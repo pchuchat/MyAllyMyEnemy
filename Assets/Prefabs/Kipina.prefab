@@ -143,6 +143,7 @@ GameObject:
   - component: {fileID: -8023790235932053258}
   - component: {fileID: 2251022623129124305}
   - component: {fileID: 8002680264568220254}
+  - component: {fileID: 296533394093348040}
   - component: {fileID: 8508339662242141726}
   - component: {fileID: 3780319210031477636}
   - component: {fileID: 2027145272539048017}
@@ -389,6 +390,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lightningStrike: {fileID: 8880293685122149207}
   damageAmount: 10
+--- !u!114 &296533394093348040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4736019986219371458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 4
+  outlineColor: {r: 0.4811321, g: 0.47010884, b: 0.47010884, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!23 &8508339662242141726
 MeshRenderer:
   m_ObjectHideFlags: 0
