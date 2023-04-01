@@ -49,14 +49,17 @@ public class PlayerPushPull : MonoBehaviour
     /// <param name="context">interact button</param>
     public void OnInteract(InputAction.CallbackContext context)
     {
-        if (context.started && pushableObject == null)
+        if (context.started && pushableObject == null && controller.isGrounded)
         {
             //CheckForPushableObject();
             pushableObject = interactor.GetInteractable("pushable_object");
-            pushableObjAudioSource = pushableObject.GetComponent<AudioSource>();
-            pushableObjAudioSource.loop = true;
-            pushableObjectRb = pushableObject.GetComponent<Rigidbody>();
-            SetDirectionOfPush();
+            if (pushableObject != null)
+            {
+                pushableObjAudioSource = pushableObject.GetComponent<AudioSource>();
+                pushableObjAudioSource.loop = true;
+                pushableObjectRb = pushableObject.GetComponent<Rigidbody>();
+                SetDirectionOfPush();
+            }
         }
         if (context.started && pushableObject != null)
         {
