@@ -28,6 +28,7 @@ public class PlayerPushPull : MonoBehaviour
     private Rigidbody pushableObjectRb;
     private AudioSource pushableObjAudioSource;
     private InteractionHint hint;
+    private InteractableDetection interactor;
 
     void Start()
     {
@@ -36,7 +37,9 @@ public class PlayerPushPull : MonoBehaviour
         controller = GetComponent<CharacterController>();
         input = GetComponent<PlayerInput>();
         playerAudioSource = GetComponent<AudioSource>();
+        interactor = GetComponent<InteractableDetection>();
     }
+
     /// <summary>
     /// Callback for Interact button pressed:
     /// If the Raycast detects a pushable object, and interact button is pressed
@@ -48,7 +51,12 @@ public class PlayerPushPull : MonoBehaviour
     {
         if (context.started && pushableObject == null)
         {
-            CheckForPushableObject();
+            //CheckForPushableObject();
+            pushableObject = interactor.GetInteractable("pushable_object");
+            pushableObjAudioSource = pushableObject.GetComponent<AudioSource>();
+            pushableObjAudioSource.loop = true;
+            pushableObjectRb = pushableObject.GetComponent<Rigidbody>();
+            SetDirectionOfPush();
         }
         if (context.started && pushableObject != null)
         {
@@ -88,12 +96,12 @@ public class PlayerPushPull : MonoBehaviour
     /// Assigns the value false to hitDirection x if the object was hit along the z axis
     /// </summary>
     /// <param name="hit">hit from raycast ect.</param>
-    private void SetDirectionOfHit(RaycastHit hit)
+    private void SetDirectionOfPush()
     {
         //Determining the axis of the hit, to move accordingly.
         //True means the object was hit along the x axis,
         //and false means the object was hit along the z axis
-        Vector3 impactPoint = hit.transform.InverseTransformPoint(hit.point);
+        Vector3 impactPoint = pushableObject.transform.InverseTransformPoint(transform.position);
         Vector3 localDir = impactPoint.normalized;
 
         float xDot = Vector3.Dot(localDir, Vector3.forward);
@@ -108,29 +116,6 @@ public class PlayerPushPull : MonoBehaviour
         else
         {
             hitDirectionX = false;
-        }
-    }
-
-    /// <summary>
-    /// Checks if there is a pushable object in front of the player
-    /// and if it is within reach defined by the length of the ray
-    /// </summary>
-    private void CheckForPushableObject()
-    {
-        // Checking if the object hit with the ray is also pushable
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hit, interactDistance)
-            && hit.collider.gameObject.CompareTag("pushable_object") && controller.isGrounded)
-        {
-            //Getting the neccessary object and components from collision
-            pushableObject = hit.collider.gameObject;
-            pushableObjAudioSource = pushableObject.GetComponent<AudioSource>();
-            pushableObjAudioSource.loop = true;
-            pushableObjectRb = pushableObject.GetComponent<Rigidbody>();
-            SetDirectionOfHit(hit);
-        }
-        else
-        {
-            pushableObject = null;
         }
     }
 
