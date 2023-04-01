@@ -17,6 +17,7 @@ public class InteractableDetection : MonoBehaviour
     private bool interactionLock = false;
     private GameObject closest = null;
     private Outline highlight = null;
+    private float originalOutlineWidth;
 
 
     // Update is called once per frame
@@ -32,12 +33,14 @@ public class InteractableDetection : MonoBehaviour
             }
             else
             {
+                if(closest != null) highlight.OutlineWidth = originalOutlineWidth;
                 closest = null;
             }
         }
         if (closest != null)
         {
             highlight = closest.GetComponent<Outline>();
+            originalOutlineWidth = highlight.OutlineWidth;
             highlight.OutlineWidth = 4;
         }
     }
