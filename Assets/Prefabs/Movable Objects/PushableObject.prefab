@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8908426679152239274}
   - component: {fileID: -6280702464696749192}
   - component: {fileID: 3980121463008008933}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PushableObject
   m_TagString: pushable_object
   m_Icon: {fileID: 0}

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5576888401921507561}
   - component: {fileID: 5576888401921507566}
   - component: {fileID: -2710053340146958024}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Liftable
   m_TagString: liftable
   m_Icon: {fileID: 0}
@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   message: Tap O Quickly to lift
+  fontSize: 5
   offsetY: 1
 --- !u!33 &5576888401921507560
 MeshFilter:

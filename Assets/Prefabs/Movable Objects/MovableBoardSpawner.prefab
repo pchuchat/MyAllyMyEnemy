@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4586040908994215878}
   - component: {fileID: 8980002075504476547}
   - component: {fileID: 148435224927931779}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: MovableBoardSpawner
   m_TagString: movable_object_spawner
   m_Icon: {fileID: 0}
@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   message: Press O to pick up
+  fontSize: 5
   offsetY: 2
 --- !u!65 &4586040908994215878
 BoxCollider:
