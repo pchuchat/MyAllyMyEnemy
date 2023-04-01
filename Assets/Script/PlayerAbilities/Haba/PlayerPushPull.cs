@@ -79,6 +79,7 @@ public class PlayerPushPull : MonoBehaviour
             pushing = false;
             pushableObject = null;
             pushableObjAudioSource = null;
+            interactor.InteractionFinished();
         }
     }
     /// <summary>
