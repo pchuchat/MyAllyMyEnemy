@@ -75,6 +75,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   message: Press O to interact
+  fontSize: 5
   offsetY: 1
 --- !u!23 &4619430327006741037
 MeshRenderer:
@@ -160,7 +161,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.04
+  m_Volume: 0.238
   m_Pitch: 1
   Loop: 0
   Mute: 0
