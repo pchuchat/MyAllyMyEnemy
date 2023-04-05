@@ -50,8 +50,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d17da8175d004c45bb00d5804d17530, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickUpSound: {fileID: 8300000, guid: c0669de6f2a344548a3e846786539376, type: 3}
-  throwSound: {fileID: 8300000, guid: e814f67823cbed546a43473c6121421e, type: 3}
+  pickUpSound: {fileID: 8300000, guid: bc1a284e75bb077478238c1feedfd1d0, type: 3}
+  throwSound: {fileID: 8300000, guid: 44b6c9d5f33304a46bde2034292aedf6, type: 3}
   targetHitSound: {fileID: 8300000, guid: 3fa6b943bec685c42bbb726da130bd51, type: 3}
   destructionSound: {fileID: 8300000, guid: c5a30d965fc96d54989291d0283b7119, type: 3}
 --- !u!33 &5706477544760214611
@@ -271,7 +271,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.202
+  m_Volume: 0.646
   m_Pitch: 1
   Loop: 0
   Mute: 0
