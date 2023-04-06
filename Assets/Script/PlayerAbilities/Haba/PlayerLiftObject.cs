@@ -69,7 +69,7 @@ public class PlayerLiftObject : MonoBehaviour
                 if (target != null)
                 {
                     input = GetComponent<PlayerInput>();
-                    rb = target.gameObject.GetComponent<Rigidbody>();
+                    rb = target.GetComponent<Rigidbody>();
                     rb.useGravity = false;
                     rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
                     maxHeight = target.transform.position;

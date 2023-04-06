@@ -48,7 +48,7 @@ public class DeviceCharged : MonoBehaviour
         moveable = transform.GetChild(0).gameObject;
         if (moveable != null)
         {            
-            rb = moveable.gameObject.GetComponent<Rigidbody>();
+            rb = moveable.GetComponent<Rigidbody>();
             rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
             rb.useGravity = false;
             startP = moveable.transform.position;
