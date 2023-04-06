@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -17,13 +15,11 @@ public class PlayerChargeDevice : MonoBehaviour
     private AudioSource audioSource; // Audiosource for the sounds below
     [Tooltip("The sound Kipinä makes when charging devices")] [SerializeField] private AudioClip chargeSound;
 
-    private CharacterController controller; // Playercharacter
     private GameObject device;              // The device in front of the player
     private InteractableDetection interactor;
 
     void Start()
     {
-        controller = gameObject.GetComponent<CharacterController>();
         audioSource = GetComponent<AudioSource>();
         interactor = GetComponent<InteractableDetection>();
     }
