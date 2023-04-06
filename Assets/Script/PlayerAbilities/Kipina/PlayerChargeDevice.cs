@@ -12,7 +12,6 @@ using UnityEngine.InputSystem;
 public class PlayerChargeDevice : MonoBehaviour
 {
     // Attributes visible in Unity
-    [Tooltip("How far away the object can be from Kipinä to be charged")] [SerializeField] private float distance = 1f;
 
     // Sounds
     private AudioSource audioSource; // Audiosource for the sounds below
