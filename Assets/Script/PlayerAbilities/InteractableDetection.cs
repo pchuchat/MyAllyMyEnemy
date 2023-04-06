@@ -5,44 +5,68 @@ using UnityEngine;
 // Finds objects in the given layer colliding with overlapcapsule that is definde byt interactPointBottom, -Top and radius.
 public class InteractableDetection : MonoBehaviour
 {
-
-    [SerializeField] private Transform interactionPointBottom;
-    [SerializeField] private Transform interactionPointTop;
-    [SerializeField] private float interactionRadius;
-    [SerializeField] private LayerMask interactableMask;
+    [Header("Interact capsule attributes")]
+    [Tooltip("Bottom center of the interaction capsule")] [SerializeField] private Transform interactionPointBottom;
+    [Tooltip("Top center of the interaction capsule")] [SerializeField] private Transform interactionPointTop;
+    [Tooltip("Radius of the interaction capsule")] [SerializeField] private float interactionRadius;
+    [Header("Interact attributes")]
+    [Tooltip("Layer where the interactable items are")] [SerializeField] private LayerMask interactableMask;
+    [Tooltip("Display where the hints are shown")] [SerializeField] private InteractionHintDisplay hintDisplay;
+    [Tooltip("How much the objects borders are highlighted")] [SerializeField] private float highlightmultiplier = 2;
 
 
     private Collider[] objects = new Collider[4];
     private int amountFound;
     private bool interactionLock = false;
     private GameObject closest = null;
+    private IsInteractable interactable;
     private Outline highlight = null;
     private float originalOutlineWidth;
+    private CharacterController controller;
 
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        if (!interactionLock)
+        controller = GetComponent<CharacterController>();
+    }
+    // Update is called once per frame
+    private void Update()
+    {
+        if (!interactionLock && controller.isGrounded)
         {
             objects = Physics.OverlapCapsule(interactionPointBottom.position, interactionPointTop.position, interactionRadius, interactableMask);
             amountFound = objects.Length;
             if (amountFound != 0)
             {
                 closest = GetClosestObject(objects);
+                interactable = closest.GetComponent<IsInteractable>();
+                if (!hintDisplay.isActive) hintDisplay.SetHint(interactable.GetHint(gameObject));
+                if (highlight == null)
+                {
+                    highlight = closest.GetComponent<Outline>();
+                    originalOutlineWidth = highlight.OutlineWidth;
+                    highlight.OutlineWidth = originalOutlineWidth * highlightmultiplier;
+                }
             }
-            else
+            else if (hintDisplay.isActive)
             {
-                if(closest != null) highlight.OutlineWidth = originalOutlineWidth;
-                closest = null;
+                Reset();
             }
         }
-        if (closest != null)
+        if (!controller.isGrounded && hintDisplay.isActive || interactionLock)
         {
-            highlight = closest.GetComponent<Outline>();
-            originalOutlineWidth = highlight.OutlineWidth;
-            highlight.OutlineWidth = 4;
+            Reset();
         }
+    }
+    /// <summary>
+    /// Resets the interactable item(s)
+    /// </summary>
+    private void Reset()
+    {
+        if (closest != null) highlight.OutlineWidth = originalOutlineWidth;
+        hintDisplay.Deactivate();
+        closest = null;
+        highlight = null;
     }
 
     /// <summary>
@@ -85,7 +109,7 @@ public class InteractableDetection : MonoBehaviour
     /// <returns>The interactable object or null</returns>
     public GameObject GetInteractable(string tag)
     {
-        if (amountFound != 0 && !interactionLock && closest.gameObject.CompareTag(tag))
+        if (amountFound != 0 && !interactionLock && closest.CompareTag(tag))
         {
             interactionLock = true;
             return closest;

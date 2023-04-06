@@ -11,7 +11,6 @@ using UnityEngine.InputSystem;
 public class PlayerCarryItem : MonoBehaviour
 {
     [Header("Carrying attributes")]
-    [Tooltip("From how far the player can pick up objects")] [SerializeField] private float interactDistance = 1f;
     [Tooltip("Throwing force of the player")] [SerializeField] private float throwForce = 5f;
     [Tooltip("Defines the upwards component of throwforce")] [SerializeField] private float throwForceUp = 1f;
 
@@ -19,17 +18,18 @@ public class PlayerCarryItem : MonoBehaviour
     private CharacterController controller;     
     private PlayerInput input;
     private bool carrying = false;      //whether the player is carrying an object or not
+    private InteractableDetection interactor;
 
     //Movable object
+    private GameObject spawner;
     private GameObject movableObject;
-    private InteractionHint hint;       //hint that is displayed when player can interact with something
 
     // Start is called before the first frame update
     void Start()
     {
         input = GetComponentInParent<PlayerInput>();
         controller = gameObject.GetComponent<CharacterController>();
-
+        interactor = GetComponent<InteractableDetection>();
     }
 
     /// <summary>
@@ -48,7 +48,12 @@ public class PlayerCarryItem : MonoBehaviour
             }
             else
             {
-                CheckForMovabeObjectSpawner();
+                spawner = interactor.GetInteractable("movable_object_spawner");
+                if (spawner != null)
+                {
+                    movableObject = spawner.GetComponent<MovableObjectSpawner>().GetMovableObject();
+                    PickUpObject();
+                }
             }
             //if the spawner was found and it succesfully gave an object -> player picks up the object
             if (movableObject != null)
@@ -75,7 +80,7 @@ public class PlayerCarryItem : MonoBehaviour
         movableObject.transform.SetParent(transform);
         carrying = true;
         input.actions.FindAction("Jump").Disable();
-        movableObject.gameObject.GetComponent<MovableObject>().PlayPickUpSound();
+        movableObject.GetComponent<MovableObject>().PlayPickUpSound();
     }
 
     /// <summary>
@@ -84,7 +89,7 @@ public class PlayerCarryItem : MonoBehaviour
     private void ThrowObject()
     {
         //Playing the sound for throwing item
-        movableObject.gameObject.GetComponent<MovableObject>().PlayThrowSound();
+        movableObject.GetComponent<MovableObject>().PlayThrowSound();
 
         //Calculating the throwforce and throwing the object
         Vector3 forceOfThrow = transform.forward * throwForce + transform.up * throwForceUp;
@@ -97,38 +102,13 @@ public class PlayerCarryItem : MonoBehaviour
         movableObject = null;
         carrying = false;
         input.actions.FindAction("Jump").Enable();
-    }
-
-    /// <summary>
-    /// Checks if there is a movable object spawner in front of the player
-    /// </summary>
-    private void CheckForMovabeObjectSpawner()
-    {
-        // Checking if the object hit with the ray is also a movable object spawner
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward + Vector3.down), out RaycastHit hit, interactDistance)
-            && hit.collider.gameObject.CompareTag("movable_object_spawner") && controller.isGrounded)
-        {
-            //Getting the object from the spawner and pickng it up
-            movableObject = hit.collider.gameObject.GetComponent<MovableObjectSpawner>().GetMovableObject();
-            PickUpObject();
-        }
+        interactor.InteractionFinished();
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        //Activating and deactivating hints when player comes near a movable object
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward + Vector3.down), out RaycastHit hit, interactDistance)
-            && hit.collider.gameObject.CompareTag("movable_object_spawner") && controller.isGrounded && !carrying)
-        {
-            hint = hit.collider.gameObject.GetComponentInChildren<InteractionHint>();
-            hint.Activate();
-        }
-        else if (hint != null)
-        {
-            hint.DeActivate();
-        }
 
         //Checking if there is a target area below the movable object while the player is carrying it
         //if said target is found removes the object from the player and snaps it in the middle of the target area.
@@ -141,6 +121,7 @@ public class PlayerCarryItem : MonoBehaviour
             movableObject.GetComponent<Rigidbody>().useGravity = true;
             carrying = false;
             movableObject = null;
+            interactor.InteractionFinished();
         }
     }
 

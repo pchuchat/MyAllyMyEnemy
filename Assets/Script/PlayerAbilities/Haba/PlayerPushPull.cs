@@ -7,7 +7,6 @@ using UnityEngine.InputSystem;
 public class PlayerPushPull : MonoBehaviour
 {
     [Header("Pushing attributes")]
-    [Tooltip("From how far the player can push objects")] [SerializeField] private float interactDistance = 1f;
     [Tooltip("The speed that the player can push objects")] [SerializeField] private float pushSpeed = 4.0f;
 
     [Header("Pushing sounds")]
@@ -27,7 +26,6 @@ public class PlayerPushPull : MonoBehaviour
     private GameObject pushableObject;
     private Rigidbody pushableObjectRb;
     private AudioSource pushableObjAudioSource;
-    private InteractionHint hint;
     private InteractableDetection interactor;
 
     void Start()
@@ -123,20 +121,6 @@ public class PlayerPushPull : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        //Showing the hint for picking up object when it is possible
-        if (hint != null)
-        {
-            hint.DeActivate();
-        }
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hit, interactDistance)
-               && hit.collider.gameObject.CompareTag("pushable_object") && controller.isGrounded && !pushing)
-        {
-            hint = hit.collider.gameObject.GetComponentInChildren<InteractionHint>();
-            hint.Activate();
-        }
-    }
     private void FixedUpdate()
     {
         if (pushing)
@@ -160,7 +144,7 @@ public class PlayerPushPull : MonoBehaviour
             }
             //Moving the object and player
             controller.Move(pushableObjectRb.velocity * Time.fixedDeltaTime);
-            pushableObjectRb.AddRelativeForce(direction * magnitude * pushSpeed - pushableObject.transform.InverseTransformDirection(pushableObjectRb.velocity), ForceMode.VelocityChange);
+            pushableObjectRb.AddRelativeForce(magnitude * pushSpeed * direction - pushableObject.transform.InverseTransformDirection(pushableObjectRb.velocity), ForceMode.VelocityChange);
             
             //Playing the sounds for pushing
             if (magnitude != 0 && !pushableObjAudioSource.isPlaying)
