@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 3051086098176424050}
   - component: {fileID: 1880563873760749264}
   - component: {fileID: -7112080732442864729}
-  - component: {fileID: 8698010447129268461}
   - component: {fileID: 4586040908994215878}
   - component: {fileID: 8980002075504476547}
   - component: {fileID: -2822605307665909009}
@@ -105,21 +104,7 @@ MonoBehaviour:
   interactHint: Press O to pick up
   cantInteractHint: You can't interact with this one
   outlineThickness: 2
---- !u!114 &8698010447129268461
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5994058634364569098}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad48c56d46ee2424eb6bd0dbd7d60ae1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  message: Press O to pick up
-  fontSize: 5
-  offsetY: 2
+  highlightmultiplier: 2
 --- !u!65 &4586040908994215878
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -146,6 +131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movableObject: {fileID: 3772046666810807097, guid: a3858e4480e82f346a765fb65244f1ef, type: 3}
+  targets: []
 --- !u!114 &-2822605307665909009
 MonoBehaviour:
   m_ObjectHideFlags: 0

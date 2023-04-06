@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 // ©GameGurus - Heikkinen R., Hopeasaari J., Kantola J., Kettunen J., Kommio R, PC, Parviainen P., Rautiainen J.
@@ -23,6 +24,7 @@ public class PlayerCarryItem : MonoBehaviour
     //Movable object
     private GameObject spawner;
     private GameObject movableObject;
+    private List<GameObject> targets;
 
     // Start is called before the first frame update
     void Start()
@@ -52,6 +54,7 @@ public class PlayerCarryItem : MonoBehaviour
                 if (spawner != null)
                 {
                     movableObject = spawner.GetComponent<MovableObjectSpawner>().GetMovableObject();
+                    targets = spawner.GetComponent<MovableObjectSpawner>().GetTargets();
                     PickUpObject();
                 }
             }
@@ -102,6 +105,7 @@ public class PlayerCarryItem : MonoBehaviour
         movableObject = null;
         carrying = false;
         input.actions.FindAction("Jump").Enable();
+        targets = null;
         interactor.InteractionFinished();
     }
 
@@ -112,8 +116,8 @@ public class PlayerCarryItem : MonoBehaviour
 
         //Checking if there is a target area below the movable object while the player is carrying it
         //if said target is found removes the object from the player and snaps it in the middle of the target area.
-        if (carrying && Physics.Raycast(movableObject.transform.position, transform.TransformDirection(Vector3.down), out RaycastHit hit1, 5f)
-            && hit1.collider.gameObject.CompareTag("target_area"))
+        if (carrying && Physics.Raycast(movableObject.transform.position, transform.TransformDirection(Vector3.down), out RaycastHit hit, 5f)
+            && hit.collider.gameObject.CompareTag("target_area") && targets.Contains(hit.collider.gameObject))
         {
             movableObject.transform.SetParent(null);
             movableObject.GetComponent<BoxCollider>().enabled = true;

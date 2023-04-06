@@ -117,6 +117,7 @@ MonoBehaviour:
   interactHint: Press O to pick up
   cantInteractHint: You can't interact with this one
   outlineThickness: 2
+  highlightmultiplier: 2
 --- !u!114 &8980002075504476547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,7 +130,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96569117bb0cd7047b6645787553f972, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movableObject: {fileID: 0}
+  movableObject: {fileID: 3772046666810807097, guid: 4572db2455e78cb4fa5ee5e9479c3178, type: 3}
+  targets:
+  - {fileID: 51734729867651191, guid: 2dfa71e1fd135f34c98c8fc7f99a4ac6, type: 3}
 --- !u!54 &148435224927931779
 Rigidbody:
   m_ObjectHideFlags: 0
