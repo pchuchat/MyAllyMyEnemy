@@ -351,7 +351,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   hintDisplay: {fileID: 7102769059477453693}
-  highlightmultiplier: 2
 --- !u!114 &2210187075978687484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -394,7 +393,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: 1
-  distance: 1
   stopAtHeight: 1.5
   time: 20
   liftSound: {fileID: 8300000, guid: 6a4192bbb74d01442b4c3d16092b788b, type: 3}
