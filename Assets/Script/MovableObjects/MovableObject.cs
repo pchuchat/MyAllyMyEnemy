@@ -90,6 +90,5 @@ public class MovableObject : MonoBehaviour
     public void SetTargets(List<GameObject> targetAreas)
     {
         targets = targetAreas;
-        Debug.Log("test" + targets + "test");
     }
 }
