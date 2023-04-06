@@ -23,6 +23,7 @@ public class IsInteractable : MonoBehaviour
         if (player == Player.Kipina) highlight.OutlineColor = Color.blue;
         highlight.OutlineWidth = outlineThickness;
         originaOutlineThickness = outlineThickness;
+        highlight.OutlineMode = Outline.Mode.OutlineVisible;
     }
 
     public void HighLight()
