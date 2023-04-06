@@ -11,7 +11,9 @@ public class IsInteractable : MonoBehaviour
     [Tooltip("Hint for player that can interact")] [SerializeField] private string interactHint = "example hint";
     [Tooltip("Hint for player that can't interact")] [SerializeField] private string cantInteractHint = "You can't interact with this one";
     [Tooltip("Thickness of the outline")] [SerializeField] private float outlineThickness = 2f;
+    [Tooltip("How much the objects borders are highlighted")] [SerializeField] private float highlightmultiplier = 2;
     private Outline highlight;
+    private float originaOutlineThickness;
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +22,19 @@ public class IsInteractable : MonoBehaviour
         if (player == Player.Haba) highlight.OutlineColor = Color.red;
         if (player == Player.Kipina) highlight.OutlineColor = Color.blue;
         highlight.OutlineWidth = outlineThickness;
+        originaOutlineThickness = outlineThickness;
     }
+
+    public void HighLight()
+    {
+        if (highlight.OutlineWidth == originaOutlineThickness) highlight.OutlineWidth *= highlightmultiplier;
+    }
+
+    public void Reset()
+    {
+        highlight.OutlineWidth = originaOutlineThickness;
+    }
+
     /// <summary>
     /// Gets the hint for the object depending on player given as parameter
     /// </summary>

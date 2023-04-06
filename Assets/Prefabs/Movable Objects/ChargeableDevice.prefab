@@ -10,13 +10,14 @@ GameObject:
   m_Component:
   - component: {fileID: 9066024022495620346}
   - component: {fileID: 7288850608731709070}
+  - component: {fileID: -7004942429048327650}
   - component: {fileID: 4920549545274718688}
-  - component: {fileID: 4574357300711311179}
   - component: {fileID: 4619430327006741037}
   - component: {fileID: 2002666687265246199}
   - component: {fileID: -8426542700838290077}
   - component: {fileID: 6148276139053327975}
-  m_Layer: 0
+  - component: {fileID: 5773068725314044196}
+  m_Layer: 7
   m_Name: ChargeableDevice
   m_TagString: noCharge
   m_Icon: {fileID: 0}
@@ -46,6 +47,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1184416725749755638}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &-7004942429048327650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1184416725749755638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53c76fbdd359d914ebaec6bffabd71d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: 1
+  interactHint: Press O to interact
+  cantInteractHint: You can't interact with this one
+  outlineThickness: 2
 --- !u!114 &4920549545274718688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,21 +79,6 @@ MonoBehaviour:
   height: 3
   force: 0.02
   chargedDeviceSound: {fileID: 8300000, guid: 84e427d6b66ab4066b6a4dcd0ce819ee, type: 3}
---- !u!114 &4574357300711311179
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1184416725749755638}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad48c56d46ee2424eb6bd0dbd7d60ae1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  message: Press O to interact
-  fontSize: 5
-  offsetY: 1
 --- !u!23 &4619430327006741037
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -245,3 +247,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5773068725314044196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1184416725749755638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []

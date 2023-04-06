@@ -21,7 +21,6 @@ public class PlayerLiftObject : MonoBehaviour
 {
     // Attributes visible in Unity    
     [Tooltip("How much the Haba lifts an object per buttonpress")] [SerializeField] private float force = 0.2f;
-    [Tooltip("How far away the object can be from Haba to lift")] [SerializeField] private float distance = 1f;
     [Tooltip("How high Haba can lift an object")] [SerializeField] private float stopAtHeight = 1.5f;
     [Tooltip("How long until Haba drops the object")] [SerializeField] private int time = 20;
 

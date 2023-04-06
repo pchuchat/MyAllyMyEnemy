@@ -12,7 +12,6 @@ public class InteractableDetection : MonoBehaviour
     [Header("Interact attributes")]
     [Tooltip("Layer where the interactable items are")] [SerializeField] private LayerMask interactableMask;
     [Tooltip("Display where the hints are shown")] [SerializeField] private InteractionHintDisplay hintDisplay;
-    [Tooltip("How much the objects borders are highlighted")] [SerializeField] private float highlightmultiplier = 2;
 
 
     private Collider[] objects = new Collider[4];
@@ -20,8 +19,6 @@ public class InteractableDetection : MonoBehaviour
     private bool interactionLock = false;
     private GameObject closest = null;
     private IsInteractable interactable;
-    private Outline highlight = null;
-    private float originalOutlineWidth;
     private CharacterController controller;
 
 
@@ -40,13 +37,8 @@ public class InteractableDetection : MonoBehaviour
             {
                 closest = GetClosestObject(objects);
                 interactable = closest.GetComponent<IsInteractable>();
+                interactable.HighLight();
                 if (!hintDisplay.isActive) hintDisplay.SetHint(interactable.GetHint(gameObject));
-                if (highlight == null)
-                {
-                    highlight = closest.GetComponent<Outline>();
-                    originalOutlineWidth = highlight.OutlineWidth;
-                    highlight.OutlineWidth = originalOutlineWidth * highlightmultiplier;
-                }
             }
             else if (hintDisplay.isActive)
             {
@@ -63,10 +55,9 @@ public class InteractableDetection : MonoBehaviour
     /// </summary>
     private void Reset()
     {
-        if (closest != null) highlight.OutlineWidth = originalOutlineWidth;
         hintDisplay.Deactivate();
         closest = null;
-        highlight = null;
+        interactable.Reset();
     }
 
     /// <summary>
