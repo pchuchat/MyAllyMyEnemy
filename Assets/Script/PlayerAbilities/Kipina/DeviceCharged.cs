@@ -5,6 +5,7 @@ using UnityEngine;
 
 // ©GameGurus - Heikkinen R., Hopeasaari J., Kantola J., Kettunen J., Kommio R, PC, Parviainen P., Rautiainen J.
 // By: Parviainen P
+//  Edited: Kettunen J
 // The device becomes active and moves child-object attached to the device x amount of times up and down.
 // Nulls all changes and variables, then stops.
 
@@ -47,7 +48,7 @@ public class DeviceCharged : MonoBehaviour
         moveable = transform.GetChild(0).gameObject;
         if (moveable != null)
         {            
-            rb = moveable.gameObject.GetComponent<Rigidbody>();
+            rb = moveable.GetComponent<Rigidbody>();
             rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
             rb.useGravity = false;
             startP = moveable.transform.position;

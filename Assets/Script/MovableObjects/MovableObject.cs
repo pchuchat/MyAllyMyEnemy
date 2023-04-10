@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 // ©GameGurus - Heikkinen R., Hopeasaari J., Kantola J., Kettunen J., Kommio R, PC, Parviainen P., Rautiainen J.
 // Creator: Kettunen. J
@@ -14,6 +15,7 @@ public class MovableObject : MonoBehaviour
     private Rigidbody rb;
     private bool keepThisOne;
     private AudioSource audioSource;
+    [SerializeField]private List<GameObject> targets = new();
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +30,7 @@ public class MovableObject : MonoBehaviour
     /// <param name="collider">The trigger that was hit</param>
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.CompareTag("target_area") && gameObject.CompareTag("movable_object"))
+        if (collider.gameObject.CompareTag("target_area") && targets.Contains(collider.gameObject) && gameObject.CompareTag("movable_object"))
         {
             audioSource.clip = targetHitSound;
             audioSource.Play();
@@ -84,5 +86,9 @@ public class MovableObject : MonoBehaviour
     {
         audioSource.clip = throwSound;
         audioSource.Play();
+    }
+    public void SetTargets(List<GameObject> targetAreas)
+    {
+        targets = targetAreas;
     }
 }

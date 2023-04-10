@@ -11,11 +11,12 @@ GameObject:
   - component: {fileID: 7786672237158086808}
   - component: {fileID: 624869289926886527}
   - component: {fileID: 7759962255475079576}
-  - component: {fileID: 6633262193956220632}
+  - component: {fileID: 6074368841919298461}
+  - component: {fileID: -2383571667318013055}
   - component: {fileID: 8908426679152239274}
   - component: {fileID: -6280702464696749192}
   - component: {fileID: 3980121463008008933}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PushableObject
   m_TagString: pushable_object
   m_Icon: {fileID: 0}
@@ -87,7 +88,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &6633262193956220632
+--- !u!114 &6074368841919298461
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -96,12 +97,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 7494234140640489652}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad48c56d46ee2424eb6bd0dbd7d60ae1, type: 3}
+  m_Script: {fileID: 11500000, guid: 53c76fbdd359d914ebaec6bffabd71d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  message: Hold O to move
-  fontSize: 5
-  offsetY: 1
+  player: 0
+  interactHint: Hold O to move
+  cantInteractHint: You can't interact with this one
+  outlineThickness: 2
+--- !u!114 &-2383571667318013055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7494234140640489652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 0.8679245, g: 0.07018256, b: 0.07018256, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!65 &8908426679152239274
 BoxCollider:
   m_ObjectHideFlags: 0

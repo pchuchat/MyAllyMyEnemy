@@ -21,7 +21,6 @@ public class PlayerLiftObject : MonoBehaviour
 {
     // Attributes visible in Unity    
     [Tooltip("How much the Haba lifts an object per buttonpress")] [SerializeField] private float force = 0.2f;
-    [Tooltip("How far away the object can be from Haba to lift")] [SerializeField] private float distance = 1f;
     [Tooltip("How high Haba can lift an object")] [SerializeField] private float stopAtHeight = 1.5f;
     [Tooltip("How long until Haba drops the object")] [SerializeField] private int time = 20;
 
@@ -41,7 +40,7 @@ public class PlayerLiftObject : MonoBehaviour
     private int timer;          // "Timer" that counts if buttonpressing stops (actually counts frames)
     private PlayerInput input; // Used to disable movement and jump while lifting
     private CharacterController controller; // Playercharacter
-    private InteractionHint hint;
+    private InteractableDetection interactor;
 
     //This is here just in case. It was removed because now lifting stops if dropped object is no longer moving
     //Earlier lifting stopped if the lifted object was in the same position (or close enough) to it's original position before lifting
@@ -52,7 +51,8 @@ public class PlayerLiftObject : MonoBehaviour
     private void Start()
     {
         controller = gameObject.GetComponent<CharacterController>();
-        audioSource = GetComponent<AudioSource>();        
+        audioSource = GetComponent<AudioSource>();
+        interactor = GetComponent<InteractableDetection>();
     }
 
     /// <summary>
@@ -65,13 +65,23 @@ public class PlayerLiftObject : MonoBehaviour
         {
             if (target == null)
             {
-                canLift = GetObjectInfront();
+                target = interactor.GetInteractable("liftable");
+                if (target != null)
+                {
+                    input = GetComponent<PlayerInput>();
+                    rb = target.GetComponent<Rigidbody>();
+                    rb.useGravity = false;
+                    rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
+                    maxHeight = target.transform.position;
+                    maxHeight.y = (target.transform.position.y) + stopAtHeight;
+                    input.actions.FindAction("Movement").Disable();
+                    input.actions.FindAction("Jump").Disable();
+                    canLift = true;
+                }
             }
 
             if (canLift == true)
             {
-                input.actions.FindAction("Movement").Disable();
-                input.actions.FindAction("Jump").Disable();
                 timer = time;
                 audioSource.clip = liftSound;
                 audioSource.Play();
@@ -90,54 +100,6 @@ public class PlayerLiftObject : MonoBehaviour
         }   
     }
 
-    /// <summary>
-    /// Checks if there is an object in front of the player within a spesific distance and returns a bool value. 
-    /// If there is one, then checks if the object has the tag "liftable". If the object that is close has
-    /// the correct tag then sets it to be the target-gameobject;
-    /// The object has to have a rigidbody.
-    /// </summary>
-    /// <returns>False if there is no object in front of the player
-    ///          False if the object in front of the player doesn't have the correct tag
-    ///          True if a gameobject is close enough and has the correct tag</returns>
-    private bool GetObjectInfront()
-    {
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hit, distance) && controller.isGrounded)
-        {                                                                         
-            GameObject hitGameobject = hit.transform.gameObject;
-
-            if (hitGameobject.CompareTag("liftable"))
-            {
-                input = GetComponent<PlayerInput>();
-                target = hitGameobject;
-                rb = target.gameObject.GetComponent<Rigidbody>();
-                rb.useGravity = false;
-                rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
-                maxHeight = target.transform.position;                      
-                maxHeight.y = (target.transform.position.y) + stopAtHeight;
-                return true;
-            }
-
-            return false;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
-    private void Update()
-    {
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward),
-            out RaycastHit hit, distance) && hit.collider.gameObject.CompareTag("liftable") && controller.isGrounded && target == null)
-        {
-            hint = hit.collider.gameObject.GetComponentInChildren<InteractionHint>();
-            hint.Activate();
-        }
-        else if (hint != null)
-        {
-            hint.DeActivate();
-        }
-    }
     private void FixedUpdate()
     {
         timer--;
@@ -166,7 +128,7 @@ public class PlayerLiftObject : MonoBehaviour
                     rb = null;
                     audioSource.clip = objectGroundSound;
                     audioSource.Play();
-
+                    interactor.InteractionFinished();
                 }
             }
         }       

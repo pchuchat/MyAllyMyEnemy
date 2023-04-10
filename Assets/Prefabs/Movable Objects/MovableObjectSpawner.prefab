@@ -11,11 +11,12 @@ GameObject:
   - component: {fileID: 4781019375420726679}
   - component: {fileID: 3051086098176424050}
   - component: {fileID: 1880563873760749264}
-  - component: {fileID: 8698010447129268461}
   - component: {fileID: 4586040908994215878}
+  - component: {fileID: 4991885970081588558}
   - component: {fileID: 8980002075504476547}
   - component: {fileID: 148435224927931779}
-  m_Layer: 0
+  - component: {fileID: 846644147126053823}
+  m_Layer: 7
   m_Name: MovableObjectSpawner
   m_TagString: movable_object_spawner
   m_Icon: {fileID: 0}
@@ -87,20 +88,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &8698010447129268461
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5994058634364569098}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad48c56d46ee2424eb6bd0dbd7d60ae1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  message: Press O to pick up
-  offsetY: 2
 --- !u!65 &4586040908994215878
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -114,6 +101,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4991885970081588558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5994058634364569098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53c76fbdd359d914ebaec6bffabd71d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: 0
+  interactHint: Press O to pick up
+  cantInteractHint: You can't interact with this one
+  outlineThickness: 2
+  highlightmultiplier: 2
 --- !u!114 &8980002075504476547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,7 +130,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96569117bb0cd7047b6645787553f972, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movableObject: {fileID: 0}
+  movableObject: {fileID: 3772046666810807097, guid: 4572db2455e78cb4fa5ee5e9479c3178, type: 3}
+  targets:
+  - {fileID: 51734729867651191, guid: 2dfa71e1fd135f34c98c8fc7f99a4ac6, type: 3}
 --- !u!54 &148435224927931779
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -143,3 +149,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &846644147126053823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5994058634364569098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
