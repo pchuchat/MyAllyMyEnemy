@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3107090464621798764}
   - component: {fileID: 8837071818186868364}
   - component: {fileID: 3330164476935191581}
+  - component: {fileID: 4250761064041333224}
   - component: {fileID: 4986269721007875944}
   m_Layer: 0
   m_Name: TargetAreaBoards
@@ -84,6 +85,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &4250761064041333224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 51734729867651191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd9c7b6b209ee0649a2aacab1b0b55a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  snapDistance: 0.5
 --- !u!65 &4986269721007875944
 BoxCollider:
   m_ObjectHideFlags: 0
