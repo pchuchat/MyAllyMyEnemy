@@ -13,16 +13,33 @@ public class Lightning_attack : MonoBehaviour
     // The amount of damage that the lightning strike does
     [SerializeField] int damageAmount = 25;
 
+    // A list of sound clips that will play randomly each time the lightning strike is performed
+    [SerializeField] List<AudioClip> attackSounds;
+
+    private AudioSource audioSource;
+
     private void Start()
     {
         // Stop the particle system immediately when the character is created
         lightningStrike.Stop();
+
+        // Get the AudioSource component on this gameobject
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Function that is called when the lightning strike is performed
     public void OnAttack()
     {
         Debug.Log("OnAttack called");
+
+        // Play a random attack sound
+        if (attackSounds.Count > 0)
+        {
+            int randomIndex = Random.Range(0, attackSounds.Count);
+            audioSource.clip = attackSounds[randomIndex];
+            audioSource.Play();
+        }
+
         LaunchLightningStrike();
     }
 

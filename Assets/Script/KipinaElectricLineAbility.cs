@@ -1,15 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+// ©GameGurus - Heikkinen R., Hopeasaari J., Kantola J., Kettunen J., Kommio R, PC, Parviainen P., Rautiainen J.
+// Creator: PC, Phatchanon Chuchat 
+// Kipinä's ElectricLine interaction
 public class KipinaElectricLineAbility : MonoBehaviour
 {
-    [SerializeField] private float electricLineSpeed = 5.0f;
-    [SerializeField] private LayerMask electricLineLayer;
-    [SerializeField] private GameObject electricBall;
-    [SerializeField] private GameObject electricBallHolder;
 
+    [SerializeField] private float electricLineSpeed = 5.0f; // The speed at which the player moves along the electric line
+    [SerializeField] private GameObject electricBall; // The electric ball object that follows the player along the electric line
+    [SerializeField] private GameObject electricBallHolder; // The holder object for the electric ball
+    [SerializeField] private AudioClip electricLineLoopSound; // The sound played while the player is on the electric line
+    [SerializeField] private AudioClip electricLineEnterSound; // The sound played when the player enters the electric line
+    [SerializeField] private AudioClip electricLineExitSound; // The sound played when the player exits the electric line
+
+
+
+    // Private variables
     private CharacterController characterController;
     private PlayerMovement playerMovement;
     private bool isOnElectricLine = false;
@@ -18,130 +26,153 @@ public class KipinaElectricLineAbility : MonoBehaviour
     private Vector3 startPosition;
     private Vector3 endPosition;
     private float electricLineDistance;
-    private float horizontalInputValue;
-   
+    private GameObject interactableObject;
+    private InteractableDetection interactor;
+    private bool hasInteracted = false;
+    private bool hasJumpedOffLine = false;
+    private AudioSource audioSource;
+
+
+
+
+
 
 
     private void Start()
     {
-
+        // Initialize variables
         electricBall = electricBallHolder.transform.GetChild(0).gameObject;
         SetElectricBallActive(false);
         characterController = GetComponent<CharacterController>();
         playerMovement = GetComponent<PlayerMovement>();
+        interactor = GetComponent<InteractableDetection>();
+        interactor.enabled = true;
         Time.fixedDeltaTime = 0.02f;
+        audioSource = gameObject.AddComponent<AudioSource>();
+
+
+
     }
 
+
+    // Set the electric ball object's visibility and position
     private void SetElectricBallActive(bool active)
     {
         electricBall.GetComponent<MeshRenderer>().enabled = active;
-        electricBallHolder.transform.position = transform.position;
-        Debug.Log("ElectricBall asetettu " + (active ? "aktiiviseksi" : "passiiviseksi"));
-    }
+        electricBall.transform.position = startPosition;
 
+    }
+    // Called when the player interacts with the environment
     public void OnInteract(InputAction.CallbackContext context)
     {
-        if (context.performed && !isOnElectricLine)
+        if (context.performed && !isOnElectricLine && !hasInteracted)
         {
-            Debug.Log("Interact-painiketta painettu ja hahmo ei ole sähkölinjalla");
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, Vector3.forward, out hit, 3.0f, electricLineLayer))
+            // Get the interactable object
+            interactableObject = interactor.GetInteractable("ElectricLine");
+
+            if (interactableObject != null && interactableObject.layer == LayerMask.NameToLayer("Interactable"))
             {
-                currentElectricLine = hit.collider.gameObject.GetComponent<LineRenderer>() ?? hit.collider.gameObject.transform.parent.GetComponent<LineRenderer>();
+                // Get the current electric line
+                currentElectricLine = interactableObject.GetComponent<LineRenderer>() ?? interactableObject.transform.parent.GetComponent<LineRenderer>();
+
+                // Set the start and end positions of the electric line
                 startPosition = currentElectricLine.GetPosition(0);
                 endPosition = currentElectricLine.GetPosition(1);
-                electricLineDistance = Vector3.Distance(startPosition, endPosition);
+
+                // Check which point is closer to the player
+                float distToStart = Vector3.Distance(transform.position, startPosition);
+                float distToEnd = Vector3.Distance(transform.position, endPosition);
+
+                if (distToStart < distToEnd)
+                {
+                    electricLineDistance = Vector3.Distance(startPosition, endPosition);
+                }
+                else
+                {
+                    electricLineDistance = Vector3.Distance(endPosition, startPosition);
+                    Vector3 temp = startPosition;
+                    startPosition = endPosition;
+                    endPosition = temp;
+                }
+
+                // Start moving the player along the electric line
                 isOnElectricLine = true;
                 playerMovement.enabled = false;
                 characterController.enabled = false;
 
-                // Aseta ElectricBall aktiiviseksi
+                // Activate the electric ball object
                 SetElectricBallActive(true);
-                Debug.Log("Hahmo siirtyi sähkölinjalle");
 
-                // Aseta hahmon sijainti raycastin osumapisteeksi
-                transform.position = hit.point;
+                // Play the electric line enter sound
+                audioSource.PlayOneShot(electricLineEnterSound);
 
-                // Aseta currentLineProgress oikeaan arvoon suhteessa osumapisteeseen
-                float closestPointDistance = Mathf.Clamp(Vector3.Distance(hit.point, startPosition), 0, electricLineDistance);
+                // Play the electric line loop sound
+                audioSource.clip = electricLineLoopSound;
+                audioSource.loop = true;
+                audioSource.Play();
+
+                // Aseta hahmon sijainti linjan alkuun
+                transform.position = startPosition;
+
+                // Aseta currentLineProgress oikeaan arvoon suhteessa hahmon sijaintiin linjalla
+                float closestPointDistance = Mathf.Clamp(Vector3.Distance(transform.position, startPosition), 0, electricLineDistance);
                 currentLineProgress = closestPointDistance;
+                // Estä InteractableDetection-komponentin Reset()-funktion kutsuminen
+                // kun hahmo on sähkölinjalla
+                interactor.enabled = false;
+                hasInteracted = true; // Lisää tämä rivi
+                isOnElectricLine = true;
+
             }
+            // Reset the InteractableDetection component if the player is not on an electric line
+            if (!hasInteracted) interactor.Reset();
         }
-    }
-    public void OnMove(InputAction.CallbackContext context)
-    {
-        if (isOnElectricLine)
-        {
-            horizontalInputValue = context.ReadValue<Vector2>().x;
-        }
-    }
 
-    public void OnJump(InputAction.CallbackContext context)
-    {
-        if (context.performed && isOnElectricLine)
-        {
-            // Tarkistetaan, onko pelaaja sähkölinjan alkupisteessä tai loppupisteessä
-            Vector3 playerPosition = transform.position;
-            bool atStart = playerPosition == startPosition;
-            bool atEnd = playerPosition == endPosition;
-
-            // Nollaa sähkölinjan muuttujat
-            currentElectricLine = null;
-            startPosition = Vector3.zero;
-            endPosition = Vector3.zero;
-            electricLineDistance = 0.0f;
-            isOnElectricLine = false;
-            playerMovement.enabled = true;
-            characterController.enabled = true;
-            // Aseta ElectricBall passiiviseksi
-            SetElectricBallActive(false);
-
-            // Jos pelaaja ei ole sähkölinjan loppupisteessä, tarkistetaan, voiko hän palata sähkölinjalle
-            if (!atEnd)
-            {
-                RaycastHit hit;
-                if (Physics.Raycast(transform.position, Vector3.forward, out hit, 3.0f, electricLineLayer))
-                {
-                    currentElectricLine = hit.collider.gameObject.GetComponent<LineRenderer>() ?? hit.collider.gameObject.transform.parent.GetComponent<LineRenderer>();
-                    startPosition = currentElectricLine.GetPosition(0);
-                    endPosition = currentElectricLine.GetPosition(1);
-                    electricLineDistance = Vector3.Distance(startPosition, endPosition);
-                    isOnElectricLine = true;
-                    playerMovement.enabled = false;
-                    characterController.enabled = false;
-
-                    // Aseta pelaajan sijainti raycastin osumapisteeksi
-                    transform.position = hit.point;
-                }
-            }
-
-            // Palauta pelaaja sähkölinjalle
-            if (isOnElectricLine)
-            {
-                if (atEnd)
-                {
-                    currentLineProgress = electricLineDistance;
-                }
-                else
-                {
-                    currentLineProgress = Vector3.Distance(transform.position, startPosition);
-                }
-            }
-        }
     }
 
     private void FixedUpdate()
     {
+        // Check if the player is currently on the electric line
         if (isOnElectricLine)
         {
-            // Liikuta hahmoa sähkölinjalla pelaajan ohjauksessa
-            currentLineProgress += horizontalInputValue * electricLineSpeed * Time.fixedDeltaTime;
-            currentLineProgress = Mathf.Clamp(currentLineProgress, 0, electricLineDistance);
+            // Set the player's position to the electric line's starting point
+            transform.position = startPosition;
 
-            // Päivitä hahmon sijainti sähkölinjalla
-            float lerpValue = currentLineProgress / electricLineDistance;
-            Vector3 newPosition = Vector3.Lerp(startPosition, endPosition, lerpValue);
-            transform.position = newPosition;
+            // Update the player's position along the electric line using linear interpolation
+            transform.position = Vector3.Lerp(startPosition, endPosition, currentLineProgress / electricLineDistance);
+
+            // Increment the current line progress based on the electric line's speed and fixed delta time
+            currentLineProgress += electricLineSpeed * Time.fixedDeltaTime;
+
+            // Check if the player has reached the end of the electric line
+            if (currentLineProgress >= electricLineDistance)
+            {
+                // Reset the electric line variables
+                currentElectricLine = null;
+                startPosition = Vector3.zero;
+                endPosition = Vector3.zero;
+                electricLineDistance = 0.0f;
+                isOnElectricLine = false;
+
+                // Re-enable the player's movement and character controller
+                playerMovement.enabled = true;
+                characterController.enabled = true;
+
+                // Set the ElectricBall object to inactive
+                SetElectricBallActive(false);
+
+                // Allow the InteractableDetection component to call the Reset() function again
+                interactor.InteractionFinished();
+                interactor.enabled = true;
+
+                // Set the hasJumpedOffLine and hasInteracted flags to false
+                hasJumpedOffLine = true;
+                isOnElectricLine = false;
+                hasInteracted = false;
+
+                // Stop playing the electric line loop sound
+                audioSource.Stop();
+            }
         }
     }
 }

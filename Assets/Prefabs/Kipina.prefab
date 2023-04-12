@@ -422,18 +422,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2251022623129124305}
-        m_TargetAssemblyTypeName: KipinaElectricLineAbility, Assembly-CSharp
-        m_MethodName: OnMove
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
     m_ActionId: 57f26671-b3d8-4eb8-b9f5-8cdcf818dbc1
     m_ActionName: Player/Movement[/DualShock4GamepadHID/leftStick,/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
   - m_PersistentCalls:
@@ -450,9 +438,13 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2251022623129124305}
-        m_TargetAssemblyTypeName: KipinaElectricLineAbility, Assembly-CSharp
-        m_MethodName: OnJump
+    m_ActionId: b017ab7a-e0a4-4989-926c-5d9719b5071a
+    m_ActionName: Player/Jump[/Keyboard/space,/DualShock4GamepadHID/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -8023790235932053258}
+        m_TargetAssemblyTypeName: PlayerChargeDevice, Assembly-CSharp
+        m_MethodName: OnCharge
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -462,10 +454,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: b017ab7a-e0a4-4989-926c-5d9719b5071a
-    m_ActionName: Player/Jump[/Keyboard/space,/DualShock4GamepadHID/buttonSouth]
-  - m_PersistentCalls:
-      m_Calls:
       - m_Target: {fileID: 2251022623129124305}
         m_TargetAssemblyTypeName: KipinaElectricLineAbility, Assembly-CSharp
         m_MethodName: OnInteract
@@ -544,7 +532,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   hintDisplay: {fileID: 6946852614220248839}
-  highlightmultiplier: 2
 --- !u!114 &-8023790235932053258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -557,7 +544,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c62331ec2de4ac642a7a5c9b27da7892, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: 1
   chargeSound: {fileID: 8300000, guid: 2ef26044eed6fe144b602b11f64b2311, type: 3}
 --- !u!114 &2251022623129124305
 MonoBehaviour:
@@ -571,12 +557,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bab034f13ff0cc4e8a91202bf885824, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  electricLineSpeed: 5
-  electricLineLayer:
-    serializedVersion: 2
-    m_Bits: 8
+  electricLineSpeed: 10
   electricBall: {fileID: 994008705248500551, guid: 86231a515d1315f45bda9ef33e687e5e, type: 3}
   electricBallHolder: {fileID: 5189931440743380729}
+  electricLineLoopSound: {fileID: 8300000, guid: b2a75d6dd247c15438f233a36db64945, type: 3}
+  electricLineEnterSound: {fileID: 8300000, guid: a235d590ef2a04d1b85b61ef4c21337c, type: 3}
+  electricLineExitSound: {fileID: 8300000, guid: 4c8650c4e779a3f489981686c693d6e9, type: 3}
 --- !u!114 &8002680264568220254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -591,6 +577,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lightningStrike: {fileID: 8880293685122149207}
   damageAmount: 10
+  attackSounds: []
 --- !u!114 &296533394093348040
 MonoBehaviour:
   m_ObjectHideFlags: 0

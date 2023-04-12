@@ -240,9 +240,9 @@ GameObject:
   - component: {fileID: 127728096}
   - component: {fileID: 127728095}
   - component: {fileID: 127728094}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: floor
-  m_TagString: Untagged
+  m_TagString: ElectricLine
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -873,7 +873,9 @@ GameObject:
   - component: {fileID: 783537393}
   - component: {fileID: 783537392}
   - component: {fileID: 783537394}
-  m_Layer: 3
+  - component: {fileID: 783537395}
+  - component: {fileID: 783537396}
+  m_Layer: 7
   m_Name: ElectricLine
   m_TagString: ElectricLine
   m_Icon: {fileID: 0}
@@ -931,8 +933,8 @@ LineRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.98009366
-        value: 0.16863644
+        time: 0
+        value: 0.012195121
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -986,14 +988,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 783537390}
-  m_LocalRotation: {x: -0.008194568, y: -0.2898674, z: -0.0026243178, w: 0.95702815}
-  m_LocalPosition: {x: -0.33, y: 0.34, z: -19.92}
+  m_LocalRotation: {x: 0.0128717525, y: -0.28985497, z: 0.0037563446, w: 0.9569767}
+  m_LocalPosition: {x: -0.28, y: 0.49, z: -19.99}
   m_LocalScale: {x: 0.9831602, y: 0.65840554, z: 0.012728941}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 16
-  m_LocalEulerAnglesHint: {x: -0.986, y: -33.701, z: -0.016}
+  m_LocalEulerAnglesHint: {x: 1.536, y: -33.702, z: -0.016}
 --- !u!65 &783537394
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1007,6 +1009,41 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 73.4418, y: 1, z: 69.09175}
   m_Center: {x: -0.00007724762, y: 1, z: -19.999998}
+--- !u!114 &783537395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 783537390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 0.26666668, g: 0.27450982, b: 0.32941177, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
+--- !u!114 &783537396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 783537390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53c76fbdd359d914ebaec6bffabd71d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: 1
+  interactHint: Press O to interact
+  cantInteractHint: You can't interact with this one
+  outlineThickness: 2
+  highlightmultiplier: 2
 --- !u!1001 &813567895
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2990,6 +3027,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1439525847368997482, guid: 26956faebe323a24c8cddbc4c4a529ec, type: 3}
+    - {fileID: 4010567375552551249, guid: 26956faebe323a24c8cddbc4c4a529ec, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 26956faebe323a24c8cddbc4c4a529ec, type: 3}
 --- !u!1001 &5921681356607560795
 PrefabInstance:
