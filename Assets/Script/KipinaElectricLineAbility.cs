@@ -46,7 +46,6 @@ public class KipinaElectricLineAbility : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         playerMovement = GetComponent<PlayerMovement>();
         interactor = GetComponent<InteractableDetection>();
-        interactor.enabled = true;
         Time.fixedDeltaTime = 0.02f;
         audioSource = gameObject.AddComponent<AudioSource>();
 
@@ -70,7 +69,7 @@ public class KipinaElectricLineAbility : MonoBehaviour
             // Get the interactable object
             interactableObject = interactor.GetInteractable("ElectricLine");
 
-            if (interactableObject != null && interactableObject.layer == LayerMask.NameToLayer("Interactable"))
+            if (interactableObject != null)
             {
                 // Get the current electric line
                 currentElectricLine = interactableObject.GetComponent<LineRenderer>() ?? interactableObject.transform.parent.GetComponent<LineRenderer>();
@@ -117,15 +116,10 @@ public class KipinaElectricLineAbility : MonoBehaviour
                 // Aseta currentLineProgress oikeaan arvoon suhteessa hahmon sijaintiin linjalla
                 float closestPointDistance = Mathf.Clamp(Vector3.Distance(transform.position, startPosition), 0, electricLineDistance);
                 currentLineProgress = closestPointDistance;
-                // Estä InteractableDetection-komponentin Reset()-funktion kutsuminen
-                // kun hahmo on sähkölinjalla
-                interactor.enabled = false;
                 hasInteracted = true; // Lisää tämä rivi
                 isOnElectricLine = true;
 
             }
-            // Reset the InteractableDetection component if the player is not on an electric line
-            if (!hasInteracted) interactor.Reset();
         }
 
     }
@@ -161,9 +155,8 @@ public class KipinaElectricLineAbility : MonoBehaviour
                 // Set the ElectricBall object to inactive
                 SetElectricBallActive(false);
 
-                // Allow the InteractableDetection component to call the Reset() function again
+                // Free up the interactor
                 interactor.InteractionFinished();
-                interactor.enabled = true;
 
                 // Set the hasJumpedOffLine and hasInteracted flags to false
                 hasJumpedOffLine = true;
