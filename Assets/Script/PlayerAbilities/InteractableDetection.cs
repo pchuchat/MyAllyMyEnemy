@@ -55,7 +55,7 @@ public class InteractableDetection : MonoBehaviour
     /// <summary>
     /// Resets the interactable item(s)
     /// </summary>
-    public void Reset()
+    private void Reset()
     {
         hintDisplay.Deactivate();
         closest = null;
