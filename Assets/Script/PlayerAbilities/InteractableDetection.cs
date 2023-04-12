@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 // ©GameGurus - Heikkinen R., Hopeasaari J., Kantola J., Kettunen J., Kommio R, PC, Parviainen P., Rautiainen J.
 // Creator: Kettunen. J
@@ -50,14 +51,18 @@ public class InteractableDetection : MonoBehaviour
             Reset();
         }
     }
+
     /// <summary>
     /// Resets the interactable item(s)
     /// </summary>
-    private void Reset()
+    public void Reset()
     {
         hintDisplay.Deactivate();
         closest = null;
-        interactable.Reset();
+        if (interactable != null && interactable.GetComponent<Outline>() != null)
+        {
+            interactable.Reset();
+        }
     }
 
     /// <summary>
@@ -100,7 +105,7 @@ public class InteractableDetection : MonoBehaviour
     /// <returns>The interactable object or null</returns>
     public GameObject GetInteractable(string tag)
     {
-        if (amountFound != 0 && !interactionLock && closest.CompareTag(tag))
+        if (amountFound != 0 && !interactionLock && closest != null && closest.CompareTag(tag))
         {
             interactionLock = true;
             return closest;

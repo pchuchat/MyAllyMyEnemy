@@ -34,7 +34,13 @@ public class PlayerChargeDevice : MonoBehaviour
     {
         if (context.performed)
         {
-            if(device == null)
+            if (audioSource == null || interactor == null)
+            {
+                Debug.LogError("Audio source or interactor is null!");
+                return;
+            }
+
+            if (device == null)
             {
                 device = interactor.GetInteractable("noCharge");
                 if (device != null)
@@ -48,6 +54,6 @@ public class PlayerChargeDevice : MonoBehaviour
                     interactor.InteractionFinished();
                 }
             }
-        }           
+        }
     }
 }
