@@ -399,8 +399,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pushSpeed: 4
-  startPushingSound: {fileID: 8300000, guid: 6a4192bbb74d01442b4c3d16092b788b, type: 3}
-  stopPushingSound: {fileID: 8300000, guid: 9bdb46e5cee65db4ab20ecd8b41a017e, type: 3}
+  startPushingSounds:
+  - {fileID: 8300000, guid: 6a4192bbb74d01442b4c3d16092b788b, type: 3}
+  stopPushingSounds:
+  - {fileID: 8300000, guid: 9bdb46e5cee65db4ab20ecd8b41a017e, type: 3}
 --- !u!114 &-2295498896310718508
 MonoBehaviour:
   m_ObjectHideFlags: 0
