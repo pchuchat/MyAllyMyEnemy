@@ -5,7 +5,6 @@ using UnityEngine;
 public class DeviceOpenDoor : MonoBehaviour
 {
     //Atributes visible in unity
-    //[Tooltip("How many times activated device moves child-object")] [SerializeField] private int times = 4;
     [Tooltip("How high the target-position is from the start-position")] [SerializeField] private float height = 3f;
     [Tooltip("How much child-object is moved per frame")] [SerializeField] private float force = 0.02f;
 
@@ -29,7 +28,7 @@ public class DeviceOpenDoor : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        transform.GetComponent<DeviceCharged>().enabled = false;
+        transform.GetComponent<DeviceOpenDoor>().enabled = false;
     }
 
     /// <summary>
@@ -45,10 +44,9 @@ public class DeviceOpenDoor : MonoBehaviour
             rb = moveable.GetComponent<Rigidbody>();
             rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
             rb.useGravity = false;
-            //startP = moveable.transform.position;
             targetP = moveable.transform.position;
             targetP.y = (moveable.transform.position.y + height);
-            doorTrigger = moveable.transform.GetChild(0).gameObject;
+            doorTrigger = transform.GetChild(1).gameObject;
             audioSource.clip = chargedDeviceSound;
             audioSource.loop = true;
             audioSource.Play();
@@ -63,17 +61,20 @@ public class DeviceOpenDoor : MonoBehaviour
     private void StopScript()
     {
         rb.useGravity = true;
-        rb.constraints = RigidbodyConstraints.FreezeAll;
-        transform.tag = "noCharge";
-        //trips = 0;
-        moveable = null;
-        rb = null;
-        audioSource.Stop();
-        transform.GetComponent<DeviceCharged>().enabled = false;
+        if (true)
+        {
+            rb.constraints = RigidbodyConstraints.FreezeAll;
+            transform.tag = "noCharge";
+            //moveable = null;
+            //rb = null;
+            audioSource.Stop();
+            //transform.GetComponent<DeviceCharged>().enabled = false;
+        }
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void DoorTriggered()
     {
+        Debug.Log("Triggeriin osui");
         if (moveable != null)
         {
             if(Vector3.Distance(rb.transform.position, targetP) < 0.001f)
@@ -84,8 +85,7 @@ public class DeviceOpenDoor : MonoBehaviour
     }
 
     /// <summary>
-    /// Moves the moveable-object front and back between it's start position and target position.
-    /// Stops when object has travelled the distance 4 times.
+    /// Moves the moveable-object up to a certain height
     /// Is called every frame
     /// </summary>
     void FixedUpdate()
@@ -93,14 +93,6 @@ public class DeviceOpenDoor : MonoBehaviour
         if (moveable != null)
         {
             rb.transform.position = Vector3.MoveTowards(rb.transform.position, targetP, force);
-            /*if (true && (Vector3.Distance(rb.transform.position, targetP) < 0.001f)) // Hups onkohan tässä jotain kesken koska mitä toi true tossa on???
-            {
-                float temp = targetP.y;
-                targetP.y = startP.y;
-                startP.y = temp;
-                trips++;
-            }*/
         }
-
     }
 }
