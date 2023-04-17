@@ -363,8 +363,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95a96f9a0dc474a4c93077d1495a0aeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  throwForce: 7
-  throwForceUp: 2
+  throwdistance: 3
+  throwAngle: 45
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 256
+  snapRadius: 0.5
+  possibleTargets:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &1752433261407351242
 MonoBehaviour:
   m_ObjectHideFlags: 0

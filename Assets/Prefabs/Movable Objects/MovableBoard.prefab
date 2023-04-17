@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3760185311058718716}
   - component: {fileID: 9180238475570400866}
   - component: {fileID: 239134168185156649}
+  - component: {fileID: 4179391372679507932}
   - component: {fileID: 827722293802970839}
   - component: {fileID: 7752434805273297361}
   m_Layer: 0
@@ -54,6 +55,11 @@ MonoBehaviour:
   throwSound: {fileID: 8300000, guid: 44b6c9d5f33304a46bde2034292aedf6, type: 3}
   targetHitSound: {fileID: 8300000, guid: 3fa6b943bec685c42bbb726da130bd51, type: 3}
   destructionSound: {fileID: 8300000, guid: c5a30d965fc96d54989291d0283b7119, type: 3}
+  targets:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!33 &5706477544760214611
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -126,13 +132,29 @@ Rigidbody:
   m_GameObject: {fileID: 3772046666810807097}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 1
-  m_AngularDrag: 0.05
+  m_Drag: 0
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &4179391372679507932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3772046666810807097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 288d9850c420a074989f0e23bfc0c758, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lineRenderer: {fileID: 827722293802970839}
+  maxIterations: 10000
+  maxSegmentCount: 300
+  segmentStepModulo: 2
 --- !u!120 &827722293802970839
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -140,7 +162,7 @@ LineRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3772046666810807097}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -202,23 +224,14 @@ LineRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.23405457
-        value: 0.46800232
+        time: 0.25834656
+        value: 0.09703827
         inSlope: 0
         outSlope: 0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.8265941
-        value: 0.1706357
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
