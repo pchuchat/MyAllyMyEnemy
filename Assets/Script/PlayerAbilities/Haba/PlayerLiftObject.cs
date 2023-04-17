@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System.Collections;
 
 // ©GameGurus - Heikkinen R., Hopeasaari J., Kantola J., Kettunen J., Kommio R, PC, Parviainen P., Rautiainen J.
 // By: Parviainen P
@@ -26,7 +25,9 @@ public class PlayerLiftObject : MonoBehaviour
 
     // Sounds
     private AudioSource audioSource; // Audiosource for the sounds below
-    [Tooltip("The sound Haba makes when lifting object")] [SerializeField] private AudioClip liftSound;
+    [Header("Sounds")]
+    [Tooltip("How many taps between each sound")] [SerializeField] private int soundinterval = 4;
+    [Tooltip("The sounds Haba makes when lifting objects")] [SerializeField] private List<AudioClip> liftSounds;
     [Tooltip("The sound Haba makes when drops lifted object")] [SerializeField] private AudioClip dropSound;
     [Tooltip("The sound the dropped object makes when hitting the ground")] [SerializeField] private AudioClip objectGroundSound;
 
@@ -41,6 +42,8 @@ public class PlayerLiftObject : MonoBehaviour
     private PlayerInput input; // Used to disable movement and jump while lifting
     private CharacterController controller; // Playercharacter
     private InteractableDetection interactor;
+    private RandomSoundPlayer randomizer;
+    private int tapCounter;
 
     //This is here just in case. It was removed because now lifting stops if dropped object is no longer moving
     //Earlier lifting stopped if the lifted object was in the same position (or close enough) to it's original position before lifting
@@ -53,6 +56,7 @@ public class PlayerLiftObject : MonoBehaviour
         controller = gameObject.GetComponent<CharacterController>();
         audioSource = GetComponent<AudioSource>();
         interactor = GetComponent<InteractableDetection>();
+        randomizer = GetComponent<RandomSoundPlayer>();
     }
 
     /// <summary>
@@ -66,6 +70,7 @@ public class PlayerLiftObject : MonoBehaviour
             if (target == null)
             {
                 target = interactor.GetInteractable("liftable");
+                tapCounter = soundinterval;
                 if (target != null)
                 {
                     input = GetComponent<PlayerInput>();
@@ -83,10 +88,13 @@ public class PlayerLiftObject : MonoBehaviour
             if (canLift == true)
             {
                 timer = time;
-                audioSource.clip = liftSound;
-                audioSource.Play();
+                if (tapCounter == soundinterval && !target.CompareTag("atMaxHeight"))
+                {
+                    randomizer.Play(liftSounds);
+                    tapCounter = 0;
+                }
+                else tapCounter++;
 
-                
                 movementUp = new Vector3 (0, force, 0);
                 rb.AddForce(movementUp - rb.velocity, ForceMode.VelocityChange);
 

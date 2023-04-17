@@ -416,7 +416,11 @@ MonoBehaviour:
   force: 1
   stopAtHeight: 1.5
   time: 20
-  liftSound: {fileID: 8300000, guid: 6a4192bbb74d01442b4c3d16092b788b, type: 3}
+  soundinterval: 4
+  liftSounds:
+  - {fileID: 8300000, guid: 6a4192bbb74d01442b4c3d16092b788b, type: 3}
+  - {fileID: 8300000, guid: 0dbdbee00914add488bff1c1b2f884db, type: 3}
+  - {fileID: 8300000, guid: b4f3ef62a875c8f4ba62c914befdaef0, type: 3}
   dropSound: {fileID: 8300000, guid: 3fa6b943bec685c42bbb726da130bd51, type: 3}
   objectGroundSound: {fileID: 8300000, guid: 7e26c9daf4c32483b9c2790e662d3f1b, type: 3}
 --- !u!114 &5598662531001715945
