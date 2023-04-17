@@ -45,14 +45,28 @@ public class PlayerChargeDevice : MonoBehaviour
                 device = interactor.GetInteractable("noCharge");
                 if (device != null)
                 {
-                    device.tag = "charged";
-                    device.GetComponent<DeviceCharged>().enabled = true;
-                    device.GetComponent<DeviceCharged>().ActivateDevice();
-                    audioSource.clip = chargeSound;
-                    audioSource.Play();
-                    device = null;
-                    interactor.InteractionFinished();
-                }
+                    switch (device)
+                    {
+                        case < 0.0:
+                            device.tag = "charged";
+                            device.GetComponent<DeviceCharged>().enabled = true;
+                            device.GetComponent<DeviceCharged>().ActivateDevice();
+                            audioSource.clip = chargeSound;
+                            audioSource.Play();
+                            device = null;
+                            interactor.InteractionFinished();
+                            break;
+
+                        case > 15.0:
+                            device.tag = "charged";
+                            device.GetComponent<DeviceCharged>().enabled = true;
+                            device.GetComponent<DeviceCharged>().ActivateDevice();
+                            audioSource.clip = chargeSound;
+                            audioSource.Play();
+                            device = null;
+                            interactor.InteractionFinished();
+                            break;
+                    }
             }
         }
     }

@@ -18,8 +18,8 @@ public class DeviceOpenDoor : MonoBehaviour
     private GameObject doorTrigger;
     private Rigidbody rb;           // The rigidbidy of the moveable-object
     private Vector3 targetP;        // Target position where object is moved
-    private Vector3 startP;         // Start position for the object
-    private int trips = 0;          // How many trips the object has made between positions so far
+    //private Vector3 startP;         // Start position for the object
+    //private int trips = 0;          // How many trips the object has made between positions so far
 
     /// <summary>
     /// Sets audiosource 
@@ -45,7 +45,7 @@ public class DeviceOpenDoor : MonoBehaviour
             rb = moveable.GetComponent<Rigidbody>();
             rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
             rb.useGravity = false;
-            startP = moveable.transform.position;
+            //startP = moveable.transform.position;
             targetP = moveable.transform.position;
             targetP.y = (moveable.transform.position.y + height);
             doorTrigger = moveable.transform.GetChild(0).gameObject;
@@ -65,7 +65,7 @@ public class DeviceOpenDoor : MonoBehaviour
         rb.useGravity = true;
         rb.constraints = RigidbodyConstraints.FreezeAll;
         transform.tag = "noCharge";
-        trips = 0;
+        //trips = 0;
         moveable = null;
         rb = null;
         audioSource.Stop();
