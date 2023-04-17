@@ -29,7 +29,7 @@ public class PlayerCarryItem : MonoBehaviour
 
     //Aiming
     private Vector3 aimPoint;
-    [SerializeField] private Collider[] possibleTargets = new Collider[3];
+    private readonly Collider[] possibleTargets = new Collider[3];
     private int numFound;
 
 
