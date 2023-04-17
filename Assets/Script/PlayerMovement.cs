@@ -1,4 +1,5 @@
 
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -21,11 +22,11 @@ public class PlayerMovement : MonoBehaviour
     // Strength of gravity affecting the player
     [SerializeField] private float gravityValue = -9.81f;
 
-    // AudioClip for single jump
-    [SerializeField] private AudioClip jumpSound;
-
-    // AudioClip for double jump
-    [SerializeField] private AudioClip doublejumpSound;
+    // AudioClips for jumping
+    [Header("JumpSounds")]
+    [Tooltip("Chance to play sounds, 100% to play always")] [SerializeField] private float chanceToPlay = 80;
+    [Tooltip("Audioclips for single jump")] [SerializeField] private List<AudioClip> jumpSounds;
+    [Tooltip("Audioclips for double jump")] [SerializeField] private List<AudioClip> doublejumpSounds;
 
 
     // Reference to the CharacterController component
@@ -37,23 +38,22 @@ public class PlayerMovement : MonoBehaviour
     // Whether or not the player is currently grounded
     private bool groundedPlayer;
 
-    // AudioSource for jump sounds
-    private AudioSource audioSource;
-
     // Input value for movement direction
     private Vector2 movementInput = Vector2.zero;
 
     // Whether or not the player can double jump
     private bool canDoubleJump = false;
 
+    // Random sound player for effects
+    private RandomSoundPlayer randomizer;
+
 
     private void Start()
     {
         // Get the CharacterController component on this object
         controller = gameObject.GetComponent<CharacterController>();
-
-        // Get the AudioSource component on this object
-        audioSource = GetComponent<AudioSource>();
+        // Get random sound player for soundeffects
+        randomizer = GetComponent<RandomSoundPlayer>();
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -69,8 +69,7 @@ public class PlayerMovement : MonoBehaviour
             if (groundedPlayer)
             {
                 // Play single jump sound
-                audioSource.clip = jumpSound;
-                audioSource.Play();
+                randomizer.Play(jumpSounds, chanceToPlay);
 
                 // Set player velocity for single jump
                 playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
@@ -81,8 +80,7 @@ public class PlayerMovement : MonoBehaviour
             else if (canDoubleJump)
             {
                 // Play double jump sound
-                audioSource.clip = doublejumpSound;
-                audioSource.Play();
+                randomizer.Play(doublejumpSounds, chanceToPlay);
 
                 // Set player velocity for double jump when going up
                 if (playerVelocity.y >= 0)

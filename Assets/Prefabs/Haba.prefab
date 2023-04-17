@@ -149,6 +149,7 @@ GameObject:
   - component: {fileID: 323129550835044743}
   - component: {fileID: 127861193528252065}
   - component: {fileID: 7980917323831312644}
+  - component: {fileID: 5146266421261346732}
   m_Layer: 0
   m_Name: Haba
   m_TagString: player
@@ -200,8 +201,16 @@ MonoBehaviour:
   jumpHeight: 1.3
   doublejumpRatio: 0.66
   gravityValue: -19.62
-  jumpSound: {fileID: 8300000, guid: 054816f2ee6980142ab1a857bcbff482, type: 3}
-  doublejumpSound: {fileID: 8300000, guid: 58171893447e5b14e8605fae0243edb7, type: 3}
+  chanceToPlay: 80
+  jumpSounds:
+  - {fileID: 8300000, guid: 054816f2ee6980142ab1a857bcbff482, type: 3}
+  - {fileID: 8300000, guid: 0d94aaeca073c984e9b969f5c0648c57, type: 3}
+  - {fileID: 8300000, guid: 42a20e1f729bdc242b99b4296d5fa737, type: 3}
+  - {fileID: 8300000, guid: 5a7a17e5abf1f9444afffde4345ee2d2, type: 3}
+  doublejumpSounds:
+  - {fileID: 8300000, guid: 58171893447e5b14e8605fae0243edb7, type: 3}
+  - {fileID: 8300000, guid: c831c7a30911f3a459a0aa44f11da7fe, type: 3}
+  - {fileID: 8300000, guid: b8090231d86cb4141b0be6dd1c678491, type: 3}
 --- !u!114 &7598341486325973947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -369,10 +378,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   snapRadius: 0.5
-  possibleTargets:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!114 &1752433261407351242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -594,6 +599,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5146266421261346732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 323129550835044744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4876e8c279b30a5419b606e28704e0eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  source: {fileID: 7980917323831312644}
 --- !u!1 &532687655550508957
 GameObject:
   m_ObjectHideFlags: 0
