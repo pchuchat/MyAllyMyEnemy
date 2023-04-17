@@ -378,6 +378,14 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   snapRadius: 0.5
+  lightPickupSounds:
+  - {fileID: 8300000, guid: f629297a2dfa2dc499d250747e670625, type: 3}
+  heavyPickupSounds:
+  - {fileID: 8300000, guid: bc1a284e75bb077478238c1feedfd1d0, type: 3}
+  lightThrowSounds:
+  - {fileID: 8300000, guid: 1e6b9cd17dd76ee429694c660a15dfb0, type: 3}
+  heavyThrowSounds:
+  - {fileID: 8300000, guid: 44b6c9d5f33304a46bde2034292aedf6, type: 3}
 --- !u!114 &1752433261407351242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -611,7 +619,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4876e8c279b30a5419b606e28704e0eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  source: {fileID: 7980917323831312644}
 --- !u!1 &532687655550508957
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 5997447040422354872}
   - component: {fileID: 5706477544760214611}
   - component: {fileID: 3760185311058718716}
+  - component: {fileID: -8611288793449039325}
   - component: {fileID: 9180238475570400866}
   - component: {fileID: 239134168185156649}
-  - component: {fileID: -8611288793449039325}
   - component: {fileID: 6773279918742149813}
   - component: {fileID: 827722293802970839}
   - component: {fileID: 8652243067384407433}
@@ -89,6 +89,26 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-8611288793449039325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3772046666810807097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d17da8175d004c45bb00d5804d17530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heavyLifting: 0
+  pickUpSound: {fileID: 8300000, guid: f629297a2dfa2dc499d250747e670625, type: 3}
+  throwSound: {fileID: 8300000, guid: 1e6b9cd17dd76ee429694c660a15dfb0, type: 3}
+  targetHitSound: {fileID: 8300000, guid: 3fa6b943bec685c42bbb726da130bd51, type: 3}
+  destructionSound: {fileID: 8300000, guid: e331a11d9243f2e45baa403bd86bf5a1, type: 3}
+  targets:
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!65 &9180238475570400866
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -118,25 +138,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &-8611288793449039325
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3772046666810807097}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d17da8175d004c45bb00d5804d17530, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pickUpSound: {fileID: 8300000, guid: f629297a2dfa2dc499d250747e670625, type: 3}
-  throwSound: {fileID: 8300000, guid: 1e6b9cd17dd76ee429694c660a15dfb0, type: 3}
-  targetHitSound: {fileID: 8300000, guid: 3fa6b943bec685c42bbb726da130bd51, type: 3}
-  destructionSound: {fileID: 8300000, guid: e331a11d9243f2e45baa403bd86bf5a1, type: 3}
-  targets:
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!114 &6773279918742149813
 MonoBehaviour:
   m_ObjectHideFlags: 0

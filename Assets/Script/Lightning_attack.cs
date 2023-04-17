@@ -16,7 +16,6 @@ public class Lightning_attack : MonoBehaviour
 
     // AudioClips for attacking
     [Header("AttackSounds")]
-    [Tooltip("Chance to play sounds, 100% to play always")] [SerializeField] private float chanceToPlay = 100;
     [Tooltip("Audioclips for attack")] [SerializeField] private List<AudioClip> attackSounds;
 
     // Random sound player for effects
@@ -37,7 +36,7 @@ public class Lightning_attack : MonoBehaviour
         Debug.Log("OnAttack called");
 
         // Play a random attack sound
-        randomizer.Play(attackSounds, chanceToPlay);
+        randomizer.Play(attackSounds);
 
         LaunchLightningStrike();
     }
