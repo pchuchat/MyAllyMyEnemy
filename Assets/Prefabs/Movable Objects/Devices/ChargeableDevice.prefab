@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 9066024022495620346}
   - component: {fileID: 7288850608731709070}
   - component: {fileID: -7004942429048327650}
+  - component: {fileID: 1546311687569439140}
   - component: {fileID: 4920549545274718688}
   - component: {fileID: 4619430327006741037}
   - component: {fileID: 2002666687265246199}
@@ -63,6 +64,22 @@ MonoBehaviour:
   interactHint: Press O to interact
   cantInteractHint: You can't interact with this one
   outlineThickness: 2
+  highlightmultiplier: 2
+--- !u!114 &1546311687569439140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1184416725749755638}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f50b5ad3e5ace1d43af83276fab0b872, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  height: 3
+  force: 0.02
+  chargedDeviceSound: {fileID: 0}
 --- !u!114 &4920549545274718688
 MonoBehaviour:
   m_ObjectHideFlags: 0
