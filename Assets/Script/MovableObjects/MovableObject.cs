@@ -4,6 +4,7 @@ using UnityEngine;
 // Creator: Kettunen. J
 //
 // Deals with the collision of the movable object after it's thrown
+[RequireComponent(typeof(PathSimulation))]
 public class MovableObject : MonoBehaviour
 {
     [Header("Sounds")]
@@ -41,6 +42,7 @@ public class MovableObject : MonoBehaviour
             transform.position = collider.gameObject.transform.position;
             transform.forward = collider.gameObject.transform.forward;
             collider.gameObject.tag = "Untagged";
+            collider.gameObject.layer = 0;
             tag = "Untagged";
         }
     }
