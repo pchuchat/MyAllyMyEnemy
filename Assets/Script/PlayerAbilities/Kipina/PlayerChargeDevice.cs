@@ -45,7 +45,7 @@ public class PlayerChargeDevice : MonoBehaviour
                 device = interactor.GetInteractable("noCharge");
                 if (device != null)
                 {
-                    switch (device.name) // TÄMÄ EI TOIMI VIELÄ
+                    switch (device.name)
                     {
                         case "ChargeableDevice":
                             device.tag = "charged";

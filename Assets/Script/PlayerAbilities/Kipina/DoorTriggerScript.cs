@@ -2,24 +2,59 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// ©GameGurus - Heikkinen R., Hopeasaari J., Kantola J., Kettunen J., Kommio R, PC, Parviainen P., Rautiainen J.
+// By: Parviainen P
+// Sees if player enters trigger-area. If both players have entered the area calls DeviceOpenDoor and tells it to stop
+
 public class DoorTriggerScript : MonoBehaviour
 {
-    public bool triggered = false;
-    // Start is called before the first frame update
-    void Start()
+    private bool kipinaTrigger;
+    private bool habaTrigger;
+
+    /// <summary>
+    /// If something enters trigger area checks if it is one of the players. If it is one of the players changes the trigger for the 
+    /// corresponding player to be true
+    /// </summary>
+    /// <param name="other">Collider of the player that hit trigger-area</param>
+    private void OnTriggerExit(Collider other)
     {
-        
+        if(other.name == "Kipina(Clone)")
+        {
+            kipinaTrigger = true;
+        }
+        if (other.name == "Haba(Clone)")
+        {
+            habaTrigger = true;
+        }        
+        //GetComponentInParent<DeviceOpenDoor>().DoorTriggered(); // Yämä on vielä tässä väliaikaisesti jos ei toimikkaan 2 pelaajalla
     }
 
-    private void OnTriggerEnter(Collider other)
+    /// <summary>
+    /// When called from other trigger area sets the trigger of the corresponding player to false
+    /// </summary>
+    /// <param name="player">String with the player's name that exited trigger area</param>
+    public void DoorExit(string player)
     {
-        GetComponentInParent<DeviceOpenDoor>().DoorTriggered();
-        Debug.Log("Ovi triggeröity");
+        switch (player)
+        {
+            case "Kipina":
+                kipinaTrigger = false;
+                break;
+
+            case "Haba":
+                habaTrigger = false;
+                break;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    /// <summary>
+    /// If both player's triggers are true calls DeviceOpenDoor and tells it that the door was triggered
+    /// </summary>
+    private void FixedUpdate()
     {
-        
+        if (kipinaTrigger == true && habaTrigger == true)
+        {
+            GetComponentInParent<DeviceOpenDoor>().DoorTriggered();
+        }
     }
 }
