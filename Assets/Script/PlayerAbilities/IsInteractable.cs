@@ -6,7 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(Outline))]
 public class IsInteractable : MonoBehaviour
 {
-    private enum Player { Haba, Kipina }
+    private enum Player { Haba3D, Kipina }
     [Tooltip("Player that can interact with this item")] [SerializeField] private Player player;
     [Tooltip("Hint for player that can interact")] [SerializeField] private string interactHint = "example hint";
     [Tooltip("Hint for player that can't interact")] [SerializeField] private string cantInteractHint = "You can't interact with this one";
@@ -19,7 +19,7 @@ public class IsInteractable : MonoBehaviour
     void Start()
     {
         highlight = GetComponent<Outline>();
-        if (player == Player.Haba) highlight.OutlineColor = Color.red;
+        if (player == Player.Haba3D) highlight.OutlineColor = Color.red;
         if (player == Player.Kipina) highlight.OutlineColor = Color.blue;
         highlight.OutlineWidth = outlineThickness;
         originaOutlineThickness = outlineThickness;

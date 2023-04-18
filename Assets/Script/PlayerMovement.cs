@@ -103,7 +103,7 @@ public class PlayerMovement : MonoBehaviour
     {
         // Check if the player is currently grounded
         groundedPlayer = controller.isGrounded;
-
+        
         // Reset player velocity to zero when grounded
         if (groundedPlayer && playerVelocity.y < 0)
         {

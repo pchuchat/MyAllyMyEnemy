@@ -28,7 +28,7 @@ public class InteractableDetection : MonoBehaviour
         controller = GetComponent<CharacterController>();
     }
     // Update is called once per frame
-    private void Update()
+    private void FixedUpdate()
     {
         if (!interactionLock && controller.isGrounded)
         {

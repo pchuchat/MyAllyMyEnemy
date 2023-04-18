@@ -377,7 +377,7 @@ MonoBehaviour:
   targetMask:
     serializedVersion: 2
     m_Bits: 256
-  snapRadius: 0.5
+  snapRadius: 1
   lightPickupSounds:
   - {fileID: 8300000, guid: f629297a2dfa2dc499d250747e670625, type: 3}
   heavyPickupSounds:
