@@ -4,11 +4,11 @@ using UnityEngine;
 // Creator: Kettunen. J
 //
 // Deals with the collision of the movable object after it's thrown
+[RequireComponent(typeof(PathSimulation))]
 public class MovableObject : MonoBehaviour
 {
+    [Tooltip("Whether the object is heavy or not")] [SerializeField] private bool heavyLifting = false;
     [Header("Sounds")]
-    [Tooltip("Sound for picking up object from spawner")] [SerializeField] private AudioClip pickUpSound;
-    [Tooltip("Sound for when the object is thrown")] [SerializeField] private AudioClip throwSound;
     [Tooltip("Sound for when the object hits target zone")] [SerializeField] private AudioClip targetHitSound;
     [Tooltip("Sound for when the object is destroyed")] [SerializeField] private AudioClip destructionSound;
 
@@ -21,6 +21,11 @@ public class MovableObject : MonoBehaviour
     {
         rb = gameObject.GetComponent<Rigidbody>();
         audioSource = gameObject.GetComponent<AudioSource>();
+    }
+
+    public bool IsHeavy()
+    {
+        return heavyLifting;
     }
 
     /// <summary>
@@ -41,6 +46,7 @@ public class MovableObject : MonoBehaviour
             transform.position = collider.gameObject.transform.position;
             transform.forward = collider.gameObject.transform.forward;
             collider.gameObject.tag = "Untagged";
+            collider.gameObject.layer = 0;
             tag = "Untagged";
         }
     }
@@ -69,23 +75,6 @@ public class MovableObject : MonoBehaviour
                 Destroy(gameObject);
             }
         }
-    }
-    /// <summary>
-    /// Plays the sound for picking up this object
-    /// </summary>
-    public void PlayPickUpSound()
-    {
-        audioSource = gameObject.GetComponent<AudioSource>();
-        audioSource.clip = pickUpSound;
-        audioSource.Play();
-    }
-    /// <summary>
-    /// Plays the sound for throwing this object
-    /// </summary>
-    public void PlayThrowSound()
-    {
-        audioSource.clip = throwSound;
-        audioSource.Play();
     }
     public void SetTargets(List<GameObject> targetAreas)
     {
