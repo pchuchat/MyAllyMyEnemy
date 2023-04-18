@@ -13,16 +13,27 @@ public class PlayerCarryItem : MonoBehaviour
     [Tooltip("Layer for target areas")] [SerializeField] private LayerMask targetMask;
     [Tooltip("Radius of targetsnapping area around the aimPoint")] [SerializeField] private float snapRadius = 0.5f;
 
+
+    [Header("Sounds")]
+    [Header("Pickup")]
+    [Tooltip("Pickup sounds for light items")] [SerializeField] private List<AudioClip> lightPickupSounds;
+    [Tooltip("Pickup sounds for heavy items")] [SerializeField] private List<AudioClip> heavyPickupSounds;
+    [Header("Throw")]
+    [Tooltip("Throw sounds for light items")] [SerializeField] private List<AudioClip> lightThrowSounds;
+    [Tooltip("Throw sounds for heavy items")] [SerializeField] private List<AudioClip> heavyThrowSounds;
+
     //Player
     private CharacterController controller;     
     private PlayerInput input;
     private bool carrying = false;      //whether the player is carrying an object or not
     private InteractableDetection interactor;
     private Vector3 force = new(); //Throwingforce needed to reach target at given angle
+    private RandomSoundPlayer randomizer;
 
     //Movable object
+    private MovableObject movableObject;
     private GameObject spawner;
-    private GameObject movableObject;
+    private GameObject movableObjectGO;
     private List<GameObject> targets;
     private PathSimulation simulation;
     private Rigidbody movableObjectRb;
@@ -39,6 +50,7 @@ public class PlayerCarryItem : MonoBehaviour
         input = GetComponentInParent<PlayerInput>();
         controller = gameObject.GetComponent<CharacterController>();
         interactor = GetComponent<InteractableDetection>();
+        randomizer = GetComponent<RandomSoundPlayer>();
     }
 
     /// <summary>
@@ -60,7 +72,8 @@ public class PlayerCarryItem : MonoBehaviour
                 spawner = interactor.GetInteractable("movable_object_spawner");
                 if (spawner != null)
                 {
-                    movableObject = spawner.GetComponent<MovableObjectSpawner>().GetMovableObject();
+                    movableObjectGO = spawner.GetComponent<MovableObjectSpawner>().GetMovableObject();
+                    movableObject = movableObjectGO.GetComponent<MovableObject>();
                     targets = spawner.GetComponent<MovableObjectSpawner>().GetTargets();
                     PickUpObject();
                 }
@@ -73,19 +86,20 @@ public class PlayerCarryItem : MonoBehaviour
     /// </summary>
     private void PickUpObject()
     {
+        if (movableObject.IsHeavy()) randomizer.Play(heavyPickupSounds);
+        else randomizer.Play(lightPickupSounds);
         //Removing gravity from object and making sure it is held in the right orientation
-        movableObject.GetComponent<Rigidbody>().useGravity = false;
-        movableObject.transform.forward = controller.transform.forward;
+        movableObjectGO.GetComponent<Rigidbody>().useGravity = false;
+        movableObjectGO.transform.forward = controller.transform.forward;
 
         //Calculating and setting the position for carrying item
-        Vector3 targetPos = transform.position + transform.forward * (movableObject.transform.localScale.z/2 + transform.localScale.z/2 +0.1f);
-        movableObject.transform.position = targetPos;
+        Vector3 targetPos = transform.position + transform.forward * (movableObjectGO.transform.localScale.z/2 + transform.localScale.z/2 +0.1f);
+        movableObjectGO.transform.position = targetPos;
 
-        movableObject.transform.SetParent(transform);
+        movableObjectGO.transform.SetParent(transform);
         input.actions.FindAction("Jump").Disable();
-        movableObject.GetComponent<MovableObject>().PlayPickUpSound();
-        simulation = movableObject.GetComponent<PathSimulation>();
-        movableObjectRb = movableObject.GetComponent<Rigidbody>();
+        simulation = movableObjectGO.GetComponent<PathSimulation>();
+        movableObjectRb = movableObjectGO.GetComponent<Rigidbody>();
         carrying = true;
     }
 
@@ -94,21 +108,23 @@ public class PlayerCarryItem : MonoBehaviour
     /// </summary>
     private void ThrowObject()
     {
+        if (movableObject.IsHeavy()) randomizer.Play(heavyThrowSounds);
+        else randomizer.Play(lightThrowSounds);
         simulation.Terminate();
         //Playing the sound for throwing item
-        movableObject.GetComponent<MovableObject>().PlayThrowSound();
 
         //Adding force for the object
         movableObjectRb.AddForce(force * movableObjectRb.mass, ForceMode.Impulse);
 
         //Setting all the neccessary parameters for the object once it's thrown and performing neccessary "resets"
-        movableObject.GetComponent<Rigidbody>().useGravity = true;
-        movableObject.transform.SetParent(null);
-        movableObject.GetComponent<BoxCollider>().enabled = true;
-        movableObject = null;
+        movableObjectGO.GetComponent<Rigidbody>().useGravity = true;
+        movableObjectGO.transform.SetParent(null);
+        movableObjectGO.GetComponent<BoxCollider>().enabled = true;
+        movableObjectGO = null;
         carrying = false;
         input.actions.FindAction("Jump").Enable();
         targets = null;
+        movableObject = null;
         interactor.InteractionFinished();
     }
     // Update is called once per frame
@@ -116,7 +132,7 @@ public class PlayerCarryItem : MonoBehaviour
     {
         //Checking if there is a target area below the movable object while the player is carrying it
         //if said target is found throws the object at needed force to reach center of target area.
-        if (carrying && Physics.Raycast(movableObject.transform.position, transform.TransformDirection(Vector3.down), out RaycastHit hit, 5f)
+        if (carrying && Physics.Raycast(movableObjectGO.transform.position, transform.TransformDirection(Vector3.down), out RaycastHit hit, 5f)
             && hit.collider.gameObject.CompareTag("target_area") && targets.Contains(hit.collider.gameObject))
         {
             force = simulation.CalculateThrowingForce(hit.collider.gameObject.transform.position, throwAngle);
@@ -129,7 +145,7 @@ public class PlayerCarryItem : MonoBehaviour
         {
             CheckForTargets();
             force = simulation.CalculateThrowingForce(aimPoint, throwAngle);
-            simulation.SimulatePath(movableObject, force);
+            simulation.SimulatePath(movableObjectGO, force);
         }
     }
     /// <summary>
@@ -137,7 +153,7 @@ public class PlayerCarryItem : MonoBehaviour
     /// </summary>
     private void CheckForTargets()
     {
-        aimPoint = movableObject.transform.position + transform.forward * throwdistance;
+        aimPoint = movableObjectGO.transform.position + transform.forward * throwdistance;
         aimPoint.y = transform.position.y - transform.localScale.y / 2;
         numFound = Physics.OverlapSphereNonAlloc(aimPoint, snapRadius, possibleTargets, targetMask);
 

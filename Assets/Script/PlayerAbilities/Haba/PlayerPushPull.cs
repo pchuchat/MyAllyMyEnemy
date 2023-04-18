@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 // ©GameGurus - Heikkinen R., Hopeasaari J., Kantola J., Kettunen J., Kommio R, PC, Parviainen P., Rautiainen J.
@@ -10,16 +11,16 @@ public class PlayerPushPull : MonoBehaviour
     [Tooltip("The speed that the player can push objects")] [SerializeField] private float pushSpeed = 4.0f;
 
     [Header("Pushing sounds")]
-    [Tooltip("The sound Haba makes when starting pushing")] [SerializeField] private AudioClip startPushingSound;
-    [Tooltip("The sound Haba makes when stopping pushing")] [SerializeField] private AudioClip stopPushingSound;
+    [Tooltip("The sounds Haba makes when starting pushing")] [SerializeField] private List<AudioClip> startPushingSounds;
+    [Tooltip("The sounds Haba makes when stopping pushing")] [SerializeField] private List<AudioClip> stopPushingSounds;
 
     //Player
     private CharacterController controller;
     private PlayerInput input;
-    private AudioSource playerAudioSource;
     private PlayerMovement playerMovement;
     private Vector2 movementInput;
     private bool pushing = false;
+    private RandomSoundPlayer randomizer;
 
     //Pushable object
     private bool hitDirectionX;
@@ -34,8 +35,8 @@ public class PlayerPushPull : MonoBehaviour
         playerMovement = GetComponent<PlayerMovement>();
         controller = GetComponent<CharacterController>();
         input = GetComponent<PlayerInput>();
-        playerAudioSource = GetComponent<AudioSource>();
         interactor = GetComponent<InteractableDetection>();
+        randomizer = GetComponent<RandomSoundPlayer>();
     }
 
     /// <summary>
@@ -71,8 +72,7 @@ public class PlayerPushPull : MonoBehaviour
             if(pushableObjAudioSource.isPlaying)
             {
                 pushableObjAudioSource.Stop();
-                playerAudioSource.clip = stopPushingSound;
-                playerAudioSource.Play();
+                randomizer.Play(stopPushingSounds);
             }
             pushableObjectRb.constraints = RigidbodyConstraints.FreezeAll;
             input.actions.FindAction("Jump").Enable();
@@ -149,15 +149,13 @@ public class PlayerPushPull : MonoBehaviour
             //Playing the sounds for pushing
             if (magnitude != 0 && !pushableObjAudioSource.isPlaying)
             {
-                playerAudioSource.clip = startPushingSound;
-                playerAudioSource.Play();
+                randomizer.Play(startPushingSounds);
                 pushableObjAudioSource.Play();
             }
             else if (magnitude == 0 && pushableObjAudioSource.isPlaying)
             {
                 pushableObjAudioSource.Stop();
-                playerAudioSource.clip = stopPushingSound;
-                playerAudioSource.Play();
+                randomizer.Play(stopPushingSounds);
             }
         }
     }

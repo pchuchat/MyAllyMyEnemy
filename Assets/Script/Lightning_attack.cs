@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 
 // ©GameGurus - Heikkinen R., Hopeasaari J., Kantola J., Kettunen J., Kommio R, PC, Parviainen P., Rautiainen J.
 // Creator: PC, Phatchanon Chuchat 
+// Edited: JK, Janne Kettunen
 // Player's Ligthning Attack
 public class Lightning_attack : MonoBehaviour
 {
@@ -13,10 +14,12 @@ public class Lightning_attack : MonoBehaviour
     // The amount of damage that the lightning strike does
     [SerializeField] int damageAmount = 25;
 
-    // A list of sound clips that will play randomly each time the lightning strike is performed
-    [SerializeField] List<AudioClip> attackSounds;
+    // AudioClips for attacking
+    [Header("AttackSounds")]
+    [Tooltip("Audioclips for attack")] [SerializeField] private List<AudioClip> attackSounds;
 
-    private AudioSource audioSource;
+    // Random sound player for effects
+    private RandomSoundPlayer randomizer;
 
     private void Start()
     {
@@ -24,7 +27,7 @@ public class Lightning_attack : MonoBehaviour
         lightningStrike.Stop();
 
         // Get the AudioSource component on this gameobject
-        audioSource = GetComponent<AudioSource>();
+        randomizer = GetComponent<RandomSoundPlayer>();
     }
 
     // Function that is called when the lightning strike is performed
@@ -33,12 +36,7 @@ public class Lightning_attack : MonoBehaviour
         Debug.Log("OnAttack called");
 
         // Play a random attack sound
-        if (attackSounds.Count > 0)
-        {
-            int randomIndex = Random.Range(0, attackSounds.Count);
-            audioSource.clip = attackSounds[randomIndex];
-            audioSource.Play();
-        }
+        randomizer.Play(attackSounds);
 
         LaunchLightningStrike();
     }
