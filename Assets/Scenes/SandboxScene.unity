@@ -240,9 +240,9 @@ GameObject:
   - component: {fileID: 127728096}
   - component: {fileID: 127728095}
   - component: {fileID: 127728094}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: floor
-  m_TagString: ElectricLine
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
