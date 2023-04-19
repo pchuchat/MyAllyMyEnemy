@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 // By: Parviainen P
 // Edited: Kettunen J
 // Kipinä charges the device in front and activates it.
-// Activation of devices cause some action in the game. The action depends on what script is attached to the device.
+// Activation of devices cause some action in the game. The action depends on what script is attached to the device
 
 public class PlayerChargeDevice : MonoBehaviour
 {

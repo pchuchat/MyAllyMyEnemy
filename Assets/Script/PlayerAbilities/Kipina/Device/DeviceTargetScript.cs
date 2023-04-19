@@ -4,7 +4,7 @@ using UnityEngine;
 // ©GameGurus - Heikkinen R., Hopeasaari J., Kantola J., Kettunen J., Kommio R, PC, Parviainen P., Rautiainen J.
 // By: Parviainen P
 // Checks if object entering/leaving trigger area is cableEnd. Changes parent's tag to noCharge/Untagged depending on wther cableEnd enters
-// or leaves the triggering area. Also gives parent which tag it should use when it is done running script
+// or leaves the triggering area. Also gives parent which tag it should use when it is done running script 
 
 public class DeviceTargetScript : MonoBehaviour
 {
