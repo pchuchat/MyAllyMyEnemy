@@ -59,7 +59,7 @@ public class MovableObject : MonoBehaviour
     /// <param name="collision"></param>
     private void OnCollisionEnter(Collision collision)
     {
-        if (!keepThisOne && gameObject.CompareTag("movable_object"))
+        if (!keepThisOne && gameObject.CompareTag("movable_object") && !collision.gameObject.CompareTag("player"))
         {
             tag = "Untagged";
             GetComponent<MeshRenderer>().enabled = false;
