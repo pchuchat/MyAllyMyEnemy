@@ -28,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
     [Tooltip("Audioclips for single jump")] [SerializeField] private List<AudioClip> jumpSounds;
     [Tooltip("Audioclips for double jump")] [SerializeField] private List<AudioClip> doublejumpSounds;
     [Tooltip("Jump sounds that play always when player jumps")] [SerializeField] private List<AudioClip> alwaysPlayJumpSounds;
+    [Tooltip("Doublejump sounds that play always when player jumps")] [SerializeField] private List<AudioClip> alwaysPlayDoubleJumpSounds;
 
 
 
@@ -87,7 +88,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 // Play double jump sound
                 randomizer.Play(doublejumpSounds, chanceToPlay);
-                randomizer.Play(alwaysPlayJumpSounds);
+                randomizer.Play(alwaysPlayDoubleJumpSounds);
 
                 // Set player velocity for double jump when going up
                 if (playerVelocity.y >= 0)
