@@ -382,12 +382,15 @@ MonoBehaviour:
   jumpHeight: 1.3
   doublejumpRatio: 0.66
   gravityValue: -19.62
-  chanceToPlay: 80
+  chanceToPlay: 66
   jumpSounds:
+  - {fileID: 8300000, guid: 4a6b65b04211edf4e93abf00d1d558f0, type: 3}
   - {fileID: 8300000, guid: 7017c86314da5134198db5e87219aaca, type: 3}
   - {fileID: 8300000, guid: 0f04652a099ec0647add9e1ba4b68248, type: 3}
   doublejumpSounds:
   - {fileID: 8300000, guid: 4a6b65b04211edf4e93abf00d1d558f0, type: 3}
+  - {fileID: 8300000, guid: 7017c86314da5134198db5e87219aaca, type: 3}
+  - {fileID: 8300000, guid: 0f04652a099ec0647add9e1ba4b68248, type: 3}
 --- !u!114 &6540128322100697887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -565,9 +568,9 @@ MonoBehaviour:
   electricLineSpeed: 10
   electricBall: {fileID: 994008705248500551, guid: 86231a515d1315f45bda9ef33e687e5e, type: 3}
   electricBallHolder: {fileID: 5189931440743380729}
-  electricLineLoopSound: {fileID: 8300000, guid: b2a75d6dd247c15438f233a36db64945, type: 3}
-  electricLineEnterSound: {fileID: 8300000, guid: a235d590ef2a04d1b85b61ef4c21337c, type: 3}
-  electricLineExitSound: {fileID: 8300000, guid: 4c8650c4e779a3f489981686c693d6e9, type: 3}
+  electricLineLoopSound: {fileID: 8300000, guid: 391abaa6774d80f49b3321c649d3bad6, type: 3}
+  electricLineEnterSound: {fileID: 8300000, guid: 23ef6668658d6a34395236b7da9692a1, type: 3}
+  electricLineExitSound: {fileID: 8300000, guid: 2ef26044eed6fe144b602b11f64b2311, type: 3}
 --- !u!114 &8002680264568220254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -582,12 +585,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lightningStrike: {fileID: 8880293685122149207}
   damageAmount: 10
-  chanceToPlay: 100
   attackSounds:
-  - {fileID: 8300000, guid: 9ea0cf9738bd4d541835e97a3c5b62cc, type: 3}
-  - {fileID: 8300000, guid: 8678ec957091d9742bca259d0bdfdbd7, type: 3}
-  - {fileID: 8300000, guid: 91dca473ab37cc246b602a1f7deb260d, type: 3}
-  - {fileID: 8300000, guid: 66cce332661d4e047a1e62f6f03adf76, type: 3}
+  - {fileID: 8300000, guid: 23ef6668658d6a34395236b7da9692a1, type: 3}
+  - {fileID: 8300000, guid: 2ef26044eed6fe144b602b11f64b2311, type: 3}
+  - {fileID: 8300000, guid: 59778eca181d32f49a588f5475ded39b, type: 3}
 --- !u!114 &296533394093348040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5626,7 +5627,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4876e8c279b30a5419b606e28704e0eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  source: {fileID: 489692100669251167}
 --- !u!1 &4742189154372306976
 GameObject:
   m_ObjectHideFlags: 0
