@@ -28,6 +28,8 @@ public class PlayerPushPull : MonoBehaviour
     private Rigidbody pushableObjectRb;
     private AudioSource pushableObjAudioSource;
     private InteractableDetection interactor;
+    private bool groundedPlayer;
+    private float groundedDelay;
 
     void Start()
     {
@@ -48,7 +50,7 @@ public class PlayerPushPull : MonoBehaviour
     /// <param name="context">interact button</param>
     public void OnInteract(InputAction.CallbackContext context)
     {
-        if (context.started && pushableObject == null && controller.isGrounded)
+        if (context.started && pushableObject == null && groundedDelay > 0)
         {
             //CheckForPushableObject();
             pushableObject = interactor.GetInteractable("pushable_object");
@@ -120,7 +122,19 @@ public class PlayerPushPull : MonoBehaviour
             hitDirectionX = false;
         }
     }
-
+    private void Update()
+    {
+        // Check if the player is currently grounded
+        groundedPlayer = controller.isGrounded;
+        if (groundedPlayer)
+        {
+            groundedDelay = 0.2f;
+        }
+        if (groundedDelay > 0)
+        {
+            groundedDelay -= Time.deltaTime;
+        }
+    }
     private void FixedUpdate()
     {
         if (pushing)

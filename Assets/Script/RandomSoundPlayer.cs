@@ -18,6 +18,7 @@ public class RandomSoundPlayer : MonoBehaviour
     /// <param name="chanceToPlay">Optional chance to play, on default always play</param>
     public void Play(List<AudioClip> clips, float chanceToPlay = 100f)
     {
+        if (clips.Count == 0) return;
         if (Random.Range(0f, 100f) <= chanceToPlay)
         {
             source.clip = clips[Random.Range(0, clips.Count)];
