@@ -113,7 +113,7 @@ MonoBehaviour:
   jumpHeight: 1.3
   doublejumpRatio: 0.66
   gravityValue: -19.62
-  chanceToPlay: 66
+  chanceToPlay: 50
   jumpSounds:
   - {fileID: 8300000, guid: 4a6b65b04211edf4e93abf00d1d558f0, type: 3}
   - {fileID: 8300000, guid: 7017c86314da5134198db5e87219aaca, type: 3}
@@ -122,8 +122,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 4a6b65b04211edf4e93abf00d1d558f0, type: 3}
   - {fileID: 8300000, guid: 7017c86314da5134198db5e87219aaca, type: 3}
   - {fileID: 8300000, guid: 0f04652a099ec0647add9e1ba4b68248, type: 3}
-  alwaysPlayJumpSounds: []
-  alwaysPlayDoubleJumpSounds: []
+  alwaysPlayJumpSounds:
+  - {fileID: 8300000, guid: a4192ba5ad75ef343bb7b2ec15973e66, type: 3}
+  alwaysPlayDoubleJumpSounds:
+  - {fileID: 8300000, guid: 83ff000692cf56843a2de9fb3cc54b05, type: 3}
 --- !u!114 &7778397587872483313
 MonoBehaviour:
   m_ObjectHideFlags: 0
