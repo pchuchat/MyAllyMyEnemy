@@ -62,7 +62,7 @@ public class InteractableDetection : MonoBehaviour
                 Reset();
             }
         }
-        if (groundedDelay ==  0 && hintDisplay.isActive || interactionLock)
+        if (groundedDelay < 0.1f && hintDisplay.isActive || interactionLock)
         {
             Reset();
         }
