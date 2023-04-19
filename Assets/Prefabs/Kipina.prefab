@@ -316,11 +316,10 @@ GameObject:
   m_Component:
   - component: {fileID: 509579478597333126}
   - component: {fileID: 7365542191702105737}
-  - component: {fileID: 6540128322100697887}
   - component: {fileID: 1650933401303488408}
+  - component: {fileID: 6540128322100697887}
   - component: {fileID: -8559214990705658680}
   - component: {fileID: -8023790235932053258}
-  - component: {fileID: 26993318533902399}
   - component: {fileID: 2251022623129124305}
   - component: {fileID: 8002680264568220254}
   - component: {fileID: 296533394093348040}
@@ -477,18 +476,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 26993318533902399}
-        m_TargetAssemblyTypeName: PlayerCarryCable, Assembly-CSharp
-        m_MethodName: OnCarryCable
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
     m_ActionId: 94f86286-01c1-45cd-98ea-3367081bacb3
     m_ActionName: Player/Interact[/DualShock4GamepadHID/buttonEast,/DualShock4GamepadHID1/buttonEast]
   - m_PersistentCalls:
@@ -531,37 +518,11 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: c1c82458-de33-42d6-8324-ce9bf8319616
     m_ActionName: Player/Charge[/DualShock4GamepadHID/buttonEast]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 2181f636-2635-42f6-90de-3e72cd520a0c
-    m_ActionName: Player/CarryCable[/DualShock4GamepadHID/buttonEast,/Keyboard/h,/Keyboard/l]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &1650933401303488408
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4736019986219371458}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e00347e45f7832b42b32b8447f01df32, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerSpeed: 6
-  jumpHeight: 1.3
-  doublejumpRatio: 0.66
-  gravityValue: -19.62
-  chanceToPlay: 80
-  jumpSounds:
-  - {fileID: 8300000, guid: 7017c86314da5134198db5e87219aaca, type: 3}
-  - {fileID: 8300000, guid: 0f04652a099ec0647add9e1ba4b68248, type: 3}
-  doublejumpSounds:
-  - {fileID: 8300000, guid: 4a6b65b04211edf4e93abf00d1d558f0, type: 3}
 --- !u!114 &-8559214990705658680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -594,18 +555,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chargeSound: {fileID: 8300000, guid: 2ef26044eed6fe144b602b11f64b2311, type: 3}
---- !u!114 &26993318533902399
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4736019986219371458}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 191f73ee986e17746a07668adab6302f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2251022623129124305
 MonoBehaviour:
   m_ObjectHideFlags: 0
