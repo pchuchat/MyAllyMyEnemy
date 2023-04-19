@@ -52,8 +52,7 @@ public class DeviceCharged : MonoBehaviour
             rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
             rb.useGravity = false;
             startP = moveable.transform.position;
-            targetP = moveable.transform.position;
-            targetP.y = (moveable.transform.position.y + height);
+            targetP = moveable.transform.GetChild(0).position;
             audioSource.clip = chargedDeviceSound;
             audioSource.loop = true;
             audioSource.Play();
@@ -90,9 +89,9 @@ public class DeviceCharged : MonoBehaviour
             rb.transform.position = Vector3.MoveTowards(rb.transform.position, targetP, force);
             if (true && (Vector3.Distance(rb.transform.position, targetP) < 0.001f)) // Hups onkohan tässä jotain kesken koska mitä toi true tossa on???
             {
-                float temp = targetP.y;
-                targetP.y = startP.y;
-                startP.y = temp;
+                Vector3 temp = targetP;
+                targetP = startP;
+                startP = temp;
                 trips++;
             }
             if (trips == times)

@@ -26,7 +26,7 @@ public class DoorTriggerScript : MonoBehaviour
         {
             habaTrigger = true;
         }        
-        //GetComponentInParent<DeviceOpenDoor>().DoorTriggered(); // Yämä on vielä tässä väliaikaisesti jos ei toimikkaan 2 pelaajalla
+        //GetComponentInParent<DeviceOpenDoor>().DoorTriggered(); // Tämä on vielä tässä väliaikaisesti jos ei toimikkaan 2 pelaajalla
     }
 
     /// <summary>
@@ -48,7 +48,7 @@ public class DoorTriggerScript : MonoBehaviour
     }
 
     /// <summary>
-    /// If both player's triggers are true calls DeviceOpenDoor and tells it that the door was triggered
+    /// If both player triggers are true calls DeviceOpenDoor and tells it that the door was triggered
     /// </summary>
     private void FixedUpdate()
     {

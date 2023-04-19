@@ -57,6 +57,10 @@ public class DeviceOpenDoor : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Sets door's gravity to true and stops audio
+    /// Is called from DoorTriggerScript when both players have triggered the script
+    /// </summary>
     public void DoorTriggered()
     {
         if (moveable != null)
@@ -68,6 +72,7 @@ public class DeviceOpenDoor : MonoBehaviour
 
     /// <summary>
     /// Moves the moveable-object up to a certain height
+    /// Plays audio and calls StopScript if door is back on the floor
     /// Is called every frame
     /// </summary>
     void FixedUpdate()
