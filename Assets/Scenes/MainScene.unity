@@ -340,7 +340,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefabs:
-  - {fileID: 323129550835044744, guid: 857a26a4c6b54574e837f9b58f74a976, type: 3}
+  - {fileID: 7389977614475096561, guid: b3a800dadeae3a6458010c2a8751ffe1, type: 3}
   - {fileID: 4736019986219371458, guid: 93e48b405251dd64caab206ae8ce0249, type: 3}
 --- !u!1 &1682452029
 GameObject:
