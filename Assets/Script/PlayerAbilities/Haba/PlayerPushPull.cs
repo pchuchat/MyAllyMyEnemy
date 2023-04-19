@@ -71,18 +71,7 @@ public class PlayerPushPull : MonoBehaviour
         }
         if (context.canceled && pushing)
         {
-            if(pushableObjAudioSource.isPlaying)
-            {
-                pushableObjAudioSource.Stop();
-                randomizer.Play(stopPushingSounds);
-            }
-            pushableObjectRb.constraints = RigidbodyConstraints.FreezeAll;
-            input.actions.FindAction("Jump").Enable();
-            playerMovement.enabled = true;
-            pushing = false;
-            pushableObject = null;
-            pushableObjAudioSource = null;
-            interactor.InteractionFinished();
+            StopPushing();
         }
     }
     /// <summary>
@@ -92,6 +81,23 @@ public class PlayerPushPull : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         movementInput = context.ReadValue<Vector2>();
+    }
+
+    private void StopPushing()
+    {
+
+        if (pushableObjAudioSource.isPlaying)
+        {
+            pushableObjAudioSource.Stop();
+            randomizer.Play(stopPushingSounds);
+        }
+        pushableObjectRb.constraints = RigidbodyConstraints.FreezeAll;
+        input.actions.FindAction("Jump").Enable();
+        playerMovement.enabled = true;
+        pushing = false;
+        pushableObject = null;
+        pushableObjAudioSource = null;
+        interactor.InteractionFinished();
     }
 
     /// <summary>
@@ -170,6 +176,12 @@ public class PlayerPushPull : MonoBehaviour
             {
                 pushableObjAudioSource.Stop();
                 randomizer.Play(stopPushingSounds);
+            }
+
+            RaycastHit hit;
+            if (!Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, 0.1f))
+            {
+                StopPushing();
             }
         }
     }
