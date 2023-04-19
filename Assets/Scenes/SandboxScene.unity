@@ -240,9 +240,9 @@ GameObject:
   - component: {fileID: 127728096}
   - component: {fileID: 127728095}
   - component: {fileID: 127728094}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: floor
-  m_TagString: ElectricLine
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2210,7 +2210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fighters:
-  - {fileID: 323129550835044744, guid: 857a26a4c6b54574e837f9b58f74a976, type: 3}
+  - {fileID: 7389977614475096561, guid: b3a800dadeae3a6458010c2a8751ffe1, type: 3}
   - {fileID: 4736019986219371458, guid: 93e48b405251dd64caab206ae8ce0249, type: 3}
 --- !u!1001 &1607066710
 PrefabInstance:

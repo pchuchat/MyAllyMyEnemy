@@ -23,10 +23,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float gravityValue = -9.81f;
 
     // AudioClips for jumping
-    [Header("JumpSounds")]
+    [Header("Sounds")]
     [Tooltip("Chance to play sounds, 100% to play always")] [SerializeField] private float chanceToPlay = 80;
     [Tooltip("Audioclips for single jump")] [SerializeField] private List<AudioClip> jumpSounds;
     [Tooltip("Audioclips for double jump")] [SerializeField] private List<AudioClip> doublejumpSounds;
+    [Tooltip("Jump sounds that play always when player jumps")] [SerializeField] private List<AudioClip> alwaysPlayJumpSounds;
+    [Tooltip("Doublejump sounds that play always when player jumps")] [SerializeField] private List<AudioClip> alwaysPlayDoubleJumpSounds;
+
 
 
     // Reference to the CharacterController component
@@ -47,6 +50,8 @@ public class PlayerMovement : MonoBehaviour
     // Random sound player for effects
     private RandomSoundPlayer randomizer;
 
+    private float coyoteTimer;
+
 
     private void Start()
     {
@@ -66,10 +71,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if (context.performed)
         {
-            if (groundedPlayer)
+            if (coyoteTimer > 0)
             {
+                coyoteTimer = 0;
                 // Play single jump sound
                 randomizer.Play(jumpSounds, chanceToPlay);
+                randomizer.Play(alwaysPlayJumpSounds);
 
                 // Set player velocity for single jump
                 playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
@@ -81,6 +88,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 // Play double jump sound
                 randomizer.Play(doublejumpSounds, chanceToPlay);
+                randomizer.Play(alwaysPlayDoubleJumpSounds);
 
                 // Set player velocity for double jump when going up
                 if (playerVelocity.y >= 0)
@@ -99,11 +107,24 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public bool PlayerGrounded()
+    {
+        if (coyoteTimer > 0) return true;
+        else return false;
+    }
+
     void Update()
     {
         // Check if the player is currently grounded
         groundedPlayer = controller.isGrounded;
-
+        if (groundedPlayer)
+        {
+            coyoteTimer = 0.2f;
+        }
+        if (coyoteTimer > 0)
+        {
+            coyoteTimer -= Time.deltaTime;
+        }
         // Reset player velocity to zero when grounded
         if (groundedPlayer && playerVelocity.y < 0)
         {
