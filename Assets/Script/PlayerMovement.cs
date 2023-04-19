@@ -47,6 +47,8 @@ public class PlayerMovement : MonoBehaviour
     // Random sound player for effects
     private RandomSoundPlayer randomizer;
 
+    private float coyoteTimer;
+
 
     private void Start()
     {
@@ -66,8 +68,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if (context.performed)
         {
-            if (groundedPlayer)
+            if (coyoteTimer > 0)
             {
+                coyoteTimer = 0;
                 // Play single jump sound
                 randomizer.Play(jumpSounds, chanceToPlay);
 
@@ -99,11 +102,24 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public bool PlayerGrounded()
+    {
+        if (coyoteTimer > 0) return true;
+        else return false;
+    }
+
     void Update()
     {
         // Check if the player is currently grounded
         groundedPlayer = controller.isGrounded;
-        
+        if (groundedPlayer)
+        {
+            coyoteTimer = 0.2f;
+        }
+        if (coyoteTimer > 0)
+        {
+            coyoteTimer -= Time.deltaTime;
+        }
         // Reset player velocity to zero when grounded
         if (groundedPlayer && playerVelocity.y < 0)
         {

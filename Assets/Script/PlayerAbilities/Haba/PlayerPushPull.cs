@@ -48,7 +48,7 @@ public class PlayerPushPull : MonoBehaviour
     /// <param name="context">interact button</param>
     public void OnInteract(InputAction.CallbackContext context)
     {
-        if (context.started && pushableObject == null && controller.isGrounded)
+        if (context.started && pushableObject == null)
         {
             //CheckForPushableObject();
             pushableObject = interactor.GetInteractable("pushable_object");

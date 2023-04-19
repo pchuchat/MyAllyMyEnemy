@@ -21,16 +21,32 @@ public class InteractableDetection : MonoBehaviour
     private GameObject closest = null;
     private IsInteractable interactable;
     private CharacterController controller;
+    private bool groundedPlayer;
+    private float groundedDelay;
 
 
     private void Start()
     {
         controller = GetComponent<CharacterController>();
     }
+
+    private void Update()
+    {
+        // Check if the player is currently grounded
+        groundedPlayer = controller.isGrounded;
+        if (groundedPlayer)
+        {
+            groundedDelay = 0.2f;
+        }
+        if (groundedDelay > 0)
+        {
+            groundedDelay -= Time.deltaTime;
+        }
+    }
     // Update is called once per frame
     private void FixedUpdate()
     {
-        if (!interactionLock && controller.isGrounded)
+        if (!interactionLock && groundedDelay > 0)
         {
             objects = Physics.OverlapCapsule(interactionPointBottom.position, interactionPointTop.position, interactionRadius, interactableMask);
             amountFound = objects.Length;
@@ -46,7 +62,7 @@ public class InteractableDetection : MonoBehaviour
                 Reset();
             }
         }
-        if (!controller.isGrounded && hintDisplay.isActive || interactionLock)
+        if (groundedDelay ==  0 && hintDisplay.isActive || interactionLock)
         {
             Reset();
         }
