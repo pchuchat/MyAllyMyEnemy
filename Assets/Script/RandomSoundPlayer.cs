@@ -7,10 +7,6 @@ using UnityEngine;
 public class RandomSoundPlayer : MonoBehaviour
 {
     private AudioSource source;
-    private void Start()
-    {
-        source = GetComponent<AudioSource>();
-    }
     /// <summary>
     /// Plays a random sound from given list with optional chance of playing the sound
     /// </summary>
@@ -21,8 +17,10 @@ public class RandomSoundPlayer : MonoBehaviour
         if (clips.Count == 0) return;
         if (Random.Range(0f, 100f) <= chanceToPlay)
         {
+            source = gameObject.AddComponent<AudioSource>();
             source.clip = clips[Random.Range(0, clips.Count)];
             source.Play();
+            Destroy(source, source.clip.length);
         }
     }
 }
