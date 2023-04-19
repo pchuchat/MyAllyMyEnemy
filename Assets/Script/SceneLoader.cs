@@ -7,15 +7,27 @@ using UnityEngine.SceneManagement;
 // TODO:
 //  - Implement actual logic for loading, now simply loads specified scenes on game startup
 //
-// Additively loads and unloads other scenes from the main scene
+// Additively loads and unloads level scenes from the main scene
 
 public class SceneLoader : MonoBehaviour
 {
+    private bool loadScenes = true;
 
     void Start()
     {
-        // Additively loads the scene with index 1 in the project's build settings
-        SceneManager.LoadScene(1, LoadSceneMode.Additive);
+        // Don't load scenes in the editor
+        #if UNITY_EDITOR
+            loadScenes = false;
+        #endif
+
+        // Additively loads all the scenes of Level 1, based on indexes in the project's build settings
+        // NOTE: Logic to load and unload scenes appropriately on the fly should be implemented later
+        if (loadScenes)
+        {
+            SceneManager.LoadScene(1, LoadSceneMode.Additive);
+            SceneManager.LoadScene(2, LoadSceneMode.Additive);
+            SceneManager.LoadScene(3, LoadSceneMode.Additive);
+        }
     }
 
 }
