@@ -23,10 +23,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float gravityValue = -9.81f;
 
     // AudioClips for jumping
-    [Header("JumpSounds")]
+    [Header("Sounds")]
     [Tooltip("Chance to play sounds, 100% to play always")] [SerializeField] private float chanceToPlay = 80;
     [Tooltip("Audioclips for single jump")] [SerializeField] private List<AudioClip> jumpSounds;
     [Tooltip("Audioclips for double jump")] [SerializeField] private List<AudioClip> doublejumpSounds;
+    [Tooltip("Jump sounds that play always when player jumps")] [SerializeField] private List<AudioClip> alwaysPlayJumpSounds;
+
 
 
     // Reference to the CharacterController component
@@ -73,6 +75,7 @@ public class PlayerMovement : MonoBehaviour
                 coyoteTimer = 0;
                 // Play single jump sound
                 randomizer.Play(jumpSounds, chanceToPlay);
+                randomizer.Play(alwaysPlayJumpSounds);
 
                 // Set player velocity for single jump
                 playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
@@ -84,6 +87,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 // Play double jump sound
                 randomizer.Play(doublejumpSounds, chanceToPlay);
+                randomizer.Play(alwaysPlayJumpSounds);
 
                 // Set player velocity for double jump when going up
                 if (playerVelocity.y >= 0)
