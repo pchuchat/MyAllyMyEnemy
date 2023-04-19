@@ -319,7 +319,6 @@ GameObject:
   - component: {fileID: 1650933401303488408}
   - component: {fileID: 6540128322100697887}
   - component: {fileID: -8559214990705658680}
-  - component: {fileID: -8023790235932053258}
   - component: {fileID: 2251022623129124305}
   - component: {fileID: 8002680264568220254}
   - component: {fileID: 296533394093348040}
@@ -330,6 +329,8 @@ GameObject:
   - component: {fileID: 8880293685122149207}
   - component: {fileID: 5043602593057914591}
   - component: {fileID: 2867270823939548798}
+  - component: {fileID: 9034264762090935323}
+  - component: {fileID: 675555709344891169}
   m_Layer: 0
   m_Name: Kipina
   m_TagString: player
@@ -452,7 +453,7 @@ MonoBehaviour:
     m_ActionName: Player/Jump[/Keyboard/space,/DualShock4GamepadHID/buttonSouth]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -8023790235932053258}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerChargeDevice, Assembly-CSharp
         m_MethodName: OnCharge
         m_Mode: 0
@@ -504,7 +505,7 @@ MonoBehaviour:
     m_ActionName: Player/PickUp[/DualShock4GamepadHID/buttonEast,/DualSenseGamepadHID/buttonEast]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -8023790235932053258}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerChargeDevice, Assembly-CSharp
         m_MethodName: OnCharge
         m_Mode: 0
@@ -542,19 +543,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   hintDisplay: {fileID: 6946852614220248839}
---- !u!114 &-8023790235932053258
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4736019986219371458}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c62331ec2de4ac642a7a5c9b27da7892, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  chargeSound: {fileID: 8300000, guid: 2ef26044eed6fe144b602b11f64b2311, type: 3}
 --- !u!114 &2251022623129124305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5629,6 +5617,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4876e8c279b30a5419b606e28704e0eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &9034264762090935323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4736019986219371458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 191f73ee986e17746a07668adab6302f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &675555709344891169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4736019986219371458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 403f590de876d4348b1295c9c7755473, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chargeSound: {fileID: 0}
 --- !u!1 &4742189154372306976
 GameObject:
   m_ObjectHideFlags: 0

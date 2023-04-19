@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 // By: Parviainen P
 // Edited: Kettunen J
 // Kipinä charges the device in front and activates it.
-// Activation of devices cause some action in the game. The action depends on what script is attached to the device
+// Activation of devices cause some action in the game. The action depends on what script is attached to the device.
 
 public class PlayerChargeDevice : MonoBehaviour
 {
@@ -45,13 +45,28 @@ public class PlayerChargeDevice : MonoBehaviour
                 device = interactor.GetInteractable("noCharge");
                 if (device != null)
                 {
-                    device.tag = "charged";
-                    device.GetComponent<DeviceCharged>().enabled = true;
-                    device.GetComponent<DeviceCharged>().ActivateDevice();
-                    audioSource.clip = chargeSound;
-                    audioSource.Play();
-                    device = null;
-                    interactor.InteractionFinished();
+                    switch (device.name)
+                    {
+                        case "ChargeableDevice":
+                            device.tag = "charged";
+                            device.GetComponent<DeviceCharged>().enabled = true;
+                            device.GetComponent<DeviceCharged>().ActivateDevice();
+                            audioSource.clip = chargeSound;
+                            audioSource.Play();
+                            device = null;
+                            interactor.InteractionFinished();
+                            break;
+
+                        case "DeviceDoor":
+                            device.tag = "charged";
+                            device.GetComponent<DeviceOpenDoor>().enabled = true;
+                            device.GetComponent<DeviceOpenDoor>().ActivateDevice();
+                            audioSource.clip = chargeSound;
+                            audioSource.Play();
+                            device = null;
+                            interactor.InteractionFinished();
+                            break;
+                    }
                 }
             }
         }

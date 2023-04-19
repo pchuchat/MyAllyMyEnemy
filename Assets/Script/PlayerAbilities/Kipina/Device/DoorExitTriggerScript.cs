@@ -4,7 +4,7 @@ using UnityEngine;
 
 // ©GameGurus - Heikkinen R., Hopeasaari J., Kantola J., Kettunen J., Kommio R, PC, Parviainen P., Rautiainen J.
 // By: Parviainen P
-// If player enters trigger-area calls DoorTrigger Script and tells it that player has left the area.
+// If player enters trigger-area calls DoorTrigger Script and tells it that player has left the area
 
 
 public class DoorExitTriggerScript : MonoBehaviour
