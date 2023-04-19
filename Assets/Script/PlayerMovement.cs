@@ -82,7 +82,7 @@ public class PlayerMovement : MonoBehaviour
                 randomizer.Play(alwaysPlayJumpSounds);
 
                 // Set player velocity for single jump
-                playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+                playerVelocity.y = Mathf.Sqrt(jumpHeight * -2.0f * gravityValue);
 
                 // Allow double jump
                 canDoubleJump = true;
@@ -94,14 +94,14 @@ public class PlayerMovement : MonoBehaviour
                 randomizer.Play(alwaysPlayDoubleJumpSounds);
 
                 // Set player velocity for double jump when going up
-                if (playerVelocity.y >= 0)
+                if (playerVelocity.y >= -1)
                 {
-                    playerVelocity.y = Mathf.Sqrt(jumpHeight * doublejumpRatio * -3.0f * gravityValue);
+                    playerVelocity.y = Mathf.Sqrt(jumpHeight * doublejumpRatio * -2.0f * gravityValue);
                 }
                 // Set player velocity for double jump when going down (only lowers downwards momentum to it's square root before adding the updwards momentum)
                 else
                 {
-                    playerVelocity.y = -Mathf.Sqrt(-playerVelocity.y) + Mathf.Sqrt(jumpHeight * doublejumpRatio * -3.0f * gravityValue);
+                    playerVelocity.y = -Mathf.Sqrt(-playerVelocity.y) + Mathf.Sqrt(jumpHeight * doublejumpRatio * -2.0f * gravityValue);
                 }
 
                 // Disable double jump until next grounded state
@@ -131,7 +131,7 @@ public class PlayerMovement : MonoBehaviour
         // Reset player velocity to zero when grounded
         if (groundedPlayer && playerVelocity.y < 0)
         {
-            playerVelocity.y = 0f;
+            playerVelocity.y = -2f;
 
             // Disable double jump until next jump
             canDoubleJump = false;
