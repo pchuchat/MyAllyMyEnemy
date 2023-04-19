@@ -15,11 +15,11 @@ public class DoorExitTriggerScript : MonoBehaviour
     /// <param name="other">Collider of the player that hit trigger-area</param>
     private void OnTriggerExit(Collider other)
     {
-        if (other.name == "Kipina(Clone)")
+        if (other.name == "Kipina3D(Clone)")
         {
             transform.parent.GetComponentInChildren<DoorTriggerScript>().DoorExit("Kipina");
         }
-        if (other.name == "Haba(Clone)")
+        if (other.name == "Haba3D(Clone)")
         {
             transform.parent.GetComponentInChildren<DoorTriggerScript>().DoorExit("Haba");
         }

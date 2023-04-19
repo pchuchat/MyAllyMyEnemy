@@ -45,7 +45,8 @@ GameObject:
   - component: {fileID: 802035486288012070}
   - component: {fileID: 7778397587872483313}
   - component: {fileID: 4846165156880685963}
-  - component: {fileID: 7392557559728091997}
+  - component: {fileID: 1382901730169259355}
+  - component: {fileID: 5237308144269304996}
   - component: {fileID: 6961991454256511837}
   - component: {fileID: 6473253729535180857}
   - component: {fileID: 6546200658913912860}
@@ -185,7 +186,7 @@ MonoBehaviour:
     m_ActionName: Player/Jump[/Keyboard/space,/DualShock4GamepadHID/buttonSouth]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7392557559728091997}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerChargeDevice, Assembly-CSharp
         m_MethodName: OnCharge
         m_Mode: 0
@@ -237,7 +238,7 @@ MonoBehaviour:
     m_ActionName: Player/PickUp[/DualShock4GamepadHID/buttonEast,/DualSenseGamepadHID/buttonEast]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7392557559728091997}
+      - m_Target: {fileID: 5237308144269304996}
         m_TargetAssemblyTypeName: PlayerChargeDevice, Assembly-CSharp
         m_MethodName: OnCharge
         m_Mode: 0
@@ -251,6 +252,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: c1c82458-de33-42d6-8324-ce9bf8319616
     m_ActionName: Player/Charge[/DualShock4GamepadHID/buttonEast]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1382901730169259355}
+        m_TargetAssemblyTypeName: PlayerCarryCable, Assembly-CSharp
+        m_MethodName: OnCarryCable
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ef166510-dac3-4372-bfb0-a6e72ffc7963
+    m_ActionName: Player/CarryCable[/DualShock4GamepadHID/buttonEast,/DualShock4GamepadHID1/buttonEast,/Keyboard/h,/Keyboard/l]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -275,7 +292,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   hintDisplay: {fileID: 9124022777189231849}
---- !u!114 &7392557559728091997
+--- !u!114 &1382901730169259355
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -284,7 +301,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1978736765859351414}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c62331ec2de4ac642a7a5c9b27da7892, type: 3}
+  m_Script: {fileID: 11500000, guid: 191f73ee986e17746a07668adab6302f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5237308144269304996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1978736765859351414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 403f590de876d4348b1295c9c7755473, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   chargeSound: {fileID: 0}

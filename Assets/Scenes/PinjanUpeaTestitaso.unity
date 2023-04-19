@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.1818041, g: 0.2274764, b: 0.30742106, a: 1}
+  m_IndirectSpecularColor: {r: 0.18180451, g: 0.22747703, b: 0.30742216, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -501,6 +501,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zoomFactor: 15
   cameraHeight: 10
+  followSpeed: 2
 --- !u!4 &783166549
 Transform:
   m_ObjectHideFlags: 0
@@ -876,7 +877,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 43.895, y: -34.984, z: 10.369}
 --- !u!1 &1596457445
 GameObject:
@@ -909,8 +910,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fighters:
-  - {fileID: 4736019986219371458, guid: 93e48b405251dd64caab206ae8ce0249, type: 3}
-  - {fileID: 323129550835044744, guid: 857a26a4c6b54574e837f9b58f74a976, type: 3}
+  - {fileID: 1978736765859351414, guid: 88d3a69b47a32cf4db9d0192e065578e, type: 3}
+  - {fileID: 7389977614475096561, guid: b3a800dadeae3a6458010c2a8751ffe1, type: 3}
 --- !u!114 &1596457447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1097,6 +1098,10 @@ PrefabInstance:
     - target: {fileID: 1889889953113892856, guid: 4e57be145a8034f43bfa5568b59a0bdc, type: 3}
       propertyPath: m_TagString
       value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 3322258424749999258, guid: 4e57be145a8034f43bfa5568b59a0bdc, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3349288989210939287, guid: 4e57be145a8034f43bfa5568b59a0bdc, type: 3}
       propertyPath: m_RootOrder
