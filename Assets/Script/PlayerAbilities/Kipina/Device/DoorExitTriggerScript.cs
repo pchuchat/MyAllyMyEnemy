@@ -15,7 +15,6 @@ public class DoorExitTriggerScript : MonoBehaviour
     /// <param name="other">Collider of the player that hit trigger-area</param>
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log(other.name);
         if (other.name == "Kipina(Clone)")
         {
             transform.parent.GetComponentInChildren<DoorTriggerScript>().DoorExit("Kipina");

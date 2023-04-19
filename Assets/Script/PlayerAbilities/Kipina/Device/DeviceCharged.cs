@@ -1,28 +1,31 @@
 using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 // ©GameGurus - Heikkinen R., Hopeasaari J., Kantola J., Kettunen J., Kommio R, PC, Parviainen P., Rautiainen J.
 // By: Parviainen P
-// Lifts door up and keeps it there. Drops the door when both players have gone through it to the other side
+//  Edited: Kettunen J
+// The device becomes active and moves child-object attached to the device x amount of times up and down.
+// Nulls all changes and variables, then stops.
 
-public class DeviceOpenDoor : MonoBehaviour
+public class DeviceCharged : MonoBehaviour
 {
     //Atributes visible in unity
-    [Tooltip("How high the target-position is from the start-position")] [SerializeField] private float height = 3f;
+    [Tooltip("How many times activated device moves child-object")] [SerializeField] private int times = 4;
     [Tooltip("How much child-object is moved per frame")] [SerializeField] private float force = 0.02f;
 
     // Sounds
     private AudioSource audioSource; // Audiosource for the sound below
     [Tooltip("The sound the device makes when active (Plays on repeat until device is no longer active)")] [SerializeField] private AudioClip chargedDeviceSound;
-    [Tooltip("The sound the door makes when it is dropped and hits the floor")] [SerializeField] private AudioClip droppedDoorSound;
 
     //Private attributes
     private GameObject moveable;    // The object that device moves when activated (= child-object)
     private Rigidbody rb;           // The rigidbidy of the moveable-object
-    private Vector3 startP;
     private Vector3 targetP;        // Target position where object is moved
-
+    private Vector3 startP;         // Start position for the object
+    private int trips = 0;          // How many trips the object has made between positions so far
+    
     /// <summary>
     /// Sets audiosource 
     /// Disables this script
@@ -31,7 +34,7 @@ public class DeviceOpenDoor : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        transform.GetComponent<DeviceOpenDoor>().enabled = false;
+        transform.GetComponent<DeviceCharged>().enabled = false;
     }
 
     /// <summary>
@@ -43,13 +46,12 @@ public class DeviceOpenDoor : MonoBehaviour
     {
         moveable = transform.GetChild(0).gameObject;
         if (moveable != null)
-        {
+        {            
             rb = moveable.GetComponent<Rigidbody>();
             rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
             rb.useGravity = false;
             startP = moveable.transform.position;
-            targetP = moveable.transform.position;
-            targetP.y = (moveable.transform.position.y + height);
+            targetP = moveable.transform.GetChild(0).position;
             audioSource.clip = chargedDeviceSound;
             audioSource.loop = true;
             audioSource.Play();
@@ -58,21 +60,25 @@ public class DeviceOpenDoor : MonoBehaviour
     }
 
     /// <summary>
-    /// Sets door's gravity to true and stops audio
-    /// Is called from DoorTriggerScript when both players have triggered the script
+    /// Deactivates the device this script is attached to.
+    /// Nulls all variables and changes to them done with this script. Stops script
     /// </summary>
-    public void DoorTriggered()
+    private void StopScript()
     {
-        if (moveable != null)
-        {
-            rb.useGravity = true;
-            audioSource.Stop();
-        }
+        rb.useGravity = true;
+        rb.constraints = RigidbodyConstraints.FreezeAll;
+        transform.tag = transform.GetComponentInChildren<DeviceTargetScript>().WhichTag(); // Asks trigger area which tag it should use
+        trips = 0;
+        moveable = null;
+        rb = null;
+        audioSource.Stop();
+
+        transform.GetComponent<DeviceCharged>().enabled = false;
     }
 
     /// <summary>
-    /// Moves the moveable-object up to a certain height
-    /// Plays audio and calls StopScript if door is back on the floor
+    /// Moves the moveable-object front and back between it's start position and target position.
+    /// Stops when object has travelled the distance 4 times.
     /// Is called every frame
     /// </summary>
     void FixedUpdate()
@@ -80,26 +86,18 @@ public class DeviceOpenDoor : MonoBehaviour
         if (moveable != null)
         {
             rb.transform.position = Vector3.MoveTowards(rb.transform.position, targetP, force);
-            if ((Vector3.Distance(rb.transform.position, startP) < 0.001f) && rb.useGravity == true)
+            if (true && (Vector3.Distance(rb.transform.position, targetP) < 0.001f)) // Hups onkohan tässä jotain kesken koska mitä toi true tossa on???
             {
-                audioSource.clip = droppedDoorSound;
-                audioSource.Play();
+                Vector3 temp = targetP;
+                targetP = startP;
+                startP = temp;
+                trips++;
+            }
+            if (trips == times)
+            {
                 StopScript();
             }
-        }  
-    }
-
-    /// <summary>
-    /// Deactivates the device this script is attached to.
-    /// Nulls all variables and changes to them done with this script. Stops script
-    /// </summary>
-    private void StopScript()
-    {
-        rb.useGravity = false;
-        rb.constraints = RigidbodyConstraints.FreezeAll;
-        transform.tag = "noCharge";
-        moveable = null;
-        rb = null;
-        transform.GetComponent<DeviceOpenDoor>().enabled = false;
+        }
+        
     }
 }
