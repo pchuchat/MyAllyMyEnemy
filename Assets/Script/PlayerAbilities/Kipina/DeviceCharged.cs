@@ -13,7 +13,6 @@ public class DeviceCharged : MonoBehaviour
 {
     //Atributes visible in unity
     [Tooltip("How many times activated device moves child-object")] [SerializeField] private int times = 4;
-    [Tooltip("How high the target-position is from the start-position")] [SerializeField] private float height = 3f;
     [Tooltip("How much child-object is moved per frame")] [SerializeField] private float force = 0.02f;
 
     // Sounds
