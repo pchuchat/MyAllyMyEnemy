@@ -89,15 +89,6 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""CarryCable"",
-                    ""type"": ""Button"",
-                    ""id"": ""2181f636-2635-42f6-90de-3e72cd520a0c"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -419,39 +410,6 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                     ""action"": ""Charge"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""4898c3b2-5c4b-4623-bf1d-744a91996e58"",
-                    ""path"": ""<Gamepad>/buttonEast"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Player1;Player2"",
-                    ""action"": ""CarryCable"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""840121b5-e2ca-4f46-bb52-63bd5b414fb5"",
-                    ""path"": ""<Keyboard>/h"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Player1"",
-                    ""action"": ""CarryCable"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""b0c06038-7794-4567-b103-f5aefb342fa6"",
-                    ""path"": ""<Keyboard>/l"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Player2"",
-                    ""action"": ""CarryCable"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -500,7 +458,6 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_PickUp = m_Player.FindAction("PickUp", throwIfNotFound: true);
         m_Player_Charge = m_Player.FindAction("Charge", throwIfNotFound: true);
-        m_Player_CarryCable = m_Player.FindAction("CarryCable", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -567,7 +524,6 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_PickUp;
     private readonly InputAction m_Player_Charge;
-    private readonly InputAction m_Player_CarryCable;
     public struct PlayerActions
     {
         private @PlayerControl m_Wrapper;
@@ -579,7 +535,6 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputAction @PickUp => m_Wrapper.m_Player_PickUp;
         public InputAction @Charge => m_Wrapper.m_Player_Charge;
-        public InputAction @CarryCable => m_Wrapper.m_Player_CarryCable;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -610,9 +565,6 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                 @Charge.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCharge;
                 @Charge.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCharge;
                 @Charge.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCharge;
-                @CarryCable.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCarryCable;
-                @CarryCable.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCarryCable;
-                @CarryCable.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCarryCable;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -638,9 +590,6 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                 @Charge.started += instance.OnCharge;
                 @Charge.performed += instance.OnCharge;
                 @Charge.canceled += instance.OnCharge;
-                @CarryCable.started += instance.OnCarryCable;
-                @CarryCable.performed += instance.OnCarryCable;
-                @CarryCable.canceled += instance.OnCarryCable;
             }
         }
     }
@@ -672,6 +621,5 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
         void OnAttack(InputAction.CallbackContext context);
         void OnPickUp(InputAction.CallbackContext context);
         void OnCharge(InputAction.CallbackContext context);
-        void OnCarryCable(InputAction.CallbackContext context);
     }
 }

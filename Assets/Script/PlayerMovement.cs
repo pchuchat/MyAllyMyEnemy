@@ -52,6 +52,8 @@ public class PlayerMovement : MonoBehaviour
 
     private float coyoteTimer;
 
+    private Transform cameraRig;
+
 
     private void Start()
     {
@@ -59,6 +61,7 @@ public class PlayerMovement : MonoBehaviour
         controller = gameObject.GetComponent<CharacterController>();
         // Get random sound player for soundeffects
         randomizer = GetComponent<RandomSoundPlayer>();
+        cameraRig = Camera.main.GetComponentInParent<Transform>();
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -134,8 +137,22 @@ public class PlayerMovement : MonoBehaviour
             canDoubleJump = false;
         }
 
+
+        //Camera direction
+        Vector3 cameraForward = cameraRig.forward;
+        Vector3 cameraRight = cameraRig.right;
+
+        cameraForward.y = 0;
+        cameraRight.y = 0;
+
+        //Relative camera direction
+        Vector3 relativeForward = movementInput.y * cameraForward;
+        Vector3 relativeRight = movementInput.x * cameraRight;
+
+        Vector3 relativeMove = relativeForward + relativeRight;
+
         // Calculate the player's movement vector and move the player
-        Vector3 move = new(movementInput.x, 0, movementInput.y);
+        Vector3 move = new(relativeMove.x, 0, relativeMove.z);
         controller.Move(playerSpeed * Time.deltaTime * move);
 
         // Face the player in the direction of movement

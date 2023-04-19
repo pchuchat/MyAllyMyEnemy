@@ -855,7 +855,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &775408607 stripped
 GameObject:
@@ -994,7 +994,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 1.536, y: -33.702, z: -0.016}
 --- !u!65 &783537394
 BoxCollider:
@@ -1528,7 +1528,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3107090464621798764, guid: e570920c24c5f694d9b25cb323a9f0f8, type: 3}
       propertyPath: m_RootOrder
-      value: 17
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 3107090464621798764, guid: e570920c24c5f694d9b25cb323a9f0f8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2211,7 +2211,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fighters:
   - {fileID: 7389977614475096561, guid: b3a800dadeae3a6458010c2a8751ffe1, type: 3}
-  - {fileID: 4736019986219371458, guid: 93e48b405251dd64caab206ae8ce0249, type: 3}
+  - {fileID: 1978736765859351414, guid: 88d3a69b47a32cf4db9d0192e065578e, type: 3}
 --- !u!1001 &1607066710
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2320,6 +2320,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zoomFactor: 15
   cameraHeight: 10
+  followSpeed: 2
 --- !u!4 &1682452031
 Transform:
   m_ObjectHideFlags: 0
@@ -2973,21 +2974,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: DoubleJumpHintTrigger
       objectReference: {fileID: 0}
-    - target: {fileID: 4010567375552551249, guid: 26956faebe323a24c8cddbc4c4a529ec, type: 3}
-      propertyPath: message
-      value: Press jump again to doublejump
-      objectReference: {fileID: 0}
-    - target: {fileID: 4010567375552551249, guid: 26956faebe323a24c8cddbc4c4a529ec, type: 3}
-      propertyPath: offsetY
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 4967016642906986422, guid: 26956faebe323a24c8cddbc4c4a529ec, type: 3}
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6917568950793315821, guid: 26956faebe323a24c8cddbc4c4a529ec, type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 6917568950793315821, guid: 26956faebe323a24c8cddbc4c4a529ec, type: 3}
       propertyPath: m_LocalScale.x
