@@ -43,7 +43,7 @@ public class DoorExitTriggerScript : MonoBehaviour
                 else player2Exited = false;
             }
         }
-        if (player1Exited && player2Exited)transform.parent.GetComponentInParent<DeviceOpenDoor>().DoorTriggered();
+        if (player1Exited && player2Exited)transform.parent.GetComponentInChildren<DeviceOpenDoor>().DoorTriggered();
     }
     private void Update()
     {
