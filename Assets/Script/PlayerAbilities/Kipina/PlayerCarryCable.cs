@@ -53,7 +53,8 @@ public class PlayerCarryCable : MonoBehaviour
         carrying = true;
         cableEndRB.useGravity = false;
         cableEnd.transform.forward = transform.forward;
-        Vector3 targetPos = transform.position + transform.forward * (cableEnd.transform.localScale.z / 2 + transform.localScale.z / 2 + 0.1f);
+        Vector3 targetPos = transform.position + transform.forward * transform.localScale.x * 0.75f + transform.up * transform.localScale.y;
+        cableEndRB.constraints = RigidbodyConstraints.FreezeAll;
         cableEnd.transform.position = targetPos;
         input.actions.FindAction("Jump").Disable();
         cableEnd.transform.SetParent(transform);
@@ -68,6 +69,7 @@ public class PlayerCarryCable : MonoBehaviour
         cableEnd.transform.SetParent(null);
         input.actions.FindAction("Jump").Enable();
         cableEndRB.useGravity = true;
+        cableEndRB.constraints &= ~RigidbodyConstraints.FreezePositionY;
         cableEnd = null;
         cableEndRB = null;
         interactor.InteractionFinished();
