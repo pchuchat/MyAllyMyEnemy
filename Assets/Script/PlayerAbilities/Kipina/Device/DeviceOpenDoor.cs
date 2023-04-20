@@ -65,7 +65,6 @@ public class DeviceOpenDoor : MonoBehaviour
         if (moveable != null)
         {
             rb.useGravity = true;
-            audioSource.Stop();
         }
     }
 
@@ -79,7 +78,11 @@ public class DeviceOpenDoor : MonoBehaviour
         if (moveable != null)
         {
             rb.transform.position = Vector3.MoveTowards(rb.transform.position, targetP, force);
-            if ((Vector3.Distance(rb.transform.position, startP) < 0.001f) && rb.useGravity == true)
+            if ((Vector3.Distance(rb.transform.position, targetP) < 0.001f) && rb.useGravity == true)
+            {
+                audioSource.Stop();
+            }
+                if ((Vector3.Distance(rb.transform.position, startP) < 0.001f) && rb.useGravity == true)
             {
                 audioSource.clip = droppedDoorSound;
                 audioSource.Play();
