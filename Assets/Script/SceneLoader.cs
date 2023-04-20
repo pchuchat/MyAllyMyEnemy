@@ -24,9 +24,9 @@ public class SceneLoader : MonoBehaviour
         // NOTE: Logic to load and unload scenes appropriately on the fly should be implemented later
         if (loadScenes)
         {
-            SceneManager.LoadScene(1, LoadSceneMode.Additive);
             SceneManager.LoadScene(2, LoadSceneMode.Additive);
             SceneManager.LoadScene(3, LoadSceneMode.Additive);
+            SceneManager.LoadScene(4, LoadSceneMode.Additive);
         }
     }
 
