@@ -114,7 +114,7 @@ MonoBehaviour:
   jumpHeight: 1.2
   doublejumpRatio: 0.66
   gravityValue: -19.62
-  chanceToPlay: 50
+  chanceToPlay: 35
   jumpSounds:
   - {fileID: 8300000, guid: 4a6b65b04211edf4e93abf00d1d558f0, type: 3}
   - {fileID: 8300000, guid: 7017c86314da5134198db5e87219aaca, type: 3}
@@ -349,7 +349,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lightningStrike: {fileID: 5574026198299699031}
   damageAmount: 10
-  attackSounds: []
+  attackSounds:
+  - {fileID: 8300000, guid: 54e519a982536fe499a0f20672b68a5b, type: 3}
+  - {fileID: 8300000, guid: 1b3c008e2439a60458a1e48b138bcf98, type: 3}
+  - {fileID: 8300000, guid: f199f843a2fdb674fb22129d804232ea, type: 3}
 --- !u!114 &6546200658913912860
 MonoBehaviour:
   m_ObjectHideFlags: 0
