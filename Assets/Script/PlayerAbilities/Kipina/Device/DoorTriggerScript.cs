@@ -31,17 +31,18 @@ public class DoorTriggerScript : MonoBehaviour
 
     /// <summary>
     /// When called from other trigger area sets the trigger of the corresponding player to false
+    /// DoorExitTrigger calls this with either "Haba" or "Kipina" NOT THE ACTUAL PLAYER NAME
     /// </summary>
     /// <param name="player">String with the player's name that exited trigger area</param>
     public void DoorExit(string player)
     {
         switch (player)
         {
-            case "Kipina3D":
+            case "Kipina":
                 kipinaTrigger = false;
                 break;
 
-            case "Haba3D":
+            case "Haba":
                 habaTrigger = false;
                 break;
         }
