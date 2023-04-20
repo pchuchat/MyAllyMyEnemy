@@ -57,7 +57,7 @@ public class PlayerChargeDevice : MonoBehaviour
                             interactor.InteractionFinished();
                             break;
 
-                        case "DeviceDoor":
+                        case "kapine_kauko":
                             device.tag = "charged";
                             device.GetComponent<DeviceOpenDoor>().enabled = true;
                             device.GetComponent<DeviceOpenDoor>().ActivateDevice();

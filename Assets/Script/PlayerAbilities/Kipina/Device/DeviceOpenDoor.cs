@@ -40,7 +40,7 @@ public class DeviceOpenDoor : MonoBehaviour
     /// </summary>
     public void ActivateDevice()
     {
-        moveable = transform.GetChild(0).gameObject;
+        moveable = transform.parent.gameObject.transform.GetChild(1).gameObject;
         if (moveable != null)
         {
             rb = moveable.GetComponent<Rigidbody>();
@@ -103,5 +103,6 @@ public class DeviceOpenDoor : MonoBehaviour
         moveable = null;
         rb = null;
         transform.GetComponent<DeviceOpenDoor>().enabled = false;
+        Debug.Log("Hep");
     }
 }
