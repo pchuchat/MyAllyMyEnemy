@@ -120,7 +120,7 @@ public class PlayerMovement : MonoBehaviour
     {
         // Check if the player is currently grounded
         groundedPlayer = controller.isGrounded;
-        if (groundedPlayer)
+        if (groundedPlayer && playerVelocity.y <= 0)
         {
             coyoteTimer = 0.2f;
         }

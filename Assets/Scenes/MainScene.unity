@@ -404,9 +404,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abe805d0c0281c847ac0f0fd57196514, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zoomFactor: 15
-  cameraHeight: 13
-  follofSpeed: 2
+  zoomFactor: 18
+  cameraHeight: 18
+  followSpeed: 2
 --- !u!4 &1682452031
 Transform:
   m_ObjectHideFlags: 0
@@ -476,11 +476,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8484650840706009966, guid: e9358aa12ec534e42bdb559892745f03, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.953717
+      value: 0.9396927
       objectReference: {fileID: 0}
     - target: {fileID: 8484650840706009966, guid: e9358aa12ec534e42bdb559892745f03, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.30070576
+      value: 0.3420201
       objectReference: {fileID: 0}
     - target: {fileID: 8484650840706009966, guid: e9358aa12ec534e42bdb559892745f03, type: 3}
       propertyPath: m_LocalRotation.y
@@ -492,7 +492,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8484650840706009966, guid: e9358aa12ec534e42bdb559892745f03, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 35
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 8484650840706009966, guid: e9358aa12ec534e42bdb559892745f03, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y

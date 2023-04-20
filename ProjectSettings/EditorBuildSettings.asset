@@ -9,7 +9,13 @@ EditorBuildSettings:
     path: Assets/Scenes/MainScene.unity
     guid: 4d37314aba1d90e4a9e651be6655590f
   - enabled: 1
-    path: Assets/Scenes/Level 1/Area 1 testiversio.unity
-    guid: bda27751f63c4b144bd2e1e883bbb1b3
+    path: Assets/Scenes/Level 1/Area 1.unity
+    guid: a355eeb6a3db676408f9dfa99a256fe8
+  - enabled: 1
+    path: Assets/Scenes/Level 1/Area 2.unity
+    guid: 71b7779751291bf439cb8a82df2576fd
+  - enabled: 1
+    path: Assets/Scenes/Level 1/Area 3.unity
+    guid: e04ec13bec5105d49b7225ec9dea96c0
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: f0a4051f732d1e44a958d96c42910767, type: 2}
