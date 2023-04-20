@@ -649,7 +649,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   height: 3
   force: 0.02
-  chargedDeviceSound: {fileID: 0}
+  chargedDeviceSound: {fileID: 8300000, guid: 391abaa6774d80f49b3321c649d3bad6, type: 3}
   droppedDoorSound: {fileID: 0}
 --- !u!114 &4286076575908617269
 MonoBehaviour:
