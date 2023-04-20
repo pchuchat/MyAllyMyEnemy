@@ -7,7 +7,6 @@ using UnityEngine.InputSystem;
 public class MainMenu : MonoBehaviour
 {
     public GameObject Point;
-    public Canvas menuCanvas;
 
     private int SelectedButton = 1;
     [SerializeField]
@@ -25,7 +24,7 @@ public class MainMenu : MonoBehaviour
         {
             // When the button with the pointer is clicked, this piece of script is activated
 
-            StartCoroutine(LoadScenesAndHideMenu());
+            SceneManager.LoadScene(1);
 
         }
         else if (SelectedButton == 2)
@@ -33,15 +32,6 @@ public class MainMenu : MonoBehaviour
             // When the button with the pointer is clicked, this piece of script is activated
             Application.Quit();
         }
-    }
-    private IEnumerator LoadScenesAndHideMenu()
-    {
-        // Unload the current scene (main menu) and load the desired scenes additively
-        SceneManager.UnloadSceneAsync(0);
-        yield return SceneManager.LoadSceneAsync(1, LoadSceneMode.Additive); // Load MainScene
-        yield return SceneManager.LoadSceneAsync(2, LoadSceneMode.Additive); // Load the level
-
-        menuCanvas.gameObject.SetActive(false); // Hide the menu
     }
     private void OnButtonUp()
     {
