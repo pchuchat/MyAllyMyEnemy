@@ -33,7 +33,7 @@ Transform:
   m_GameObject: {fileID: 3772046666810807097}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.64, z: -1.363}
-  m_LocalScale: {x: 2, y: 0.1, z: 0.5}
+  m_LocalScale: {x: 4.377184, y: 0.1, z: 1.103945}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -52,8 +52,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heavyLifting: 1
-  pickUpSound: {fileID: 8300000, guid: bc1a284e75bb077478238c1feedfd1d0, type: 3}
-  throwSound: {fileID: 8300000, guid: 44b6c9d5f33304a46bde2034292aedf6, type: 3}
   targetHitSound: {fileID: 8300000, guid: 3fa6b943bec685c42bbb726da130bd51, type: 3}
   destructionSound: {fileID: 8300000, guid: c5a30d965fc96d54989291d0283b7119, type: 3}
   targets:
