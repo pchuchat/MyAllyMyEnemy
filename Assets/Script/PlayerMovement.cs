@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -54,6 +55,8 @@ public class PlayerMovement : MonoBehaviour
 
     private Transform cameraRig;
 
+    private PlayerCarryCable carryCable;
+
 
     private void Start()
     {
@@ -62,6 +65,7 @@ public class PlayerMovement : MonoBehaviour
         // Get random sound player for soundeffects
         randomizer = GetComponent<RandomSoundPlayer>();
         cameraRig = Camera.main.GetComponentInParent<Transform>();
+        carryCable = GetComponent<PlayerCarryCable>();
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -86,6 +90,7 @@ public class PlayerMovement : MonoBehaviour
 
                 // Allow double jump
                 canDoubleJump = true;
+                if (carryCable != null && carryCable.IsCarrying()) canDoubleJump = false;
             }
             else if (canDoubleJump)
             {

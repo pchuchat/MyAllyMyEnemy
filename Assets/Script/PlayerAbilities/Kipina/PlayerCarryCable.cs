@@ -20,6 +20,11 @@ public class PlayerCarryCable : MonoBehaviour
         interactor = GetComponent<InteractableDetection>();
     }
 
+    public bool IsCarrying()
+    {
+        return carrying;
+    }
+
     /// <summary>
     /// Checks if object in front is cableEnd and if so sets variables and calls PickUpCable
     /// </summary>
@@ -56,7 +61,6 @@ public class PlayerCarryCable : MonoBehaviour
         Vector3 targetPos = transform.position + transform.forward * transform.localScale.x * 0.75f + transform.up * transform.localScale.y;
         cableEndRB.constraints = RigidbodyConstraints.FreezeAll;
         cableEnd.transform.position = targetPos;
-        input.actions.FindAction("Jump").Disable();
         cableEnd.transform.SetParent(transform);
     }
 
@@ -67,7 +71,6 @@ public class PlayerCarryCable : MonoBehaviour
     {
         carrying = false;
         cableEnd.transform.SetParent(null);
-        input.actions.FindAction("Jump").Enable();
         cableEndRB.useGravity = true;
         cableEndRB.constraints &= ~RigidbodyConstraints.FreezePositionY;
         cableEnd = null;
