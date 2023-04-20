@@ -23,7 +23,7 @@ public class DoorExitTriggerScript : MonoBehaviour
         {
             if (other.name == players[0].name)
             {
-                Vector3 exitDirection = players[0].transform.position - transform.position;
+                Vector3 exitDirection = transform.InverseTransformDirection(players[0].transform.position - transform.position);
                 if (exitDirection.z > 0) transform.parent.GetComponentInParent<DeviceOpenDoor>().DoorTriggered();
             }
         }
@@ -32,13 +32,13 @@ public class DoorExitTriggerScript : MonoBehaviour
         {
             if (other.name == players[0].name)
             {
-                Vector3 exitDirection = players[0].transform.position - transform.position;
+                Vector3 exitDirection = transform.InverseTransformDirection(players[0].transform.position - transform.position);
                 if (exitDirection.z > 0) player1Exited = true;
                 else player1Exited = false;
             }
             if (other.name == players[1].name)
             {
-                Vector3 exitDirection = players[1].transform.position - transform.position;
+                Vector3 exitDirection = transform.InverseTransformDirection(players[1].transform.position - transform.position);
                 if (exitDirection.z > 0) player2Exited = true;
                 else player2Exited = false;
             }
