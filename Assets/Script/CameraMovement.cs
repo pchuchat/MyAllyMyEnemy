@@ -20,10 +20,10 @@ public class CameraMovement : MonoBehaviour
     private float rotateDegrees;
     private Camera mainCamera;
 
+
     private void Start()
     {
         mainCamera = Camera.main;
-        mainCamera.transform.eulerAngles = new Vector3(90f - (Mathf.Asin(zoomFactor/Mathf.Sqrt(cameraHeight * cameraHeight + zoomFactor * zoomFactor)) * Mathf.Rad2Deg), 0, 0);
     }
     /// <summary>
     /// Moves the camera according to the center point of the two players
@@ -34,12 +34,13 @@ public class CameraMovement : MonoBehaviour
         {
             // Calculating the midpoint of the players
             midpoint = (players[0].transform.position + players[1].transform.position) / 2f;
-            midpoint.y = playerPositions[0].y + playerPositions[1].y / 2;
+            midpoint.y = (playerPositions[0].y + playerPositions[1].y) / 2;
 
             // Moving the camera
             Vector3 cameraDestination = midpoint - transform.forward * zoomFactor;
             cameraDestination.y += cameraHeight;
             transform.position = Vector3.Slerp(transform.position, cameraDestination, followSpeed * Time.deltaTime);
+
         }
         if (players.Length == 1) //Added for testing with one player
         {
