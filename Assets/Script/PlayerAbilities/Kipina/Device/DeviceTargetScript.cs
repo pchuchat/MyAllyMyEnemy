@@ -19,6 +19,7 @@ public class DeviceTargetScript : MonoBehaviour
         if (other.CompareTag("cableEnd"))
         {
             cable = true;
+            other.tag = "Untagged";
             transform.parent.tag = "noCharge";                              
         }
     }
