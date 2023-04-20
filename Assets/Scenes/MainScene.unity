@@ -1628,7 +1628,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Point: {fileID: 0}
-  menuCanvas: {fileID: 1868994995}
   NumberOfButtons: 0
   ButtonPosition1: {fileID: 0}
   ButtonPosition2: {fileID: 0}
