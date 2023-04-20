@@ -67,6 +67,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "CarryCable",
+                    "type": "Button",
+                    "id": "ef166510-dac3-4372-bfb0-a6e72ffc7963",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -386,6 +395,39 @@
                     "processors": "",
                     "groups": "Player2",
                     "action": "Charge",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8bc86a2f-05d5-4019-9d14-cad2e0b9b008",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Player1;Player2",
+                    "action": "CarryCable",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "110cf946-6f3c-4f5a-887d-29320acab071",
+                    "path": "<Keyboard>/h",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Player1",
+                    "action": "CarryCable",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ce223080-d787-45d9-9f5c-c94dbfba849f",
+                    "path": "<Keyboard>/l",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Player2",
+                    "action": "CarryCable",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

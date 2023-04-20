@@ -18,11 +18,11 @@ public class DoorTriggerScript : MonoBehaviour
     /// <param name="other">Collider of the player that hit trigger-area</param>
     private void OnTriggerExit(Collider other)
     {
-        if(other.name == "Kipina(Clone)")
+        if(other.name == "Kipina3D(Clone)")
         {
             kipinaTrigger = true;
         }
-        if (other.name == "Haba(Clone)")
+        if (other.name == "Haba3D(Clone)")
         {
             habaTrigger = true;
         }        
@@ -37,11 +37,11 @@ public class DoorTriggerScript : MonoBehaviour
     {
         switch (player)
         {
-            case "Kipina":
+            case "Kipina3D":
                 kipinaTrigger = false;
                 break;
 
-            case "Haba":
+            case "Haba3D":
                 habaTrigger = false;
                 break;
         }
