@@ -24,7 +24,7 @@ public class DoorExitTriggerScript : MonoBehaviour
             if (other.name == players[0].name)
             {
                 Vector3 exitDirection = transform.InverseTransformDirection(players[0].transform.position - transform.position);
-                if (exitDirection.z > 0) transform.parent.GetComponentInParent<DeviceOpenDoor>().DoorTriggered();
+                if (exitDirection.z > 0) transform.parent.GetComponentInChildren<DeviceOpenDoor>().DoorTriggered();
             }
         }
         // if 2 players are found makes sure that both have their last exit in the right direction

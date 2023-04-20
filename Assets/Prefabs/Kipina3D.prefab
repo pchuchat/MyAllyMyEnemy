@@ -316,7 +316,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 403f590de876d4348b1295c9c7755473, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chargeSound: {fileID: 0}
+  chargeSound: {fileID: 8300000, guid: 23ef6668658d6a34395236b7da9692a1, type: 3}
 --- !u!114 &6961991454256511837
 MonoBehaviour:
   m_ObjectHideFlags: 0
