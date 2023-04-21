@@ -154,9 +154,25 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 3.16
       objectReference: {fileID: 0}
+    - target: {fileID: 4286076575908617269, guid: 3a4bcd38cf32c1b428d6f922a185f7e1, type: 3}
+      propertyPath: interactHint
+      value: Press O to activate
+      objectReference: {fileID: 0}
+    - target: {fileID: 4286076575908617269, guid: 3a4bcd38cf32c1b428d6f922a185f7e1, type: 3}
+      propertyPath: cantInteractHint
+      value: You need electric abilities to manipulate this
+      objectReference: {fileID: 0}
     - target: {fileID: 4430466193398533942, guid: 3a4bcd38cf32c1b428d6f922a185f7e1, type: 3}
       propertyPath: m_Name
       value: DoorDevice
+      objectReference: {fileID: 0}
+    - target: {fileID: 5381858982670102320, guid: 3a4bcd38cf32c1b428d6f922a185f7e1, type: 3}
+      propertyPath: interactHint
+      value: Press O to pick up
+      objectReference: {fileID: 0}
+    - target: {fileID: 5381858982670102320, guid: 3a4bcd38cf32c1b428d6f922a185f7e1, type: 3}
+      propertyPath: cantInteractHint
+      value: You might get electrocuted if you picked this up
       objectReference: {fileID: 0}
     - target: {fileID: 5381858982670102323, guid: 3a4bcd38cf32c1b428d6f922a185f7e1, type: 3}
       propertyPath: m_Materials.Array.data[0]

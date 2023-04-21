@@ -502,9 +502,25 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 3.16
       objectReference: {fileID: 0}
+    - target: {fileID: 4286076575908617269, guid: 3a4bcd38cf32c1b428d6f922a185f7e1, type: 3}
+      propertyPath: interactHint
+      value: Press O to activate
+      objectReference: {fileID: 0}
+    - target: {fileID: 4286076575908617269, guid: 3a4bcd38cf32c1b428d6f922a185f7e1, type: 3}
+      propertyPath: cantInteractHint
+      value: You need electric abilities to manipulate this
+      objectReference: {fileID: 0}
     - target: {fileID: 4430466193398533942, guid: 3a4bcd38cf32c1b428d6f922a185f7e1, type: 3}
       propertyPath: m_Name
       value: DoorDevice
+      objectReference: {fileID: 0}
+    - target: {fileID: 5381858982670102320, guid: 3a4bcd38cf32c1b428d6f922a185f7e1, type: 3}
+      propertyPath: interactHint
+      value: Press O to pick up
+      objectReference: {fileID: 0}
+    - target: {fileID: 5381858982670102320, guid: 3a4bcd38cf32c1b428d6f922a185f7e1, type: 3}
+      propertyPath: cantInteractHint
+      value: You might get electrocuted if you picked this up
       objectReference: {fileID: 0}
     - target: {fileID: 5381858982670102323, guid: 3a4bcd38cf32c1b428d6f922a185f7e1, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -727,9 +743,25 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 3.16
       objectReference: {fileID: 0}
+    - target: {fileID: 4286076575908617269, guid: 3a4bcd38cf32c1b428d6f922a185f7e1, type: 3}
+      propertyPath: interactHint
+      value: Press O to activate
+      objectReference: {fileID: 0}
+    - target: {fileID: 4286076575908617269, guid: 3a4bcd38cf32c1b428d6f922a185f7e1, type: 3}
+      propertyPath: cantInteractHint
+      value: You need electric abilities to manipulate this
+      objectReference: {fileID: 0}
     - target: {fileID: 4430466193398533942, guid: 3a4bcd38cf32c1b428d6f922a185f7e1, type: 3}
       propertyPath: m_Name
       value: DoorDevice
+      objectReference: {fileID: 0}
+    - target: {fileID: 5381858982670102320, guid: 3a4bcd38cf32c1b428d6f922a185f7e1, type: 3}
+      propertyPath: interactHint
+      value: Press O to pick up
+      objectReference: {fileID: 0}
+    - target: {fileID: 5381858982670102320, guid: 3a4bcd38cf32c1b428d6f922a185f7e1, type: 3}
+      propertyPath: cantInteractHint
+      value: You might get electrocuted if you picked this up
       objectReference: {fileID: 0}
     - target: {fileID: 5381858982670102323, guid: 3a4bcd38cf32c1b428d6f922a185f7e1, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2146,6 +2178,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6074368841919298461, guid: 0a0c2cbe02ccff249b3cef468db07b8c, type: 3}
+      propertyPath: cantInteractHint
+      value: You're not strong enough to move this
+      objectReference: {fileID: 0}
     - target: {fileID: 7494234140640489652, guid: 0a0c2cbe02ccff249b3cef468db07b8c, type: 3}
       propertyPath: m_Name
       value: PushableHigh
@@ -2222,6 +2258,10 @@ PrefabInstance:
     - target: {fileID: 3980121463008008933, guid: 0a0c2cbe02ccff249b3cef468db07b8c, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6074368841919298461, guid: 0a0c2cbe02ccff249b3cef468db07b8c, type: 3}
+      propertyPath: cantInteractHint
+      value: You're not strong enough to move this
       objectReference: {fileID: 0}
     - target: {fileID: 7494234140640489652, guid: 0a0c2cbe02ccff249b3cef468db07b8c, type: 3}
       propertyPath: m_Name
@@ -3532,7 +3572,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: 1
   interactHint: Press O to travel through
-  cantInteractHint: You can't interact with this one
+  cantInteractHint: You don't have the ability to turn into electricity
   outlineThickness: 2
   highlightmultiplier: 2
 --- !u!114 &1182168888
@@ -17316,6 +17356,10 @@ PrefabInstance:
     - target: {fileID: 3980121463008008933, guid: 0a0c2cbe02ccff249b3cef468db07b8c, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6074368841919298461, guid: 0a0c2cbe02ccff249b3cef468db07b8c, type: 3}
+      propertyPath: cantInteractHint
+      value: You're not strong enough to move this
       objectReference: {fileID: 0}
     - target: {fileID: 7494234140640489652, guid: 0a0c2cbe02ccff249b3cef468db07b8c, type: 3}
       propertyPath: m_Name

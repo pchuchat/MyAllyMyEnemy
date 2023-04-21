@@ -6933,6 +6933,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 563634697}
     m_Modifications:
+    - target: {fileID: -7112080732442864729, guid: f876e2a086056bd408ff54cb72dae35e, type: 3}
+      propertyPath: cantInteractHint
+      value: You're not strong enough to carry this
+      objectReference: {fileID: 0}
     - target: {fileID: 1880563873760749264, guid: f876e2a086056bd408ff54cb72dae35e, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
