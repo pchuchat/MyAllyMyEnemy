@@ -12,7 +12,7 @@ public class PlayerCarryItem : MonoBehaviour
     [Tooltip("Defines the upwards angle of the throw")] [SerializeField] private float throwAngle = 45;
     [Tooltip("Layer for target areas")] [SerializeField] private LayerMask targetMask;
     [Tooltip("Radius of targetsnapping area around the aimPoint")] [SerializeField] private float snapRadius = 0.5f;
-    [Tooltip("Max distance between snapped target when automatic throw is initiated")] [SerializeField] private float autoThrowDistance = 5f;
+    [Tooltip("Distance to snapped target when automatic throw is initiated")] [SerializeField] private float autoThrowDistance = 5f;
 
 
     [Header("Sounds")]
