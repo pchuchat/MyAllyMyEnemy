@@ -23,15 +23,28 @@ public class InteractableDetection : MonoBehaviour
     private CharacterController controller;
     private bool groundedPlayer;
     private float groundedDelay;
+    private Vector3 interactionBottomLimit;
+    private Vector3 interactionTopLimit;
 
 
     private void Start()
     {
         controller = GetComponent<CharacterController>();
     }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(interactionBottomLimit, interactionRadius);
+        Gizmos.DrawWireSphere(interactionTopLimit, interactionRadius);
+
+    }
 
     private void Update()
     {
+        interactionBottomLimit = interactionPointBottom.position;
+        interactionBottomLimit.y = interactionPointBottom.position.y + interactionRadius;
+        interactionTopLimit = interactionPointBottom.position;
+        interactionTopLimit.y = interactionPointTop.position.y - interactionRadius;
         // Check if the player is currently grounded
         groundedPlayer = controller.isGrounded;
         if (groundedPlayer)
@@ -48,7 +61,7 @@ public class InteractableDetection : MonoBehaviour
     {
         if (!interactionLock && groundedDelay > 0)
         {
-            objects = Physics.OverlapCapsule(interactionPointBottom.position, interactionPointTop.position, interactionRadius, interactableMask);
+            objects = Physics.OverlapCapsule(interactionBottomLimit, interactionTopLimit, interactionRadius, interactableMask);
             amountFound = objects.Length;
             if (amountFound != 0)
             {
