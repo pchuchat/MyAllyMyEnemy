@@ -23,7 +23,9 @@ public class MovableObjectSpawner : MonoBehaviour
     /// <returns>movable object</returns>
     public GameObject GetMovableObject()
     {
-        return Instantiate(movableObject);
+        GameObject temp = Instantiate(movableObject);
+        temp.GetComponent<MovableObject>().SetTargets(targets);
+        return temp;
     }
     public List<GameObject> GetTargets()
     {

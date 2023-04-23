@@ -12,6 +12,7 @@ public class PlayerCarryItem : MonoBehaviour
     [Tooltip("Defines the upwards angle of the throw")] [SerializeField] private float throwAngle = 45;
     [Tooltip("Layer for target areas")] [SerializeField] private LayerMask targetMask;
     [Tooltip("Radius of targetsnapping area around the aimPoint")] [SerializeField] private float snapRadius = 0.5f;
+    [Tooltip("Distance to snapped target when automatic throw is initiated")] [SerializeField] private float autoThrowDistance = 5f;
 
 
     [Header("Sounds")]
@@ -23,7 +24,7 @@ public class PlayerCarryItem : MonoBehaviour
     [Tooltip("Throw sounds for heavy items")] [SerializeField] private List<AudioClip> heavyThrowSounds;
 
     //Player
-    private CharacterController controller;     
+    private CharacterController controller;
     private PlayerInput input;
     private bool carrying = false;      //whether the player is carrying an object or not
     private InteractableDetection interactor;
@@ -40,8 +41,6 @@ public class PlayerCarryItem : MonoBehaviour
 
     //Aiming
     private Vector3 aimPoint;
-    private readonly Collider[] possibleTargets = new Collider[3];
-    private int numFound;
 
 
     // Start is called before the first frame update
@@ -93,7 +92,7 @@ public class PlayerCarryItem : MonoBehaviour
         movableObjectGO.transform.forward = controller.transform.forward;
 
         //Calculating and setting the position for carrying item
-        Vector3 targetPos = transform.position + transform.forward * transform.localScale.x*0.75f + transform.up * transform.localScale.y; ;
+        Vector3 targetPos = transform.position + transform.forward * (transform.localScale.z/2 + movableObjectGO.transform.localScale.z/2) + transform.up * transform.localScale.y;
         movableObjectGO.transform.position = targetPos;
 
         movableObjectGO.transform.SetParent(transform);
@@ -110,16 +109,20 @@ public class PlayerCarryItem : MonoBehaviour
     {
         if (movableObject.IsHeavy()) randomizer.Play(heavyThrowSounds);
         else randomizer.Play(lightThrowSounds);
-        simulation.Terminate();
+        simulation.Enabled = false;
         //Playing the sound for throwing item
 
         //Adding force for the object
         movableObjectRb.AddForce(force * movableObjectRb.mass, ForceMode.Impulse);
-
         //Setting all the neccessary parameters for the object once it's thrown and performing neccessary "resets"
         movableObjectGO.GetComponent<Rigidbody>().useGravity = true;
         movableObjectGO.transform.SetParent(null);
         movableObjectGO.GetComponent<BoxCollider>().enabled = true;
+        if (simulation.targetLocked)
+        {
+            movableObjectGO.GetComponent<BoxCollider>().isTrigger = true;
+            movableObject.RotateToTarget(simulation.GetLockedTarget());
+        }
         movableObjectGO = null;
         carrying = false;
         input.actions.FindAction("Jump").Enable();
@@ -127,39 +130,22 @@ public class PlayerCarryItem : MonoBehaviour
         movableObject = null;
         interactor.InteractionFinished();
     }
-    // Update is called once per frame
-    void Update()
-    {
-        //Checking if there is a target area below the movable object while the player is carrying it
-        //if said target is found throws the object at needed force to reach center of target area.
-        if (carrying && Physics.Raycast(movableObjectGO.transform.position, transform.TransformDirection(Vector3.down), out RaycastHit hit, 5f)
-            && hit.collider.gameObject.CompareTag("target_area") && targets.Contains(hit.collider.gameObject))
-        {
-            force = simulation.CalculateThrowingForce(hit.collider.gameObject.transform.position, throwAngle);
-            ThrowObject();
-        }
-    }
     private void FixedUpdate()
     {
         if (carrying)
         {
-            CheckForTargets();
+            //Setting aimpoint and calculating the initial throwforce
+            aimPoint = transform.position + transform.forward * throwdistance;
+            force = simulation.CalculateThrowingForce(aimPoint, throwAngle);
+            //Checking if there was targets within snapping distance of throw
+            aimPoint = simulation.SimulatePath(movableObjectGO, force, snapRadius, targets);
+
+            //Calculating the throwforce for actual throw and drawing the aiming line
             force = simulation.CalculateThrowingForce(aimPoint, throwAngle);
             simulation.SimulatePath(movableObjectGO, force);
-        }
-    }
-    /// <summary>
-    /// Checks if there are targets withing snapping distance of the aimpoing and sets aimpoint accordingly
-    /// </summary>
-    private void CheckForTargets()
-    {
-        aimPoint = movableObjectGO.transform.position + transform.forward * throwdistance;
-        aimPoint.y = transform.position.y - transform.localScale.y / 2;
-        numFound = Physics.OverlapSphereNonAlloc(aimPoint, snapRadius, possibleTargets, targetMask);
-
-        if (numFound > 0 && targets.Contains(possibleTargets[0].gameObject))
-        {
-            aimPoint = possibleTargets[0].gameObject.transform.position;
+            simulation.Draw();
+            //Autothrowing object if the target is close enough
+            if (Vector3.Distance(aimPoint, transform.position) <= autoThrowDistance) ThrowObject();
         }
     }
 }

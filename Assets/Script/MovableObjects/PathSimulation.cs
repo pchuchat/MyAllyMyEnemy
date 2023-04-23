@@ -15,7 +15,9 @@ public class PathSimulation : MonoBehaviour
     private Vector3[] segments;
     private int numSegments = 0;
     private GameObject reticle;
-    private readonly Collider[] lineHits = new Collider[1];
+    private readonly Collider[] lineHits = new Collider[3];
+    public bool targetLocked = false;
+    private Transform lockedTarget;
 
     public bool Enabled
     {
@@ -26,27 +28,18 @@ public class PathSimulation : MonoBehaviour
         set
         {
             lineRenderer.enabled = value;
+            reticle.GetComponent<MeshRenderer>().enabled = value;
         }
     }
 
     public void Start()
     {
-        Enabled = true;
-        //Temporary reticle
         reticle = GameObject.CreatePrimitive(PrimitiveType.Sphere);
         reticle.GetComponent<SphereCollider>().enabled = false;
         reticle.SetActive(false);
         reticle.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-    }
-
-    /// <summary>
-    /// Destroys the aiming components of the corshair for when it is no longer needed.
-    /// </summary>
-    public void Terminate()
-    {
-        Destroy(reticle);
-        lineRenderer.enabled = false;
-
+        Enabled = true;
+        targetLocked = false;
     }
 
     /// <summary>
@@ -82,14 +75,25 @@ public class PathSimulation : MonoBehaviour
 
         return finalVelocity;
     }
-
+    /// <summary>
+    /// Gets the locked target from simulation
+    /// </summary>
+    /// <returns>locked target</returns>
+    public  Transform GetLockedTarget()
+    {
+        return lockedTarget;
+    }
     /// <summary>
     /// Simulates a path for the given object at given force 
     /// and draws a line with a croshair for the simulated path
+    /// implements also targetsnap to given targets with a given snap radius
     /// </summary>
     /// <param name="gameObject">Object which path is calculated</param>
     /// <param name="forceDirection">force that is used for calculation</param>
-    public void SimulatePath(GameObject gameObject, Vector3 forceDirection)
+    /// <param name="detectRadius">Radius for detecting collisions and ending simulation</param>
+    /// <param name="targets">possible targets for snapping</param>
+    /// <returns>The position of the line end, or where the first hit was</returns>
+    public Vector3 SimulatePath(GameObject gameObject, Vector3 forceDirection, float detectRadius = 0.1f, List<GameObject> targets = null)
     {
         Rigidbody rigidbody = gameObject.GetComponent<Rigidbody>();
         float mass = rigidbody.mass;
@@ -110,13 +114,33 @@ public class PathSimulation : MonoBehaviour
         segments[0] = position;
         numSegments = 1;
 
-        for (int i = 0; i < maxIterations && numSegments < maxSegmentCount && position.y > -5f; i++ )
+        for (int i = 0; i < maxIterations && numSegments < maxSegmentCount && position.y > -5f; i++)
         {
-            if (Physics.OverlapSphereNonAlloc(position, 0.01f, lineHits) > 0 && !lineHits[0].gameObject.CompareTag("hintTrigger"))
+            if (targets == null && Physics.OverlapSphereNonAlloc(position, detectRadius, lineHits) > 0 && !lineHits[0].gameObject.CompareTag("hintTrigger"))
             {
-                reticle.transform.position = position;
-                reticle.SetActive(true);
-                break;
+                if (!targetLocked)
+                {
+                    reticle.transform.position = position;
+                    return position;
+                }
+                if (targetLocked && Vector3.Distance(position, lineHits[0].transform.position) <= 0.2f)
+                {
+                    lockedTarget = lineHits[0].transform;
+                    return position;
+                }
+            }
+            else if (Physics.OverlapSphereNonAlloc(position, detectRadius, lineHits) > 0 && lineHits[0].gameObject.CompareTag("target_area") && targets.Contains(lineHits[0].gameObject))
+            {
+                reticle.transform.position = lineHits[0].gameObject.transform.position;
+                targetLocked = true; 
+                lockedTarget = lineHits[0].transform;
+                return lineHits[0].gameObject.transform.position;
+            }
+            else if (targets != null && Physics.Raycast(position, transform.TransformDirection(Vector3.down), out RaycastHit hit, 5f) && hit.collider.gameObject.CompareTag("target_area") && targets.Contains(hit.collider.gameObject))
+            {
+                reticle.transform.position = hit.collider.gameObject.transform.position;
+                targetLocked = true;
+                return hit.collider.gameObject.transform.position;
             }
             velocity += gravity;
             velocity *= stepDrag;
@@ -129,6 +153,16 @@ public class PathSimulation : MonoBehaviour
                 numSegments++;
             }
         }
+        targetLocked = false;
+        reticle.transform.position = position;
+        return position;
+    }
+    /// <summary>
+    /// Draws the simulated path and sets the reticle active
+    /// </summary>
+    public void Draw()
+    {
+        reticle.SetActive(true);
         lineRenderer.transform.position = segments[0];
 
         lineRenderer.positionCount = numSegments;
