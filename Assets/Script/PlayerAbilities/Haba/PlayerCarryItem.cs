@@ -117,11 +117,12 @@ public class PlayerCarryItem : MonoBehaviour
         //Setting all the neccessary parameters for the object once it's thrown and performing neccessary "resets"
         movableObjectGO.GetComponent<Rigidbody>().useGravity = true;
         movableObjectGO.transform.SetParent(null);
+        movableObjectGO.GetComponent<BoxCollider>().enabled = true;
         if (simulation.targetLocked)
         {
+            movableObjectGO.GetComponent<BoxCollider>().isTrigger = true;
             movableObject.RotateToTarget(simulation.GetLockedTarget());
         }
-        else movableObjectGO.GetComponent<BoxCollider>().enabled = true;
         movableObjectGO = null;
         carrying = false;
         input.actions.FindAction("Jump").Enable();

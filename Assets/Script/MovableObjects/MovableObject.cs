@@ -47,7 +47,7 @@ public class MovableObject : MonoBehaviour
             rb.rotation = Quaternion.Slerp(transform.rotation, destination.rotation, time);
             time += Time.fixedDeltaTime / 10;
         }
-        if (destination != null && Vector2.Distance(destination.position, transform.position) <= 0.1f) GetComponent<BoxCollider>().enabled = true; 
+        //if (destination != null && Vector3.Distance(destination.position, transform.position) <= 0.1f) GetComponent<BoxCollider>().enabled = true; 
     }
 
     /// <summary>
@@ -70,6 +70,7 @@ public class MovableObject : MonoBehaviour
             collider.gameObject.tag = "Untagged";
             collider.gameObject.layer = 0;
             tag = "Untagged";
+            GetComponent<BoxCollider>().isTrigger = false;
         }
     }
 
