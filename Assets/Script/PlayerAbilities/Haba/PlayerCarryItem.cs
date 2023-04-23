@@ -92,7 +92,7 @@ public class PlayerCarryItem : MonoBehaviour
         movableObjectGO.transform.forward = controller.transform.forward;
 
         //Calculating and setting the position for carrying item
-        Vector3 targetPos = transform.position + transform.forward * transform.localScale.x * 1f + transform.up * transform.localScale.y; ;
+        Vector3 targetPos = transform.position + transform.forward * (transform.localScale.z/2 + movableObjectGO.transform.localScale.z/2) + transform.up * transform.localScale.y;
         movableObjectGO.transform.position = targetPos;
 
         movableObjectGO.transform.SetParent(transform);
