@@ -15,14 +15,13 @@ public class DeviceOpenDoor : MonoBehaviour
     // Sounds
     private AudioSource audioSource; // Audiosource for the sound below
     [Tooltip("The sound the device makes when active (Plays on repeat until device is no longer active)")] [SerializeField] private AudioClip chargedDeviceSound;
-    //[Tooltip("The sound the door makes when it is dropped and hits the floor")] [SerializeField] private AudioClip droppedDoorSound;
     [Tooltip("The sound the door makes if it is light when it is dropped and hits the floor")] [SerializeField] private AudioClip lightDropSound;
     [Tooltip("The sound the door makes if it is heavy when it is dropped and hits the floor")] [SerializeField] private AudioClip heavyDropSound;
 
     //Private attributes
     private GameObject moveable;    // The object that device moves when activated (= child-object)
     private Rigidbody rb;           // The rigidbidy of the moveable-object
-    private Vector3 startP;
+    private Vector3 startP;         // The position where object starts
     private Vector3 targetP;        // Target position where object is moved
 
     /// <summary>
