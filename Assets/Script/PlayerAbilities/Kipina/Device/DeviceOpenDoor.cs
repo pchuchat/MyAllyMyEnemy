@@ -10,16 +10,18 @@ public class DeviceOpenDoor : MonoBehaviour
     //Atributes visible in unity
     [Tooltip("How high the target-position is from the start-position")] [SerializeField] private float height = 3f;
     [Tooltip("How much child-object is moved per frame")] [SerializeField] private float force = 0.02f;
+    [Tooltip("The sound the door makes if it is heavy when it is dropped and hits the floor")] [SerializeField] private bool isHeavy;
 
     // Sounds
     private AudioSource audioSource; // Audiosource for the sound below
     [Tooltip("The sound the device makes when active (Plays on repeat until device is no longer active)")] [SerializeField] private AudioClip chargedDeviceSound;
-    [Tooltip("The sound the door makes when it is dropped and hits the floor")] [SerializeField] private AudioClip droppedDoorSound;
+    [Tooltip("The sound the door makes if it is light when it is dropped and hits the floor")] [SerializeField] private AudioClip lightDropSound;
+    [Tooltip("The sound the door makes if it is heavy when it is dropped and hits the floor")] [SerializeField] private AudioClip heavyDropSound;
 
     //Private attributes
     private GameObject moveable;    // The object that device moves when activated (= child-object)
     private Rigidbody rb;           // The rigidbidy of the moveable-object
-    private Vector3 startP;
+    private Vector3 startP;         // The position where object starts
     private Vector3 targetP;        // Target position where object is moved
 
     /// <summary>
@@ -78,13 +80,20 @@ public class DeviceOpenDoor : MonoBehaviour
         if (moveable != null)
         {
             rb.transform.position = Vector3.MoveTowards(rb.transform.position, targetP, force);
-            if ((Vector3.Distance(rb.transform.position, targetP) < 0.001f) && rb.useGravity == true)
+
+            if ((Vector3.Distance(rb.transform.position, targetP) < 0.1f))
             {
+                audioSource.loop = false;
                 audioSource.Stop();
             }
-                if ((Vector3.Distance(rb.transform.position, startP) < 0.001f) && rb.useGravity == true)
+
+            if ((Vector3.Distance(rb.transform.position, startP) < 0.1f) && rb.useGravity == true)
             {
-                audioSource.clip = droppedDoorSound;
+                if (isHeavy)
+                {
+                    audioSource.clip = heavyDropSound;
+                }
+                else audioSource.clip = lightDropSound;
                 audioSource.Play();
                 StopScript();
             }
