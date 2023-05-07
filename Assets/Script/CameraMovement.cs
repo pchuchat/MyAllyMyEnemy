@@ -32,9 +32,12 @@ public class CameraMovement : MonoBehaviour
     {
         if (players.Length == 2)
         {
-            // Calculating the midpoint of the players
-            midpoint = (players[0].transform.position + players[1].transform.position) / 2f;
-            midpoint.y = (playerPositions[0].y + playerPositions[1].y) / 2;
+            // Calculating the weighted midpoint of the players
+            Vector3 p1 = players[0].transform.position;
+            Vector3 p2 = players[1].transform.position;
+            p1.y = playerPositions[0].y;
+            p2.y = playerPositions[1].y;
+            midpoint = WeightedMidpoint(p1, p2);
 
             // Moving the camera
             Vector3 cameraDestination = midpoint - transform.forward * zoomFactor;
@@ -59,6 +62,29 @@ public class CameraMovement : MonoBehaviour
         this.rotateSpeed = rotateSpeed;
         rotateDegrees = rotDeg;
     }
+
+    // Function for calculating the weighted midpoint of the players
+    // Midpoint tends towards the player closer to the camera
+    private Vector3 WeightedMidpoint(Vector3 p1, Vector3 p2)
+    {
+        Vector3 cameraAngle = mainCamera.transform.rotation.eulerAngles;
+        Vector3 p1Rotated = Quaternion.Euler(0, -cameraAngle.y, 0) * p1;
+        Vector3 p2Rotated = Quaternion.Euler(0, -cameraAngle.y, 0) * p2;
+
+        Vector3 weightedMid = (p1Rotated + p2Rotated) / 2; ;
+
+        if (p1Rotated.z < p2Rotated.z)
+        {
+            weightedMid.z = (p1Rotated.z * 3 + p2Rotated.z) / 4;
+        }
+        else
+        {
+            weightedMid.z = (p1Rotated.z + p2Rotated.z * 3) / 4;
+        }
+
+        return Quaternion.Euler(0, cameraAngle.y, 0) * weightedMid;
+    }
+
     void Update()
     {
         float rotate = 0;
