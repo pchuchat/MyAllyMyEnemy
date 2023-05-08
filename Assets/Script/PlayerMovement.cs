@@ -39,8 +39,15 @@ public class PlayerMovement : MonoBehaviour
     // Current velocity of the player
     private Vector3 playerVelocity;
 
+    // The direction the player should slide, ignoring momevent input
+    private Vector3 slideDirection = Vector3.zero;
+
     // Whether or not the player is currently grounded
     private bool groundedPlayer;
+
+    // Whether or not the player is standing on top of the other player
+    private bool aboveOtherPlayerLastFrame = false;
+    private bool aboveOtherPlayerCurrentFrame = false;
 
     // Input value for movement direction
     private Vector2 movementInput = Vector2.zero;
@@ -78,7 +85,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (context.performed)
         {
-            if (coyoteTimer > 0)
+            if (PlayerGrounded())
             {
                 coyoteTimer = 0;
                 // Play single jump sound
@@ -115,19 +122,36 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.gameObject.tag == "player" && hit.transform.position.y < transform.position.y - 1f && playerVelocity.y <= 0)
+        {
+            aboveOtherPlayerLastFrame = true;
+            aboveOtherPlayerCurrentFrame = true;
+
+            slideDirection = Vector3.up - hit.normal * Vector3.Dot(Vector3.up, hit.normal);
+            //slideDirection = new Vector3(hit.normal.x, 0, hit.normal.z);
+        }
+        else
+        {
+            aboveOtherPlayerLastFrame = aboveOtherPlayerCurrentFrame;
+            aboveOtherPlayerCurrentFrame = false;
+        }
+    }
+
     public bool PlayerGrounded()
     {
-        if (coyoteTimer > 0) return true;
-        else return false;
+        return coyoteTimer > 0 && !aboveOtherPlayerLastFrame;
     }
 
     void Update()
     {
         // Check if the player is currently grounded
         groundedPlayer = controller.isGrounded;
-        if (groundedPlayer && playerVelocity.y <= 0)
+        if (groundedPlayer && playerVelocity.y <= 0 && !aboveOtherPlayerLastFrame)
         {
             coyoteTimer = 0.2f;
+            slideDirection = Vector3.zero;
         }
         if (coyoteTimer > 0)
         {
@@ -158,7 +182,15 @@ public class PlayerMovement : MonoBehaviour
 
         // Calculate the player's movement vector and move the player
         Vector3 move = new(relativeMove.x, 0, relativeMove.z);
-        controller.Move(playerSpeed * Time.deltaTime * move);
+
+        if (slideDirection == Vector3.zero)
+        {
+            controller.Move(playerSpeed * Time.deltaTime * move);
+        }
+        else
+        {
+            controller.Move(-playerSpeed * Time.deltaTime * slideDirection);
+        }
 
         // Face the player in the direction of movement
         if (move != Vector3.zero)
