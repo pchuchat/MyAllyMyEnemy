@@ -351,9 +351,9 @@ MonoBehaviour:
   lightningStrike: {fileID: 5574026198299699031}
   damageAmount: 10
   attackSounds:
-  - {fileID: 8300000, guid: 54e519a982536fe499a0f20672b68a5b, type: 3}
-  - {fileID: 8300000, guid: 1b3c008e2439a60458a1e48b138bcf98, type: 3}
-  - {fileID: 8300000, guid: f199f843a2fdb674fb22129d804232ea, type: 3}
+  - {fileID: 8300000, guid: 486ce4295c4f33a4ca3c7e356bd8edb5, type: 3}
+  - {fileID: 8300000, guid: 77908339c4069ad46aa2de356f77837d, type: 3}
+  - {fileID: 8300000, guid: 294983912e4c04c479110b562330f1c2, type: 3}
 --- !u!114 &6546200658913912860
 MonoBehaviour:
   m_ObjectHideFlags: 0
