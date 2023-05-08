@@ -17,6 +17,7 @@ TagManager:
   - noCharge
   - charged
   - hintTrigger
+  - cableEnd
   layers:
   - Default
   - TransparentFX
@@ -27,7 +28,7 @@ TagManager:
   - Ground
   - Interactable
   - TargetArea
-  - 
+  - Player
   - 
   - 
   - 
