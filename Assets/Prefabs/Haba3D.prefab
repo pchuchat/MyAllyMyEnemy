@@ -444,15 +444,11 @@ MonoBehaviour:
   autoThrowDistance: 5
   lightPickupSounds:
   - {fileID: 8300000, guid: f629297a2dfa2dc499d250747e670625, type: 3}
-  - {fileID: 8300000, guid: 1e6b9cd17dd76ee429694c660a15dfb0, type: 3}
   heavyPickupSounds:
   - {fileID: 8300000, guid: bc1a284e75bb077478238c1feedfd1d0, type: 3}
-  - {fileID: 8300000, guid: 44b6c9d5f33304a46bde2034292aedf6, type: 3}
   lightThrowSounds:
-  - {fileID: 8300000, guid: f629297a2dfa2dc499d250747e670625, type: 3}
   - {fileID: 8300000, guid: 1e6b9cd17dd76ee429694c660a15dfb0, type: 3}
   heavyThrowSounds:
-  - {fileID: 8300000, guid: bc1a284e75bb077478238c1feedfd1d0, type: 3}
   - {fileID: 8300000, guid: 44b6c9d5f33304a46bde2034292aedf6, type: 3}
 --- !u!114 &673739172847429375
 MonoBehaviour:
