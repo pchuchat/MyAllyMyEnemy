@@ -442,6 +442,7 @@ MonoBehaviour:
     m_Bits: 256
   snapRadius: 2
   autoThrowDistance: 5
+  crosshairPrefab: {fileID: 6344281822576879752, guid: 7b07dd73b026b6d49b910699650c8edb, type: 3}
   lightPickupSounds:
   - {fileID: 8300000, guid: f629297a2dfa2dc499d250747e670625, type: 3}
   heavyPickupSounds:
