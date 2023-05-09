@@ -8,10 +8,10 @@ using UnityEngine;
 public class PathSimulation : MonoBehaviour
 {
     //AimingLine
-    public LineRenderer lineRenderer;
-    public int maxIterations = 10000;
-    public int maxSegmentCount = 300;
-    public float segmentStepModulo = 10f;
+    [SerializeField] private LineRenderer lineRenderer;
+    private int maxIterations = 10000;
+    private int maxSegmentCount = 300;
+    private float segmentStepModulo = 2f;
     private Vector3[] segments;
     private int numSegments = 0;
     private readonly Collider[] lineHits = new Collider[3];
