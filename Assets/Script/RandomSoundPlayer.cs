@@ -24,7 +24,7 @@ public class RandomSoundPlayer : MonoBehaviour
             else tempSource = gameObject.AddComponent<AudioSource>();
             tempSource.clip = clips[Random.Range(0, clips.Count)];
             tempSource.Play();
-            Destroy(source, tempSource.clip.length);
+            Destroy(tempSource, tempSource.clip.length);
         }
     }
 }
