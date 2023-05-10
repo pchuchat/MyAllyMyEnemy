@@ -461,6 +461,22 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 51734729867651191, guid: e570920c24c5f694d9b25cb323a9f0f8, type: 3}
   m_PrefabInstance: {fileID: 1461406534}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &455920424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 455920419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6181f77ad23f5f94d9814d22a68a6fa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateDirection: 1
+  newRotation: 90
+  rotationTime: 2
+  activationTag: Untagged
 --- !u!1001 &473243177
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1241,6 +1257,22 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 51734729867651191, guid: e570920c24c5f694d9b25cb323a9f0f8, type: 3}
   m_PrefabInstance: {fileID: 473243177}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &785835703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 785835698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6181f77ad23f5f94d9814d22a68a6fa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateDirection: 2
+  newRotation: 180
+  rotationTime: 2
+  activationTag: Untagged
 --- !u!1001 &813567895
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2639,6 +2671,7 @@ MonoBehaviour:
   zoomFactor: 15
   cameraHeight: 10
   followSpeed: 2
+  rotating: 0
 --- !u!4 &1682452031
 Transform:
   m_ObjectHideFlags: 0
@@ -2947,6 +2980,22 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 51734729867651191, guid: e570920c24c5f694d9b25cb323a9f0f8, type: 3}
   m_PrefabInstance: {fileID: 729387240}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1941606947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1941606942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6181f77ad23f5f94d9814d22a68a6fa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateDirection: 0
+  newRotation: 270
+  rotationTime: 2
+  activationTag: Untagged
 --- !u!4 &1947992704 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4781019375420726679, guid: 609cf286953e0374fb08cac1dd4f1c22, type: 3}

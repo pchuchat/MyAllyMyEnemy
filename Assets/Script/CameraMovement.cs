@@ -19,6 +19,7 @@ public class CameraMovement : MonoBehaviour
     private float amountRotated = 0;
     private float rotateDegrees;
     private Camera mainCamera;
+    public bool rotating = false;
 
 
     private void Start()
@@ -60,7 +61,9 @@ public class CameraMovement : MonoBehaviour
     public void RotateCamera(float rotDeg, float rotateSpeed)
     {
         this.rotateSpeed = rotateSpeed;
-        rotateDegrees = rotDeg;
+        rotateDegrees = Mathf.Abs(rotDeg);
+        amountRotated = 0;
+        rotating = true;
     }
 
     // Function for calculating the weighted midpoint of the players
@@ -91,12 +94,13 @@ public class CameraMovement : MonoBehaviour
         if (amountRotated < rotateDegrees)
         {
             rotate = rotateSpeed * Time.deltaTime;
-            amountRotated += rotate;
+            amountRotated += Mathf.Abs(rotate);
         }
         if (rotate != 0)
         {
             transform.RotateAround(midpoint, Vector3.up, rotate);
         }
+        else rotating = false;
 
         //Finding the players from the scene
         players = GameObject.FindGameObjectsWithTag("player");

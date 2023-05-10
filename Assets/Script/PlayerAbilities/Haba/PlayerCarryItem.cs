@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-// ©GameGurus - Heikkinen R., Hopeasaari J., Kantola J., Kettunen J., Kommio R, PC, Parviainen P., Rautiainen J.
+// ï¿½GameGurus - Heikkinen R., Hopeasaari J., Kantola J., Kettunen J., Kommio R, PC, Parviainen P., Rautiainen J.
 // Creator: Kettunen. J
 //
 // Gives the player the ability to carry and throw items given from spawners
@@ -13,6 +13,7 @@ public class PlayerCarryItem : MonoBehaviour
     [Tooltip("Layer for target areas")] [SerializeField] private LayerMask targetMask;
     [Tooltip("Radius of targetsnapping area around the aimPoint")] [SerializeField] private float snapRadius = 0.5f;
     [Tooltip("Distance to snapped target when automatic throw is initiated")] [SerializeField] private float autoThrowDistance = 5f;
+    [Tooltip("Crosshairprefab for aiming throws")][SerializeField] private GameObject crosshairPrefab;
 
 
     [Header("Sounds")]
@@ -98,6 +99,7 @@ public class PlayerCarryItem : MonoBehaviour
         movableObjectGO.transform.SetParent(transform);
         input.actions.FindAction("Jump").Disable();
         simulation = movableObjectGO.GetComponent<PathSimulation>();
+        simulation.SetCrosshair(crosshairPrefab);
         movableObjectRb = movableObjectGO.GetComponent<Rigidbody>();
         carrying = true;
     }

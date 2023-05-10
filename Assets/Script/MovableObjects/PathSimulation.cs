@@ -8,16 +8,16 @@ using UnityEngine;
 public class PathSimulation : MonoBehaviour
 {
     //AimingLine
-    public LineRenderer lineRenderer;
-    public int maxIterations = 10000;
-    public int maxSegmentCount = 300;
-    public float segmentStepModulo = 10f;
+    [SerializeField] private LineRenderer lineRenderer;
+    private int maxIterations = 10000;
+    private int maxSegmentCount = 300;
+    private float segmentStepModulo = 2f;
     private Vector3[] segments;
     private int numSegments = 0;
-    private GameObject reticle;
     private readonly Collider[] lineHits = new Collider[3];
     public bool targetLocked = false;
     private Transform lockedTarget;
+    private GameObject crosshair;
 
     public bool Enabled
     {
@@ -28,18 +28,19 @@ public class PathSimulation : MonoBehaviour
         set
         {
             lineRenderer.enabled = value;
-            reticle.GetComponent<MeshRenderer>().enabled = value;
+            crosshair.GetComponentInChildren<Canvas>().enabled = value;
         }
-    }
+    } 
 
     public void Start()
     {
-        reticle = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        reticle.GetComponent<SphereCollider>().enabled = false;
-        reticle.SetActive(false);
-        reticle.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
         Enabled = true;
         targetLocked = false;
+    }
+
+    public void SetCrosshair(GameObject crosshair)
+    {
+        this.crosshair = Instantiate(crosshair);
     }
 
     /// <summary>
@@ -116,11 +117,11 @@ public class PathSimulation : MonoBehaviour
 
         for (int i = 0; i < maxIterations && numSegments < maxSegmentCount && position.y > -5f; i++)
         {
-            if (targets == null && Physics.OverlapSphereNonAlloc(position, detectRadius, lineHits) > 0 && !lineHits[0].gameObject.CompareTag("hintTrigger"))
+            if (targets == null && Physics.OverlapSphereNonAlloc(position, detectRadius, lineHits) > 0 && (lineHits[0].gameObject.CompareTag("target_area") || !lineHits[0].isTrigger))
             {
                 if (!targetLocked)
                 {
-                    reticle.transform.position = position;
+                    crosshair.transform.position = position;
                     return position;
                 }
                 if (targetLocked && Vector3.Distance(position, lineHits[0].transform.position) <= 0.2f)
@@ -131,14 +132,14 @@ public class PathSimulation : MonoBehaviour
             }
             else if (Physics.OverlapSphereNonAlloc(position, detectRadius, lineHits) > 0 && lineHits[0].gameObject.CompareTag("target_area") && targets.Contains(lineHits[0].gameObject))
             {
-                reticle.transform.position = lineHits[0].gameObject.transform.position;
+                crosshair.transform.position = lineHits[0].gameObject.transform.position;
                 targetLocked = true; 
                 lockedTarget = lineHits[0].transform;
                 return lineHits[0].gameObject.transform.position;
             }
             else if (targets != null && Physics.Raycast(position, transform.TransformDirection(Vector3.down), out RaycastHit hit, 5f) && hit.collider.gameObject.CompareTag("target_area") && targets.Contains(hit.collider.gameObject))
             {
-                reticle.transform.position = hit.collider.gameObject.transform.position;
+                crosshair.transform.position = hit.collider.gameObject.transform.position;
                 targetLocked = true;
                 return hit.collider.gameObject.transform.position;
             }
@@ -154,7 +155,7 @@ public class PathSimulation : MonoBehaviour
             }
         }
         targetLocked = false;
-        reticle.transform.position = position;
+        crosshair.transform.position = position;
         return position;
     }
     /// <summary>
@@ -162,7 +163,6 @@ public class PathSimulation : MonoBehaviour
     /// </summary>
     public void Draw()
     {
-        reticle.SetActive(true);
         lineRenderer.transform.position = segments[0];
 
         lineRenderer.positionCount = numSegments;
