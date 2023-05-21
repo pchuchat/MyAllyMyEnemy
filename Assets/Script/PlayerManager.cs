@@ -51,5 +51,7 @@ public class PlayerManager : MonoBehaviour
         // Moves the players to their proper starting coordinates in level 1
         player1.GetComponent<Transform>().position = new Vector3(-3.0f, 1.0f, -3.0f);
         player2.GetComponent<Transform>().position = new Vector3(3.0f, 1.0f, -3.0f);
+        //player1.GetComponent<Transform>().position = new Vector3(-119.0f, 18.0f, 178.0f);
+        //player2.GetComponent<Transform>().position = new Vector3(-121.0f, 18.0f, 179.0f);
     }
 }
