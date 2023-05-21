@@ -211,6 +211,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 58171893447e5b14e8605fae0243edb7, type: 3}
   - {fileID: 8300000, guid: c831c7a30911f3a459a0aa44f11da7fe, type: 3}
   - {fileID: 8300000, guid: b8090231d86cb4141b0be6dd1c678491, type: 3}
+  alwaysPlayJumpSounds: []
+  alwaysPlayDoubleJumpSounds: []
 --- !u!114 &7598341486325973947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336,6 +338,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: c1c82458-de33-42d6-8324-ce9bf8319616
     m_ActionName: Player/Charge[/XInputControllerWindows/buttonEast]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ef166510-dac3-4372-bfb0-a6e72ffc7963
+    m_ActionName: Player/CarryCable[/DualShock4GamepadHID/buttonEast,/DualSenseGamepadHID/buttonEast,/Keyboard/h,/Keyboard/l]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -378,6 +384,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   snapRadius: 1
+  autoThrowDistance: 5
   lightPickupSounds:
   - {fileID: 8300000, guid: f629297a2dfa2dc499d250747e670625, type: 3}
   heavyPickupSounds:
@@ -529,7 +536,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.7
+  m_Volume: 0.746
   m_Pitch: 1
   Loop: 0
   Mute: 0
