@@ -18,6 +18,7 @@ TagManager:
   - charged
   - hintTrigger
   - cableEnd
+  - triggered
   layers:
   - Default
   - TransparentFX
