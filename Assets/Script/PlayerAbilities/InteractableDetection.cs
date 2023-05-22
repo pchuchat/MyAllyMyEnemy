@@ -20,7 +20,7 @@ public class InteractableDetection : MonoBehaviour
     private bool interactionLock = false;
     private GameObject closest = null;
     private IsInteractable interactable;
-    private CharacterController controller;
+    private PlayerMovement playerMoveScript;
     private bool groundedPlayer;
     private float groundedDelay;
     private Vector3 interactionBottomLimit;
@@ -29,7 +29,7 @@ public class InteractableDetection : MonoBehaviour
 
     private void Start()
     {
-        controller = GetComponent<CharacterController>();
+        playerMoveScript = GetComponent<PlayerMovement>();
     }
     private void OnDrawGizmos()
     {
@@ -46,7 +46,7 @@ public class InteractableDetection : MonoBehaviour
         interactionTopLimit = interactionPointBottom.position;
         interactionTopLimit.y = interactionPointTop.position.y - interactionRadius;
         // Check if the player is currently grounded
-        groundedPlayer = controller.isGrounded;
+        groundedPlayer = playerMoveScript.PlayerGrounded();
         if (groundedPlayer)
         {
             groundedDelay = 0.2f;
