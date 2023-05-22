@@ -500,7 +500,18 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "Arrow",
+                    "name": "",
+                    "id": "a0ca6564-6721-492b-be08-3980dfeb9fe2",
+                    "path": "<Gamepad>/dpad",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Navigate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "Arrows",
                     "id": "845d3819-26d1-491d-b5a3-e452149f8e38",
                     "path": "2DVector",
                     "interactions": "",
