@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.InputSystem;
 // ©GameGurus - Heikkinen R., Hopeasaari J., Kantola J., Kettunen J., Kommio R, PC, Parviainen P., Rautiainen J.
@@ -13,6 +14,8 @@ public class PlayerPushPull : MonoBehaviour
     [Header("Pushing sounds")]
     [Tooltip("The sounds Haba makes when starting pushing")] [SerializeField] private List<AudioClip> startPushingSounds;
     [Tooltip("The sounds Haba makes when stopping pushing")] [SerializeField] private List<AudioClip> stopPushingSounds;
+
+    private Transform cameraRig;
 
     //Player
     private CharacterController controller;
@@ -39,6 +42,7 @@ public class PlayerPushPull : MonoBehaviour
         input = GetComponent<PlayerInput>();
         interactor = GetComponent<InteractableDetection>();
         randomizer = GetComponent<RandomSoundPlayer>();
+        cameraRig = Camera.main.GetComponentInParent<Transform>();
     }
 
     /// <summary>
@@ -145,8 +149,20 @@ public class PlayerPushPull : MonoBehaviour
     {
         if (pushing)
         {
-            //Player movement input to vector3
-            Vector3 movementInputV3 = new(movementInput.x, 0, movementInput.y);
+            //Player movement input to vector3 and converted to camerarelative direction
+            Vector3 cameraForward = cameraRig.forward;
+            Vector3 cameraRight = cameraRig.right;
+
+            cameraForward.y = 0;
+            cameraRight.y = 0;
+
+            //Relative camera direction
+            Vector3 relativeForward = movementInput.y * cameraForward;
+            Vector3 relativeRight = movementInput.x * cameraRight;
+
+            Vector3 relativeMove = relativeForward + relativeRight;
+
+            Vector3 movementInputV3Relative = new(relativeMove.x, 0, relativeMove.z);
 
             float magnitude;
             Vector3 direction;
@@ -155,12 +171,12 @@ public class PlayerPushPull : MonoBehaviour
             if (hitDirectionX)
             {
                 direction = Vector3.right;
-                magnitude = Vector3.Dot(movementInputV3, pushableObjectRb.transform.right);
+                magnitude = Vector3.Dot(movementInputV3Relative, pushableObjectRb.transform.right);
             }
             else
             {
                 direction = Vector3.forward;
-                magnitude = Vector3.Dot(movementInputV3, pushableObjectRb.transform.forward);
+                magnitude = Vector3.Dot(movementInputV3Relative, pushableObjectRb.transform.forward);
             }
             //Moving the object and player
             controller.Move(pushableObjectRb.velocity * Time.fixedDeltaTime);
