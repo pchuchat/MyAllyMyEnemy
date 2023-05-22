@@ -30,8 +30,8 @@ TagManager:
   - Interactable
   - TargetArea
   - Player
-  - 
-  - 
+  - Terrain
+  - IgnoreAllButPlayer
   - 
   - 
   - 
