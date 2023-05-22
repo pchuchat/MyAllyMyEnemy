@@ -463,6 +463,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 1e6b9cd17dd76ee429694c660a15dfb0, type: 3}
   heavyThrowSounds:
   - {fileID: 8300000, guid: 44b6c9d5f33304a46bde2034292aedf6, type: 3}
+  - {fileID: 8300000, guid: 3f77d501cddf98048ac1be09250e8726, type: 3}
 --- !u!114 &673739172847429375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -480,6 +481,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6a4192bbb74d01442b4c3d16092b788b, type: 3}
   - {fileID: 8300000, guid: 0dbdbee00914add488bff1c1b2f884db, type: 3}
   - {fileID: 8300000, guid: b4f3ef62a875c8f4ba62c914befdaef0, type: 3}
+  - {fileID: 8300000, guid: d0f3b16d130792c42b408b763d9b59dc, type: 3}
   stopPushingSounds:
   - {fileID: 8300000, guid: 9bdb46e5cee65db4ab20ecd8b41a017e, type: 3}
 --- !u!114 &5282835398790907925
@@ -502,6 +504,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6a4192bbb74d01442b4c3d16092b788b, type: 3}
   - {fileID: 8300000, guid: 0dbdbee00914add488bff1c1b2f884db, type: 3}
   - {fileID: 8300000, guid: b4f3ef62a875c8f4ba62c914befdaef0, type: 3}
+  - {fileID: 8300000, guid: d0f3b16d130792c42b408b763d9b59dc, type: 3}
   dropSound: {fileID: 8300000, guid: 3fa6b943bec685c42bbb726da130bd51, type: 3}
   objectGroundSound: {fileID: 8300000, guid: 7e26c9daf4c32483b9c2790e662d3f1b, type: 3}
 --- !u!114 &7217861737011319438
