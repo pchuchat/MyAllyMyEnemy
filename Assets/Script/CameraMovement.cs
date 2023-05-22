@@ -106,7 +106,7 @@ public class CameraMovement : MonoBehaviour
         players = GameObject.FindGameObjectsWithTag("player");
         for (int i = 0; i < players.Length; i++)
         {
-            if (players[i].GetComponent<CharacterController>().isGrounded)
+            if (players[i].GetComponent<PlayerMovement>().PlayerGrounded())
             {
                 playerPositions[i] = players[i].transform.position;
             }

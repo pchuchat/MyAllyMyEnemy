@@ -399,6 +399,18 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: ef166510-dac3-4372-bfb0-a6e72ffc7963
     m_ActionName: Player/CarryCable[/XInputControllerWindows/buttonEast,/Keyboard/h,/Keyboard/l]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0fd8a01d-aa3d-4638-bcd1-dcbce98f2d26
+    m_ActionName: Player/Pause[/Keyboard/escape,/XInputControllerWindows/start]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ce637d29-4add-446d-93cf-0b6ff4b7374d
+    m_ActionName: UI/Navigate[/XInputControllerWindows/leftStick,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8d77976f-1435-4d90-b7b0-2dc22d3c7e5d
+    m_ActionName: UI/Submit[/XInputControllerWindows/buttonSouth,/Keyboard/enter,/Mouse/leftButton]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -440,7 +452,7 @@ MonoBehaviour:
   targetMask:
     serializedVersion: 2
     m_Bits: 256
-  snapRadius: 2
+  snapRadius: 5
   autoThrowDistance: 5
   crosshairPrefab: {fileID: 6344281822576879752, guid: 7b07dd73b026b6d49b910699650c8edb, type: 3}
   lightPickupSounds:
