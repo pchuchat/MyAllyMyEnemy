@@ -102,6 +102,7 @@ MonoBehaviour:
   newRotation: 180
   rotationTime: 2
   activationTag: triggered
+  allowMultipleRotations: 1
 --- !u!114 &6069709533481141407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,6 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83ba9add0c98c784b8a40a242008d3bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bothPlayersRequired: 1
 --- !u!65 &8928676397344269355
 BoxCollider:
   m_ObjectHideFlags: 0

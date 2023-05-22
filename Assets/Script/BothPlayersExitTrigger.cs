@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class BothPlayersExitTrigger : MonoBehaviour
 {
+    [Tooltip("Defines if both players are needed to activate trigger")][SerializeField] private bool bothPlayersRequired = true;
     private GameObject[] players;
     private bool player1Exited = false;
     private bool player2Exited = false;
@@ -38,10 +39,15 @@ public class BothPlayersExitTrigger : MonoBehaviour
                 else player2Exited = false;
             }
         }
-        if (player1Exited && player2Exited) tag = "triggered";
+        if (player1Exited && player2Exited || !bothPlayersRequired && (player1Exited || player2Exited))
+        {
+            player1Exited = false;
+            player2Exited = false;
+            GetComponent<CameraRotate>().Rotate();
+        }
     }
     private void Update()
     {
-        if (!CompareTag("triggered")) players = GameObject.FindGameObjectsWithTag("player");
+        players = GameObject.FindGameObjectsWithTag("player");
     }
 }
