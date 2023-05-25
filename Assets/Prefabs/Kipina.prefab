@@ -535,6 +535,18 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: ef166510-dac3-4372-bfb0-a6e72ffc7963
     m_ActionName: Player/CarryCable[/DualShock4GamepadHID/buttonEast,/DualShock4GamepadHID1/buttonEast,/Keyboard/h,/Keyboard/l]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0fd8a01d-aa3d-4638-bcd1-dcbce98f2d26
+    m_ActionName: Player/Pause[/Keyboard/escape,/DualShock4GamepadHID1/start]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ce637d29-4add-446d-93cf-0b6ff4b7374d
+    m_ActionName: UI/Navigate[/DualShock4GamepadHID1/leftStick,/DualShock4GamepadHID1/dpad,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8d77976f-1435-4d90-b7b0-2dc22d3c7e5d
+    m_ActionName: UI/Submit[/DualShock4GamepadHID1/buttonSouth,/Keyboard/enter,/Mouse/leftButton]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -590,7 +602,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lightningStrike: {fileID: 8880293685122149207}
-  damageAmount: 10
+  damageAmount: 50
   attackSounds:
   - {fileID: 8300000, guid: 23ef6668658d6a34395236b7da9692a1, type: 3}
   - {fileID: 8300000, guid: 2ef26044eed6fe144b602b11f64b2311, type: 3}
@@ -5633,6 +5645,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4876e8c279b30a5419b606e28704e0eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  source: {fileID: 0}
 --- !u!114 &9034264762090935323
 MonoBehaviour:
   m_ObjectHideFlags: 0

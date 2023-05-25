@@ -54,6 +54,7 @@ GameObject:
   - component: {fileID: 5574026198299699031}
   - component: {fileID: 7048034167308879409}
   - component: {fileID: 5875275591005859387}
+  - component: {fileID: 4056494022008762063}
   m_Layer: 9
   m_Name: Kipina3D
   m_TagString: player
@@ -269,6 +270,18 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: ef166510-dac3-4372-bfb0-a6e72ffc7963
     m_ActionName: Player/CarryCable[/DualShock4GamepadHID/buttonEast,/DualShock4GamepadHID1/buttonEast,/Keyboard/h,/Keyboard/l]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0fd8a01d-aa3d-4638-bcd1-dcbce98f2d26
+    m_ActionName: Player/Pause[/Keyboard/escape,/DualShock4GamepadHID/start]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ce637d29-4add-446d-93cf-0b6ff4b7374d
+    m_ActionName: UI/Navigate[/DualShock4GamepadHID/leftStick,/DualShock4GamepadHID/dpad,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8d77976f-1435-4d90-b7b0-2dc22d3c7e5d
+    m_ActionName: UI/Submit[/DualShock4GamepadHID/buttonSouth,/Keyboard/enter,/Mouse/leftButton]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -5319,6 +5332,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   source: {fileID: 1200229208299677362, guid: e08589107a4f17c45b50d4cf5c744fdf, type: 3}
+--- !u!114 &4056494022008762063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1978736765859351414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dc3d0ecae1eebd4890bdce9997c9099, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 50
+  playerPrefab: {fileID: 1978736765859351414}
+  gameManager: {fileID: 8082152373771825533, guid: aa1c061f3f921a24db2cdc11d5b69475, type: 3}
+  thisPlayerPrefab: {fileID: 1978736765859351414}
+  player1Prefab: {fileID: 7389977614475096561, guid: b3a800dadeae3a6458010c2a8751ffe1, type: 3}
+  player2Prefab: {fileID: 1978736765859351414}
 --- !u!1 &2094491484791968967
 GameObject:
   m_ObjectHideFlags: 0
