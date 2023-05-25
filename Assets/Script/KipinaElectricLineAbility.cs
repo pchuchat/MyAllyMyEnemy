@@ -29,7 +29,6 @@ public class KipinaElectricLineAbility : MonoBehaviour
     private GameObject interactableObject;
     private InteractableDetection interactor;
     private bool hasInteracted = false;
-    private bool hasJumpedOffLine = false;
     private AudioSource audioSource;
 
 
@@ -159,7 +158,6 @@ public class KipinaElectricLineAbility : MonoBehaviour
                 interactor.InteractionFinished();
 
                 // Set the hasJumpedOffLine and hasInteracted flags to false
-                hasJumpedOffLine = true;
                 isOnElectricLine = false;
                 hasInteracted = false;
 
