@@ -3,6 +3,7 @@ using UnityEngine;
 public class BothPlayersExitTrigger : MonoBehaviour
 {
     [Tooltip("Defines if both players are needed to activate trigger")][SerializeField] private bool bothPlayersRequired = true;
+    [Tooltip("Defines if trigger is for camera rotation")][SerializeField] private bool isCameraTrigger = true;
     private GameObject[] players;
     private bool player1Exited = false;
     private bool player2Exited = false;
@@ -20,7 +21,7 @@ public class BothPlayersExitTrigger : MonoBehaviour
             if (other.name == players[0].name)
             {
                 Vector3 exitDirection = transform.InverseTransformDirection(players[0].transform.position - transform.position);
-                if (exitDirection.z > 0) transform.parent.GetComponentInChildren<DeviceOpenDoor>().DoorTriggered();
+                if (exitDirection.z > 0) player1Exited = true;
             }
         }
         // if 2 players are found makes sure that both have their last exit in the right direction
@@ -32,6 +33,7 @@ public class BothPlayersExitTrigger : MonoBehaviour
                 if (exitDirection.z > 0) player1Exited = true;
                 else player1Exited = false;
             }
+
             if (other.name == players[1].name)
             {
                 Vector3 exitDirection = transform.InverseTransformDirection(players[1].transform.position - transform.position);
@@ -43,7 +45,8 @@ public class BothPlayersExitTrigger : MonoBehaviour
         {
             player1Exited = false;
             player2Exited = false;
-            GetComponent<CameraRotate>().Rotate();
+            tag = "triggered";
+            if (isCameraTrigger) GetComponent<CameraRotate>().Rotate();
         }
     }
     private void Update()
