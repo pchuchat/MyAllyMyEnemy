@@ -7,6 +7,12 @@ public class BothPlayersExitTrigger : MonoBehaviour
     private GameObject[] players;
     private bool player1Exited = false;
     private bool player2Exited = false;
+
+    private void Start()
+    {
+        if(isCameraTrigger) GetComponent<CameraRotate>().PreventTagActivation();
+    }
+
     /// <summary>
     /// Called when player exits triggerarea, checks which way the player 
     /// exited and closes the door if they both exited from 
