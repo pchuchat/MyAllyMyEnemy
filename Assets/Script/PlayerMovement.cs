@@ -39,6 +39,9 @@ public class PlayerMovement : MonoBehaviour
     // Current velocity of the player
     private Vector3 playerVelocity;
 
+    // Is the player on a steep slope
+    private bool steepSliding = false;
+
     // The direction the player should slide, ignoring momevent input
     private Vector3 slideDirection = Vector3.zero;
 
@@ -85,7 +88,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (context.performed)
         {
-            if (PlayerGrounded())
+            if (PlayerGrounded() && !steepSliding)
             {
                 coyoteTimer = 0;
                 // Play single jump sound
@@ -130,7 +133,6 @@ public class PlayerMovement : MonoBehaviour
             aboveOtherPlayerCurrentFrame = true;
 
             slideDirection = Vector3.up - hit.normal * Vector3.Dot(Vector3.up, hit.normal);
-            //slideDirection = new Vector3(hit.normal.x, 0, hit.normal.z);
         }
         else
         {
@@ -141,16 +143,41 @@ public class PlayerMovement : MonoBehaviour
 
     public bool PlayerGrounded()
     {
-        return coyoteTimer > 0 && !aboveOtherPlayerLastFrame;
+        return coyoteTimer > 0 && !aboveOtherPlayerLastFrame && !SlopeSliding();
+    }
+
+    bool SlopeSliding()
+    {
+        if (controller.isGrounded)
+        {
+            Vector3 castOrigin = transform.position + new Vector3(0, controller.radius, 0);
+
+            if (Physics.SphereCast(castOrigin, controller.radius - 0.01f, Vector3.down, out RaycastHit hit, 10.0f, ~LayerMask.GetMask("Player"), QueryTriggerInteraction.Ignore))
+            {
+                Collider coll = hit.collider;
+                float angle = Vector3.Angle(Vector3.up, hit.normal);
+
+                if (angle > controller.slopeLimit)
+                {
+                    float speedDivisor = (angle -35) / 20f;
+                    Vector3 normal = hit.normal;
+                    float yInverse = 1f - normal.y;
+                    slideDirection = new Vector3(-yInverse * normal.x / speedDivisor, 0, -yInverse * normal.z / speedDivisor);
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     void Update()
     {
         // Check if the player is currently grounded
         groundedPlayer = controller.isGrounded;
-        if (groundedPlayer && playerVelocity.y <= 0 && !aboveOtherPlayerLastFrame)
+        steepSliding = SlopeSliding();
+        if (groundedPlayer && playerVelocity.y <= 0 && !aboveOtherPlayerLastFrame && !steepSliding)
         {
-            coyoteTimer = 0.2f;
+            coyoteTimer = 0.1f;
             slideDirection = Vector3.zero;
         }
         if (coyoteTimer > 0)
@@ -158,7 +185,7 @@ public class PlayerMovement : MonoBehaviour
             coyoteTimer -= Time.deltaTime;
         }
         // Reset player velocity to zero when grounded
-        if (groundedPlayer && playerVelocity.y < 0)
+        if (groundedPlayer && playerVelocity.y < 0 && !steepSliding)
         {
             playerVelocity.y = -2f;
 
@@ -185,10 +212,12 @@ public class PlayerMovement : MonoBehaviour
 
         if (slideDirection == Vector3.zero)
         {
+            Physics.SyncTransforms();
             controller.Move(playerSpeed * Time.deltaTime * move);
         }
         else
         {
+            Physics.SyncTransforms();
             controller.Move(-playerSpeed * Time.deltaTime * slideDirection);
         }
 
@@ -200,6 +229,7 @@ public class PlayerMovement : MonoBehaviour
 
         // Apply gravity to the player's velocity and move the player
         playerVelocity.y += gravityValue * Time.deltaTime;
+        Physics.SyncTransforms();
         controller.Move(playerVelocity * Time.deltaTime);
     }
 
