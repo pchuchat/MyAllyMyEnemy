@@ -12,7 +12,6 @@ public class PlayerCarryCable : MonoBehaviour
     private GameObject cableEnd;
     private Rigidbody cableEndRB;
     private bool carrying = false;
-    private PlayerInput input;
 
     // Start is called before the first frame update
     void Start()
@@ -35,7 +34,6 @@ public class PlayerCarryCable : MonoBehaviour
         {
             if(carrying == false)
             {
-                input = GetComponent<PlayerInput>();
                 cableEnd = interactor.GetInteractable("cableEnd");
                 if(cableEnd != null)
                 {
