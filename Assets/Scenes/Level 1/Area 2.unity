@@ -16735,7 +16735,7 @@ MonoBehaviour:
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
-  m_SelectedVertices: b6020000
+  m_SelectedVertices: 
 --- !u!1 &1918371018
 GameObject:
   m_ObjectHideFlags: 0
