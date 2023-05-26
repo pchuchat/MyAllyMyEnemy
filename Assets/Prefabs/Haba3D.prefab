@@ -666,11 +666,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 50
-  playerPrefab: {fileID: 7389977614475096561}
-  gameManager: {fileID: 8082152373771825533, guid: aa1c061f3f921a24db2cdc11d5b69475, type: 3}
-  thisPlayerPrefab: {fileID: 7389977614475096561}
-  player1Prefab: {fileID: 7389977614475096561}
-  player2Prefab: {fileID: 1978736765859351414, guid: 88d3a69b47a32cf4db9d0192e065578e, type: 3}
 --- !u!1 &7505540812473675600
 GameObject:
   m_ObjectHideFlags: 0
@@ -796,6 +791,10 @@ PrefabInstance:
     - target: {fileID: 100002, guid: 28a5e79925e3ce04a82856c16a572cbe, type: 3}
       propertyPath: m_Name
       value: BlobShadowProjector
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 28a5e79925e3ce04a82856c16a572cbe, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 28a5e79925e3ce04a82856c16a572cbe, type: 3}
       propertyPath: m_RootOrder
