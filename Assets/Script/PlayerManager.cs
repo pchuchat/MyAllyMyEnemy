@@ -79,14 +79,14 @@ public class PlayerManager : MonoBehaviour
         }
 
         // Moves the players to their proper starting coordinates in level 1
-        player1.GetComponent<Transform>().position = new Vector3(-2.0f, -0.5f, 0.0f);
-        player2.GetComponent<Transform>().position = new Vector3(3.0f, -0.23f, -3.0f);
+        //player1.GetComponent<Transform>().position = new Vector3(-2.0f, -0.5f, 0.0f);
+        //player2.GetComponent<Transform>().position = new Vector3(3.0f, -0.23f, -3.0f);
 
         p1.GetComponent<Transform>().rotation = Quaternion.LookRotation(new Vector3(1f, -10f, 1f));
         p2.GetComponent<Transform>().rotation = Quaternion.LookRotation(new Vector3(2f, -10f, -1f));
 
-        //player1.GetComponent<Transform>().position = new Vector3(-119.0f, 18.0f, 178.0f);
-        //player2.GetComponent<Transform>().position = new Vector3(-121.0f, 18.0f, 179.0f);
+        player1.GetComponent<Transform>().position = new Vector3(-119.0f, 18.0f, 178.0f);
+        player2.GetComponent<Transform>().position = new Vector3(-121.0f, 18.0f, 179.0f);
         //player1.GetComponent<Transform>().position = new Vector3(-8.0f, 15.0f, 191.0f);
         //player2.GetComponent<Transform>().position = new Vector3(-5.0f, 15.0f, 191.0f);
     }
