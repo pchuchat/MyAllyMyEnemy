@@ -65,14 +65,18 @@ public class PlayerCarryCable : MonoBehaviour
     /// <summary>
     /// Drops cableEnd and nulls variables
     /// </summary>
-    private void DropCable()
+    public void DropCable()
     {
-        carrying = false;
-        cableEnd.transform.SetParent(null);
-        cableEndRB.useGravity = true;
-        cableEndRB.constraints &= ~RigidbodyConstraints.FreezePositionY;
-        cableEnd = null;
-        cableEndRB = null;
-        interactor.InteractionFinished();
+        if (carrying)
+        {
+            carrying = false;
+            cableEnd.transform.SetParent(null);
+            cableEndRB.useGravity = true;
+            cableEndRB.constraints &= ~RigidbodyConstraints.FreezePositionY;
+            cableEnd = null;
+            cableEndRB = null;
+            interactor.InteractionFinished();
+        }       
     }
+
 }

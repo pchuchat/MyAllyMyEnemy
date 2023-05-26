@@ -142,6 +142,10 @@ PrefabInstance:
       propertyPath: lightDropSound
       value: 
       objectReference: {fileID: 8300000, guid: e331a11d9243f2e45baa403bd86bf5a1, type: 3}
+    - target: {fileID: 3266626726262800377, guid: 3a4bcd38cf32c1b428d6f922a185f7e1, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4430466193398533942, guid: 3a4bcd38cf32c1b428d6f922a185f7e1, type: 3}
       propertyPath: m_Name
       value: DoorDevice
@@ -547,6 +551,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 644137077}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &731776492 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5381858982670102326, guid: 3a4bcd38cf32c1b428d6f922a185f7e1, type: 3}
+  m_PrefabInstance: {fileID: 115909604}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &731776500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 731776492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2950437de837b5e49a22eae06c3677ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &783166547
 GameObject:
   m_ObjectHideFlags: 0
