@@ -20,11 +20,17 @@ public class RandomSoundPlayer : MonoBehaviour
         if (clips.Count == 0) return;
         if (Random.Range(0f, 100f) <= chanceToPlay)
         {
-            if (source != null) tempSource = Instantiate(source);
+            bool destroyparent = false;
+            if (source != null)
+            {
+                destroyparent = true;
+                tempSource = Instantiate(source);
+            }
             else tempSource = gameObject.AddComponent<AudioSource>();
             tempSource.clip = clips[Random.Range(0, clips.Count)];
             tempSource.Play();
-            Destroy(tempSource, tempSource.clip.length);
+            if (destroyparent) Destroy(tempSource.transform.gameObject, tempSource.clip.length);
+            else Destroy(tempSource, tempSource.clip.length);
         }
     }
 }
