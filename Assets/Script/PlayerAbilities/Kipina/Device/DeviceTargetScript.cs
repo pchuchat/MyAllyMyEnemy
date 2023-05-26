@@ -9,6 +9,7 @@ using UnityEngine;
 public class DeviceTargetScript : MonoBehaviour
 {
     public bool cable;
+    private Rigidbody cableEndRB;
 
     /// <summary>
     /// Changes parent's tag to "noCharge" if object entering trigger-area is cableEnd
@@ -46,6 +47,8 @@ public class DeviceTargetScript : MonoBehaviour
         if (other.CompareTag("cableEnd"))
         {
             cable = false;
+            cableEndRB = transform.parent.GetComponent<Rigidbody>();
+            cableEndRB.constraints = RigidbodyConstraints.FreezeAll;
             transform.parent.tag = "Untagged";
         }
     }
