@@ -217,7 +217,6 @@ GameObject:
   - component: {fileID: -7828909219369795387}
   - component: {fileID: 6749885218394205927}
   - component: {fileID: 4697935444282087687}
-  - component: {fileID: 6307480934672779117}
   m_Layer: 9
   m_Name: Haba3D
   m_TagString: player
@@ -271,6 +270,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 0a23b63b55ca17f43a39644416ff8620, type: 3}
   alwaysPlayDoubleJumpSounds:
   - {fileID: 8300000, guid: d39c0d09e4e059b47a314a09abb98863, type: 3}
+  carrying: 0
+  lifting: 0
+  pushing: 0
+  pushMoving: 0
 --- !u!114 &-6513605987461919689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -653,19 +656,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   source: {fileID: 1200229208299677362, guid: e08589107a4f17c45b50d4cf5c744fdf, type: 3}
---- !u!114 &6307480934672779117
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7389977614475096561}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0dc3d0ecae1eebd4890bdce9997c9099, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 50
 --- !u!1 &7505540812473675600
 GameObject:
   m_ObjectHideFlags: 0

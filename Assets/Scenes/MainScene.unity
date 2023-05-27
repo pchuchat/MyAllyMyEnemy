@@ -7411,7 +7411,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8484650840706009961, guid: e9358aa12ec534e42bdb559892745f03, type: 3}
       propertyPath: far clip plane
-      value: 120
+      value: 230
       objectReference: {fileID: 0}
     - target: {fileID: 8484650840706009961, guid: e9358aa12ec534e42bdb559892745f03, type: 3}
       propertyPath: near clip plane

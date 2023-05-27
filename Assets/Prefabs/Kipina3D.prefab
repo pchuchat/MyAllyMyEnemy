@@ -54,7 +54,6 @@ GameObject:
   - component: {fileID: 5574026198299699031}
   - component: {fileID: 7048034167308879409}
   - component: {fileID: 5875275591005859387}
-  - component: {fileID: 4056494022008762063}
   m_Layer: 9
   m_Name: Kipina3D
   m_TagString: player
@@ -129,6 +128,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: a4192ba5ad75ef343bb7b2ec15973e66, type: 3}
   alwaysPlayDoubleJumpSounds:
   - {fileID: 8300000, guid: 83ff000692cf56843a2de9fb3cc54b05, type: 3}
+  carrying: 0
+  lifting: 0
+  pushing: 0
+  pushMoving: 0
 --- !u!114 &7778397587872483313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5332,19 +5335,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   source: {fileID: 1200229208299677362, guid: e08589107a4f17c45b50d4cf5c744fdf, type: 3}
---- !u!114 &4056494022008762063
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1978736765859351414}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0dc3d0ecae1eebd4890bdce9997c9099, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 50
 --- !u!1 &2094491484791968967
 GameObject:
   m_ObjectHideFlags: 0

@@ -36,6 +36,9 @@ public class PlayerMovement : MonoBehaviour
     // Reference to the CharacterController component
     private CharacterController controller;
 
+    // Reference to the Animator component
+    private Animator animator;
+
     // Current velocity of the player
     private Vector3 playerVelocity;
 
@@ -67,11 +70,17 @@ public class PlayerMovement : MonoBehaviour
 
     private PlayerCarryCable carryCable;
 
+    public bool carrying = false;
+    public bool lifting = false;
+    public bool pushing = false;
+    public bool pushMoving = false;
+
 
     private void Start()
     {
         // Get the CharacterController component on this object
         controller = gameObject.GetComponent<CharacterController>();
+        animator = gameObject.GetComponentInChildren<Animator>();
         // Get random sound player for soundeffects
         randomizer = GetComponent<RandomSoundPlayer>();
         cameraRig = Camera.main.GetComponentInParent<Transform>();
@@ -101,6 +110,10 @@ public class PlayerMovement : MonoBehaviour
                 // Allow double jump
                 canDoubleJump = true;
                 if (carryCable != null && carryCable.IsCarrying()) canDoubleJump = false;
+
+                animator.ResetTrigger("Idle");
+                animator.ResetTrigger("Walk");
+                animator.SetTrigger("Jump");
             }
             else if (canDoubleJump)
             {
@@ -121,6 +134,8 @@ public class PlayerMovement : MonoBehaviour
 
                 // Disable double jump until next grounded state
                 canDoubleJump = false;
+
+                animator.SetTrigger("Jump");
             }
         }
     }
@@ -231,6 +246,49 @@ public class PlayerMovement : MonoBehaviour
         playerVelocity.y += gravityValue * Time.deltaTime;
         Physics.SyncTransforms();
         controller.Move(playerVelocity * Time.deltaTime);
+
+        // Movement animation
+        if (movementInput != Vector2.zero && PlayerGrounded() && !lifting && !pushing)
+        {
+            if (carrying)
+            {
+                animator.SetTrigger("Carrywalk");
+            }
+            else
+            {
+                animator.SetTrigger("Walk");
+            }
+        }
+
+        // Idle animation
+        if (movementInput == Vector2.zero && PlayerGrounded() && !lifting && !pushing)
+        {
+            if (carrying)
+            {
+                animator.SetTrigger("Carry");
+            }
+            else
+            {
+                animator.SetTrigger("Idle");
+            }
+        }
+
+        // Lift animation
+        if (lifting)
+        {
+            animator.SetTrigger("Lift");
+        }
+        else
+        {
+            animator.ResetTrigger("Lift");
+        }
+
+
+        // Freefall animation
+        if (!PlayerGrounded())
+        {
+            animator.SetTrigger("Freefall");
+        }
     }
 
 }
