@@ -27,6 +27,7 @@ public class PlayerCarryItem : MonoBehaviour
     //Player
     private CharacterController controller;
     private PlayerInput input;
+    private PlayerMovement move;
     private bool carrying = false;      //whether the player is carrying an object or not
     private InteractableDetection interactor;
     private Vector3 force = new(); //Throwingforce needed to reach target at given angle
@@ -51,6 +52,7 @@ public class PlayerCarryItem : MonoBehaviour
         controller = gameObject.GetComponent<CharacterController>();
         interactor = GetComponent<InteractableDetection>();
         randomizer = GetComponent<RandomSoundPlayer>();
+        move = GetComponent <PlayerMovement>();
     }
 
     /// <summary>
@@ -66,6 +68,7 @@ public class PlayerCarryItem : MonoBehaviour
             if (carrying)
             {
                 ThrowObject();
+                move.carrying = false;
             }
             else
             {
@@ -76,6 +79,7 @@ public class PlayerCarryItem : MonoBehaviour
                     movableObject = movableObjectGO.GetComponent<MovableObject>();
                     targets = spawner.GetComponent<MovableObjectSpawner>().GetTargets();
                     PickUpObject();
+                    move.carrying = true;
                 }
             }
         }
@@ -93,7 +97,7 @@ public class PlayerCarryItem : MonoBehaviour
         movableObjectGO.transform.forward = controller.transform.forward;
 
         //Calculating and setting the position for carrying item
-        Vector3 targetPos = transform.position + transform.forward * (transform.localScale.z/2 + movableObjectGO.transform.localScale.z/2) + transform.up * transform.localScale.y;
+        Vector3 targetPos = transform.position + transform.forward * (transform.localScale.z/2 + movableObjectGO.transform.localScale.z/2) + transform.up * (transform.localScale.y + 0.2f);
         movableObjectGO.transform.position = targetPos;
 
         movableObjectGO.transform.SetParent(transform);
