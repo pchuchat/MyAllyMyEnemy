@@ -71,6 +71,9 @@ public class PlayerMovement : MonoBehaviour
     private PlayerCarryCable carryCable;
 
     public bool carrying = false;
+    public bool lifting = false;
+    public bool pushing = false;
+    public bool pushMoving = false;
 
 
     private void Start()
@@ -244,8 +247,8 @@ public class PlayerMovement : MonoBehaviour
         Physics.SyncTransforms();
         controller.Move(playerVelocity * Time.deltaTime);
 
-        // Animations if moving
-        if (movementInput != Vector2.zero && PlayerGrounded())
+        // Movement animation
+        if (movementInput != Vector2.zero && PlayerGrounded() && !lifting && !pushing)
         {
             if (carrying)
             {
@@ -253,13 +256,12 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                //animator.ResetTrigger("Idle");
                 animator.SetTrigger("Walk");
             }
         }
 
-        // Animations if idle
-        if (movementInput == Vector2.zero && PlayerGrounded())
+        // Idle animation
+        if (movementInput == Vector2.zero && PlayerGrounded() && !lifting && !pushing)
         {
             if (carrying)
             {
@@ -267,9 +269,25 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                //animator.ResetTrigger("Walk");
                 animator.SetTrigger("Idle");
             }
+        }
+
+        // Lift animation
+        if (lifting)
+        {
+            animator.SetTrigger("Lift");
+        }
+        else
+        {
+            animator.ResetTrigger("Lift");
+        }
+
+
+        // Freefall animation
+        if (!PlayerGrounded())
+        {
+            animator.SetTrigger("Freefall");
         }
     }
 

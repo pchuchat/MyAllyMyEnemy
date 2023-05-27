@@ -68,7 +68,6 @@ public class PlayerCarryItem : MonoBehaviour
             if (carrying)
             {
                 ThrowObject();
-                move.carrying = false;
             }
             else
             {
@@ -79,7 +78,6 @@ public class PlayerCarryItem : MonoBehaviour
                     movableObject = movableObjectGO.GetComponent<MovableObject>();
                     targets = spawner.GetComponent<MovableObjectSpawner>().GetTargets();
                     PickUpObject();
-                    move.carrying = true;
                 }
             }
         }
@@ -106,6 +104,7 @@ public class PlayerCarryItem : MonoBehaviour
         simulation.SetCrosshair(crosshairPrefab);
         movableObjectRb = movableObjectGO.GetComponent<Rigidbody>();
         carrying = true;
+        move.carrying = true;
     }
 
     /// <summary>
@@ -131,6 +130,7 @@ public class PlayerCarryItem : MonoBehaviour
         }
         movableObjectGO = null;
         carrying = false;
+        move.carrying = false;
         input.actions.FindAction("Jump").Enable();
         targets = null;
         movableObject = null;

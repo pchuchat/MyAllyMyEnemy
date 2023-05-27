@@ -24,6 +24,7 @@ public class PlayerPushPull : MonoBehaviour
     private Vector2 movementInput;
     private bool pushing = false;
     private RandomSoundPlayer randomizer;
+    private Animator animator;
 
     //Pushable object
     private bool hitDirectionX;
@@ -43,6 +44,7 @@ public class PlayerPushPull : MonoBehaviour
         interactor = GetComponent<InteractableDetection>();
         randomizer = GetComponent<RandomSoundPlayer>();
         cameraRig = Camera.main.GetComponentInParent<Transform>();
+        animator = gameObject.GetComponentInChildren<Animator>();
     }
 
     /// <summary>
@@ -101,6 +103,16 @@ public class PlayerPushPull : MonoBehaviour
         pushing = false;
         pushableObject = null;
         pushableObjAudioSource = null;
+
+        if (movementInput != Vector2.zero)
+        {
+            animator.SetTrigger("Walk");
+        }
+        else
+        {
+            animator.SetTrigger("Idle");
+        }
+
         interactor.InteractionFinished();
     }
 
@@ -143,6 +155,18 @@ public class PlayerPushPull : MonoBehaviour
         if (groundedDelay > 0)
         {
             groundedDelay -= Time.deltaTime;
+        }
+
+        if (pushing)
+        {
+            if (movementInput != Vector2.zero)
+            {
+                animator.SetTrigger("Pushwalk");
+            }
+            else
+            {
+                animator.SetTrigger("Push");
+            }
         }
     }
     private void FixedUpdate()

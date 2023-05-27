@@ -41,6 +41,7 @@ public class PlayerLiftObject : MonoBehaviour
     private int timer;          // "Timer" that counts if buttonpressing stops (actually counts frames)
     private PlayerInput input; // Used to disable movement and jump while lifting
     private CharacterController controller; // Playercharacter
+    private PlayerMovement move;
     private InteractableDetection interactor;
     private RandomSoundPlayer randomizer;
     private int tapCounter;
@@ -57,6 +58,7 @@ public class PlayerLiftObject : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         interactor = GetComponent<InteractableDetection>();
         randomizer = GetComponent<RandomSoundPlayer>();
+        move = GetComponent<PlayerMovement>();
     }
 
     /// <summary>
@@ -82,6 +84,7 @@ public class PlayerLiftObject : MonoBehaviour
                     input.actions.FindAction("Movement").Disable();
                     input.actions.FindAction("Jump").Disable();
                     canLift = true;
+                    move.lifting = true;
                 }
             }
 
@@ -123,6 +126,7 @@ public class PlayerLiftObject : MonoBehaviour
                 controller.Move(transform.forward * -0.5f);
                 audioSource.clip = dropSound;
                 audioSource.Play();
+                move.lifting = false;
             }           
             if (timer <= 0)
             {
