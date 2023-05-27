@@ -6,6 +6,7 @@ public class MainMenu : MonoBehaviour
 {
     public Animator animator;
     public PlayerInput playerInput;
+    public AudioSource source;
 
     private int action;
 
@@ -16,6 +17,7 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame()
     {
+        source.Play();
         playerInput.DeactivateInput();
         action = 1;
         animator.SetTrigger("FadeOut");
@@ -23,6 +25,7 @@ public class MainMenu : MonoBehaviour
 
     public void QuitGame()
     {
+        source.Play();
         playerInput.DeactivateInput();
         action = 2;
         animator.SetTrigger("FadeOut");
