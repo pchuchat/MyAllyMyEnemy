@@ -267,9 +267,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 58171893447e5b14e8605fae0243edb7, type: 3}
   - {fileID: 8300000, guid: c831c7a30911f3a459a0aa44f11da7fe, type: 3}
   alwaysPlayJumpSounds:
-  - {fileID: 8300000, guid: 0a23b63b55ca17f43a39644416ff8620, type: 3}
+  - {fileID: 8300000, guid: a48087ad534e3ad449c44e0c08457266, type: 3}
   alwaysPlayDoubleJumpSounds:
-  - {fileID: 8300000, guid: d39c0d09e4e059b47a314a09abb98863, type: 3}
+  - {fileID: 8300000, guid: b4ef7d91a3d7ba14a82787bce25519f3, type: 3}
   carrying: 0
   lifting: 0
   pushing: 0
