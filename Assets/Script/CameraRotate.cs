@@ -1,6 +1,10 @@
 using System.Reflection.Emit;
 using UnityEngine;
 using UnityEngine.UIElements;
+// ©GameGurus - Heikkinen R., Hopeasaari J., Kantola J., Kettunen J., Kommio R, PC, Parviainen P., Rautiainen J.
+// Creator: Kettunen. J
+//
+// Script for calculating camera rotations to match desired rotation in desired direction
 
 public class CameraRotate : MonoBehaviour
 {

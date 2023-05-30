@@ -4,6 +4,8 @@ using UnityEngine;
 // Creator: Kettunen. J
 //
 // Finds objects in the given layer colliding with overlapcapsule that is definde byt interactPointBottom, -Top and radius.
+// Locks the players interactions while s/he is interacting with something so they cant start 2 interactions simultaneously
+// Also makes sure that player is grounded while starting interaction.
 public class InteractableDetection : MonoBehaviour
 {
     [Header("Interact capsule attributes")]
@@ -30,13 +32,6 @@ public class InteractableDetection : MonoBehaviour
     private void Start()
     {
         playerMoveScript = GetComponent<PlayerMovement>();
-    }
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(interactionBottomLimit, interactionRadius);
-        Gizmos.DrawWireSphere(interactionTopLimit, interactionRadius);
-
     }
 
     private void Update()
