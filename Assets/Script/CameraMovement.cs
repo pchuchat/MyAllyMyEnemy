@@ -58,6 +58,11 @@ public class CameraMovement : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Starts a camera rotation with given specs
+    /// </summary>
+    /// <param name="rotDeg">How many degrees we want to rotate</param>
+    /// <param name="rotateSpeed">Defines speed by how many degrees/second for rotation</param>
     public void RotateCamera(float rotDeg, float rotateSpeed)
     {
         this.rotateSpeed = rotateSpeed;
