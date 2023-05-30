@@ -3,6 +3,8 @@ using UnityEngine;
 // Creator: Kettunen. J
 //
 // Gives the object neccessary variables for interactions
+// Sets Outline for interactable objects depending on which player can interact with it
+// Shows hints for interactable object on players hint canvas depending on who tries to interact
 [RequireComponent(typeof(Outline))]
 public class IsInteractable : MonoBehaviour
 {

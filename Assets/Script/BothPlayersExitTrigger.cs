@@ -1,4 +1,7 @@
 using UnityEngine;
+// ©GameGurus - Heikkinen R., Hopeasaari J., Kantola J., Kettunen J., Kommio R, PC, Parviainen P., Rautiainen J.
+// Creator: Kettunen. J
+// Custom trigger for detecting if both players have exited trigger from backside, also the option for activation with only one player
 
 public class BothPlayersExitTrigger : MonoBehaviour
 {
@@ -33,6 +36,7 @@ public class BothPlayersExitTrigger : MonoBehaviour
         // if 2 players are found makes sure that both have their last exit in the right direction
         if (players.Length == 2)
         {
+            //Detecting player 1 exit
             if (other.name == players[0].name)
             {
                 Vector3 exitDirection = transform.InverseTransformDirection(players[0].transform.position - transform.position);
@@ -40,6 +44,7 @@ public class BothPlayersExitTrigger : MonoBehaviour
                 else player1Exited = false;
             }
 
+            //Detecting player 2 exit
             if (other.name == players[1].name)
             {
                 Vector3 exitDirection = transform.InverseTransformDirection(players[1].transform.position - transform.position);
@@ -47,6 +52,7 @@ public class BothPlayersExitTrigger : MonoBehaviour
                 else player2Exited = false;
             }
         }
+        //Checking if trigger activation requirements are met
         if (player1Exited && player2Exited || !bothPlayersRequired && (player1Exited || player2Exited))
         {
             player1Exited = false;
@@ -57,6 +63,7 @@ public class BothPlayersExitTrigger : MonoBehaviour
     }
     private void Update()
     {
+        //Finds players in scene
         players = GameObject.FindGameObjectsWithTag("player");
     }
 }
