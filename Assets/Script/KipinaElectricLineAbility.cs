@@ -9,11 +9,13 @@ public class KipinaElectricLineAbility : MonoBehaviour
 {
 
     [SerializeField] private float electricLineSpeed = 5.0f; // The speed at which the player moves along the electric line
-    [SerializeField] private GameObject electricBall; // The electric ball object that follows the player along the electric line
-    [SerializeField] private GameObject electricBallHolder; // The holder object for the electric ball
+    [SerializeField] private ParticleSystem electricParticles; // The particle system that generates the electricity effect
     [SerializeField] private AudioClip electricLineLoopSound; // The sound played while the player is on the electric line
     [SerializeField] private AudioClip electricLineEnterSound; // The sound played when the player enters the electric line
     [SerializeField] private AudioClip electricLineExitSound; // The sound played when the player exits the electric line
+    [SerializeField] private SkinnedMeshRenderer[] skinnedMeshes; // Mesh renderers for the character
+    [SerializeField] private MeshRenderer singleMesh; // The one non-skinned mesh renderer
+
 
 
 
@@ -40,8 +42,7 @@ public class KipinaElectricLineAbility : MonoBehaviour
     private void Start()
     {
         // Initialize variables
-        electricBall = electricBallHolder.transform.GetChild(0).gameObject;
-        SetElectricBallActive(false);
+        SetParticleSystemActive(false);
         characterController = GetComponent<CharacterController>();
         playerMovement = GetComponent<PlayerMovement>();
         interactor = GetComponent<InteractableDetection>();
@@ -53,13 +54,33 @@ public class KipinaElectricLineAbility : MonoBehaviour
     }
 
 
-    // Set the electric ball object's visibility and position
-    private void SetElectricBallActive(bool active)
+    // Turn the particle system on and off
+    private void SetParticleSystemActive(bool active)
     {
-        electricBall.GetComponent<MeshRenderer>().enabled = active;
-        electricBall.transform.position = startPosition;
+        if (active)
+        {
+            electricParticles.Play();
 
+            for (int i=0; i<skinnedMeshes.Length; i++)
+            {
+                skinnedMeshes[i].enabled = false;
+            }
+
+            singleMesh.enabled = false;
+        }
+        else
+        {
+            electricParticles.Stop();
+
+            for (int i = 0; i < skinnedMeshes.Length; i++)
+            {
+                skinnedMeshes[i].enabled = true;
+            }
+
+            singleMesh.enabled = true;
+        }
     }
+
     // Called when the player interacts with the environment
     public void OnInteract(InputAction.CallbackContext context)
     {
@@ -99,7 +120,7 @@ public class KipinaElectricLineAbility : MonoBehaviour
                 characterController.enabled = false;
 
                 // Activate the electric ball object
-                SetElectricBallActive(true);
+                SetParticleSystemActive(true);
 
                 // Play the electric line enter sound
                 audioSource.PlayOneShot(electricLineEnterSound);
@@ -151,8 +172,8 @@ public class KipinaElectricLineAbility : MonoBehaviour
                 playerMovement.enabled = true;
                 characterController.enabled = true;
 
-                // Set the ElectricBall object to inactive
-                SetElectricBallActive(false);
+                // Set the ElectricBall object to inactive //////////////////////////////////////////////////
+                SetParticleSystemActive(false);
 
                 // Free up the interactor
                 interactor.InteractionFinished();

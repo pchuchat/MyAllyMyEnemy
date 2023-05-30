@@ -23,6 +23,7 @@ public class DeviceOpenDoor : MonoBehaviour
     private Rigidbody rb;           // The rigidbidy of the moveable-object
     private Vector3 startP;         // The position where object starts
     private Vector3 targetP;        // Target position where object is moved
+    private IsInteractable interactScript;
 
     /// <summary>
     /// Sets audiosource 
@@ -33,6 +34,7 @@ public class DeviceOpenDoor : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         transform.GetComponent<DeviceOpenDoor>().enabled = false;
+        interactScript = GetComponent<IsInteractable>();
     }
 
     /// <summary>
@@ -54,6 +56,8 @@ public class DeviceOpenDoor : MonoBehaviour
             audioSource.clip = chargedDeviceSound;
             audioSource.loop = true;
             audioSource.Play();
+            interactScript.interactHint = "";
+            interactScript.cantInteractHint = "";
         }
 
     }

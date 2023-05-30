@@ -11,8 +11,9 @@ public class PlayerCarryCable : MonoBehaviour
     private InteractableDetection interactor;
     private GameObject cableEnd;
     private Rigidbody cableEndRB;
-    private bool carrying = false;
     private PlayerInput input;
+
+    public bool carrying = false;
 
     // Start is called before the first frame update
     void Start()
@@ -67,7 +68,7 @@ public class PlayerCarryCable : MonoBehaviour
     /// <summary>
     /// Drops cableEnd and nulls variables
     /// </summary>
-    private void DropCable()
+    public void DropCable()
     {
         carrying = false;
         cableEnd.transform.SetParent(null);
