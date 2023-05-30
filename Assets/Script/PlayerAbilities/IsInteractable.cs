@@ -8,8 +8,8 @@ public class IsInteractable : MonoBehaviour
 {
     private enum Player { Haba3D, Kipina3D }
     [Tooltip("Player that can interact with this item")] [SerializeField] private Player player;
-    [Tooltip("Hint for player that can interact")] [SerializeField] private string interactHint = "example hint";
-    [Tooltip("Hint for player that can't interact")] [SerializeField] private string cantInteractHint = "You can't interact with this one";
+    [Tooltip("Hint for player that can interact")] [SerializeField] public string interactHint = "example hint";
+    [Tooltip("Hint for player that can't interact")] [SerializeField] public string cantInteractHint = "You can't interact with this one";
     [Tooltip("Thickness of the outline")] [SerializeField] private float outlineThickness = 2f;
     [Tooltip("How much the objects borders are highlighted")] [SerializeField] private float highlightmultiplier = 2;
     private Outline highlight;

@@ -359,10 +359,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 993277837}
     m_Modifications:
-    - target: {fileID: 2416721759385372986, guid: 3a4bcd38cf32c1b428d6f922a185f7e1, type: 3}
-      propertyPath: m_LocalScale.y
-      value: -5.12
-      objectReference: {fileID: 0}
     - target: {fileID: 3906670010592636387, guid: 3a4bcd38cf32c1b428d6f922a185f7e1, type: 3}
       propertyPath: m_LocalScale.x
       value: 22
@@ -383,25 +379,13 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 3.16
       objectReference: {fileID: 0}
-    - target: {fileID: 4286076575908617269, guid: 3a4bcd38cf32c1b428d6f922a185f7e1, type: 3}
-      propertyPath: interactHint
-      value: Press O to activate
-      objectReference: {fileID: 0}
-    - target: {fileID: 4286076575908617269, guid: 3a4bcd38cf32c1b428d6f922a185f7e1, type: 3}
-      propertyPath: cantInteractHint
-      value: You need electric abilities to manipulate this
+    - target: {fileID: 4074498806284322693, guid: 3a4bcd38cf32c1b428d6f922a185f7e1, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4430466193398533942, guid: 3a4bcd38cf32c1b428d6f922a185f7e1, type: 3}
       propertyPath: m_Name
       value: DoorDevice
-      objectReference: {fileID: 0}
-    - target: {fileID: 5381858982670102320, guid: 3a4bcd38cf32c1b428d6f922a185f7e1, type: 3}
-      propertyPath: interactHint
-      value: Press O to pick up the conductor
-      objectReference: {fileID: 0}
-    - target: {fileID: 5381858982670102320, guid: 3a4bcd38cf32c1b428d6f922a185f7e1, type: 3}
-      propertyPath: cantInteractHint
-      value: You might get electrocuted if you picked this up
       objectReference: {fileID: 0}
     - target: {fileID: 5381858982670102323, guid: 3a4bcd38cf32c1b428d6f922a185f7e1, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -537,7 +521,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh129404
+  m_Name: pb_Mesh190334
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -845,7 +829,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh129264
+  m_Name: pb_Mesh190190
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1173,10 +1157,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1616180761}
     m_Modifications:
-    - target: {fileID: 2416721759385372986, guid: 3a4bcd38cf32c1b428d6f922a185f7e1, type: 3}
-      propertyPath: m_LocalScale.y
-      value: -5.12
-      objectReference: {fileID: 0}
     - target: {fileID: 3906670010592636387, guid: 3a4bcd38cf32c1b428d6f922a185f7e1, type: 3}
       propertyPath: m_LocalScale.x
       value: 22
@@ -1197,25 +1177,13 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 3.16
       objectReference: {fileID: 0}
-    - target: {fileID: 4286076575908617269, guid: 3a4bcd38cf32c1b428d6f922a185f7e1, type: 3}
-      propertyPath: interactHint
-      value: Press O to activate
-      objectReference: {fileID: 0}
-    - target: {fileID: 4286076575908617269, guid: 3a4bcd38cf32c1b428d6f922a185f7e1, type: 3}
-      propertyPath: cantInteractHint
-      value: You need electric abilities to manipulate this
+    - target: {fileID: 4074498806284322693, guid: 3a4bcd38cf32c1b428d6f922a185f7e1, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4430466193398533942, guid: 3a4bcd38cf32c1b428d6f922a185f7e1, type: 3}
       propertyPath: m_Name
       value: DoorDevice
-      objectReference: {fileID: 0}
-    - target: {fileID: 5381858982670102320, guid: 3a4bcd38cf32c1b428d6f922a185f7e1, type: 3}
-      propertyPath: interactHint
-      value: Press O to pick up
-      objectReference: {fileID: 0}
-    - target: {fileID: 5381858982670102320, guid: 3a4bcd38cf32c1b428d6f922a185f7e1, type: 3}
-      propertyPath: cantInteractHint
-      value: You might get electrocuted if you picked this up
       objectReference: {fileID: 0}
     - target: {fileID: 5381858982670102323, guid: 3a4bcd38cf32c1b428d6f922a185f7e1, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2208,7 +2176,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh129380
+  m_Name: pb_Mesh190278
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4232,7 +4200,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh129564
+  m_Name: pb_Mesh190442
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5426,7 +5394,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh129798
+  m_Name: pb_Mesh190710
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -13374,7 +13342,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh129250
+  m_Name: pb_Mesh190176
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -13538,7 +13506,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh129158
+  m_Name: pb_Mesh190070
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -13760,7 +13728,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh129444
+  m_Name: pb_Mesh190362
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -14103,7 +14071,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh129640
+  m_Name: pb_Mesh190548
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -17617,7 +17585,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh129584
+  m_Name: pb_Mesh190464
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -18203,7 +18171,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh129620
+  m_Name: pb_Mesh190506
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -19564,7 +19532,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh129698
+  m_Name: pb_Mesh190604
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
