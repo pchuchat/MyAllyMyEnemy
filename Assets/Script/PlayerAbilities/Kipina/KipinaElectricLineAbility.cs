@@ -21,6 +21,7 @@ public class KipinaElectricLineAbility : MonoBehaviour
 
     // Private variables
     private CharacterController characterController;
+    private PlayerInput input;
     private PlayerMovement playerMovement;
     private bool isOnElectricLine = false;
     private LineRenderer currentElectricLine;
@@ -44,6 +45,7 @@ public class KipinaElectricLineAbility : MonoBehaviour
         // Initialize variables
         SetParticleSystemActive(false);
         characterController = GetComponent<CharacterController>();
+        input = GetComponent<PlayerInput>();
         playerMovement = GetComponent<PlayerMovement>();
         interactor = GetComponent<InteractableDetection>();
         Time.fixedDeltaTime = 0.02f;
@@ -118,6 +120,8 @@ public class KipinaElectricLineAbility : MonoBehaviour
                 isOnElectricLine = true;
                 playerMovement.enabled = false;
                 characterController.enabled = false;
+                input.actions.FindAction("Jump").Disable();
+                input.actions.FindAction("Attack").Disable();
 
                 // Activate the electric ball object
                 SetParticleSystemActive(true);
@@ -171,6 +175,8 @@ public class KipinaElectricLineAbility : MonoBehaviour
                 // Re-enable the player's movement and character controller
                 playerMovement.enabled = true;
                 characterController.enabled = true;
+                input.actions.FindAction("Jump").Enable();
+                input.actions.FindAction("Attack").Enable();
 
                 // Set the ElectricBall object to inactive //////////////////////////////////////////////////
                 SetParticleSystemActive(false);

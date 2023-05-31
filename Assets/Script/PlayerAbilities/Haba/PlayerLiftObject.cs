@@ -83,6 +83,7 @@ public class PlayerLiftObject : MonoBehaviour
                     maxHeight.y = (target.transform.position.y) + stopAtHeight;
                     input.actions.FindAction("Movement").Disable();
                     input.actions.FindAction("Jump").Disable();
+                    input.actions.FindAction("Attack").Disable();
                     canLift = true;
                     move.lifting = true;
                 }
@@ -134,6 +135,7 @@ public class PlayerLiftObject : MonoBehaviour
                 {
                     input.actions.FindAction("Movement").Enable();
                     input.actions.FindAction("Jump").Enable();
+                    input.actions.FindAction("Attack").Enable();
                     rb.constraints = RigidbodyConstraints.FreezeAll;
                     target.tag = "liftable";
                     target = null;
