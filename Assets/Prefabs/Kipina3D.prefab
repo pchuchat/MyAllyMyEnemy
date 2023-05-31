@@ -134,8 +134,9 @@ MonoBehaviour:
   alwaysPlayDoubleJumpSounds:
   - {fileID: 8300000, guid: 83ff000692cf56843a2de9fb3cc54b05, type: 3}
   alwaysPlayAttackSounds:
-  - {fileID: 8300000, guid: 2ef26044eed6fe144b602b11f64b2311, type: 3}
-  - {fileID: 8300000, guid: 59778eca181d32f49a588f5475ded39b, type: 3}
+  - {fileID: 8300000, guid: b0194baf2f751f341af579cf6856ee3a, type: 3}
+  - {fileID: 8300000, guid: 3b1e5bd536bb5984793d9d66e888774d, type: 3}
+  - {fileID: 8300000, guid: 51568f03a5267fd4390c3a6469d9a886, type: 3}
   carrying: 0
   lifting: 0
   pushing: 0
