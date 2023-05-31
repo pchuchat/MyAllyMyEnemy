@@ -70,6 +70,7 @@ public class MovableObject : MonoBehaviour
             transform.forward = collider.gameObject.transform.forward;
             collider.gameObject.tag = "Untagged";
             collider.gameObject.layer = 0;
+            collider.gameObject.GetComponent<BoxCollider>().enabled = false;
             tag = "Untagged";
             GetComponent<BoxCollider>().isTrigger = false;
         }
