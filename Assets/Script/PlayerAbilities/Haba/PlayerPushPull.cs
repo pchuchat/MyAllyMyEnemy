@@ -72,6 +72,7 @@ public class PlayerPushPull : MonoBehaviour
         {
             pushableObjectRb.constraints = RigidbodyConstraints.FreezeRotation;
             input.actions.FindAction("Jump").Disable();
+            input.actions.FindAction("Attack").Disable();
             playerMovement.enabled = false;
             pushing = true;
         }
@@ -99,6 +100,7 @@ public class PlayerPushPull : MonoBehaviour
         }
         pushableObjectRb.constraints = RigidbodyConstraints.FreezeAll;
         input.actions.FindAction("Jump").Enable();
+        input.actions.FindAction("Attack").Enable();
         playerMovement.enabled = true;
         pushing = false;
         pushableObject = null;
@@ -161,10 +163,14 @@ public class PlayerPushPull : MonoBehaviour
         {
             if (movementInput != Vector2.zero)
             {
+                animator.ResetTrigger("Walk");
+                animator.ResetTrigger("Idle");
                 animator.SetTrigger("Pushwalk");
             }
             else
             {
+                animator.ResetTrigger("Walk");
+                animator.ResetTrigger("Idle");
                 animator.SetTrigger("Push");
             }
         }

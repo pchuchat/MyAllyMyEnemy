@@ -19,6 +19,7 @@ public class PlayerCarryCable : MonoBehaviour
     void Start()
     {
         interactor = GetComponent<InteractableDetection>();
+        input = GetComponent<PlayerInput>();
     }
 
     public bool IsCarrying()
@@ -36,10 +37,10 @@ public class PlayerCarryCable : MonoBehaviour
         {
             if(carrying == false)
             {
-                input = GetComponent<PlayerInput>();
                 cableEnd = interactor.GetInteractable("cableEnd");
                 if(cableEnd != null)
                 {
+                    input.actions.FindAction("Attack").Disable();
                     cableEndRB = cableEnd.GetComponent<Rigidbody>();
                     PickUpCable();
                 }
@@ -70,6 +71,7 @@ public class PlayerCarryCable : MonoBehaviour
     /// </summary>
     public void DropCable()
     {
+        input.actions.FindAction("Attack").Enable();
         carrying = false;
         cableEnd.transform.SetParent(null);
         cableEndRB.useGravity = true;

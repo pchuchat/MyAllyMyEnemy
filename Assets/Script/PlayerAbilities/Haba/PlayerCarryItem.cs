@@ -100,6 +100,7 @@ public class PlayerCarryItem : MonoBehaviour
 
         movableObjectGO.transform.SetParent(transform);
         input.actions.FindAction("Jump").Disable();
+        input.actions.FindAction("Attack").Disable();
         simulation = movableObjectGO.GetComponent<PathSimulation>();
         simulation.SetCrosshair(crosshairPrefab);
         movableObjectRb = movableObjectGO.GetComponent<Rigidbody>();
@@ -132,6 +133,7 @@ public class PlayerCarryItem : MonoBehaviour
         carrying = false;
         move.carrying = false;
         input.actions.FindAction("Jump").Enable();
+        input.actions.FindAction("Attack").Enable();
         targets = null;
         movableObject = null;
         interactor.InteractionFinished();

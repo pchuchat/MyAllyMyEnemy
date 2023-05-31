@@ -94,12 +94,12 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 4294967295
   m_fontSize: 50
-  m_fontSizeBase: 36
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 30
   m_fontSizeMax: 50
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -266,14 +266,24 @@ MonoBehaviour:
   doublejumpSounds:
   - {fileID: 8300000, guid: 58171893447e5b14e8605fae0243edb7, type: 3}
   - {fileID: 8300000, guid: c831c7a30911f3a459a0aa44f11da7fe, type: 3}
+  attackSounds:
+  - {fileID: 8300000, guid: df4154ddde8b1134088bc251e188109c, type: 3}
+  - {fileID: 8300000, guid: e88924c3802784f498336beb67690832, type: 3}
+  - {fileID: 8300000, guid: 735d34a631a1bd2458fee789023c65bc, type: 3}
   alwaysPlayJumpSounds:
   - {fileID: 8300000, guid: a48087ad534e3ad449c44e0c08457266, type: 3}
   alwaysPlayDoubleJumpSounds:
   - {fileID: 8300000, guid: b4ef7d91a3d7ba14a82787bce25519f3, type: 3}
+  alwaysPlayAttackSounds:
+  - {fileID: 8300000, guid: c18520764c15db84ea1d6a644a19151c, type: 3}
+  - {fileID: 8300000, guid: b7c2eee380ba1b544933be93a63b02dc, type: 3}
+  - {fileID: 8300000, guid: 13dea6119fa10694fbfab90ba1de2157, type: 3}
+  - {fileID: 8300000, guid: d7d2d49c6182e7a47a9f1d019ce25130, type: 3}
   carrying: 0
   lifting: 0
   pushing: 0
   pushMoving: 0
+  attacking: 0
 --- !u!114 &-6513605987461919689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -376,7 +386,19 @@ MonoBehaviour:
     m_ActionId: 821db7a3-11f3-4ca7-a24c-546ee687d103
     m_ActionName: Player/Lift[/DualShock4GamepadHID/buttonEast,/DualShock4GamepadHID1/buttonEast,/Keyboard/h,/Keyboard/l]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6177564754764185179}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+        m_MethodName: OnAttack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: d8d347a7-a7ce-4ec1-b07e-cb9c0ba0c5f5
     m_ActionName: Player/Attack[/DualShock4GamepadHID/buttonWest,/DualShock4GamepadHID1/buttonWest,/Keyboard/f,/Keyboard/j]
   - m_PersistentCalls:
@@ -501,7 +523,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: 1
-  stopAtHeight: 1.5
+  stopAtHeight: 1.8
   time: 20
   soundinterval: 5
   liftSounds:

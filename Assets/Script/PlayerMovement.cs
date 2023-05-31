@@ -23,13 +23,22 @@ public class PlayerMovement : MonoBehaviour
     // Strength of gravity affecting the player
     [SerializeField] private float gravityValue = -9.81f;
 
+    // Whether the character uses electricity for attacks
+    [SerializeField] private bool usesElectricity = false;
+
+    // Particle systems for hand lightnings used during attacks, 0 for right hand and 1 for left hand
+    [SerializeField] private ParticleSystem[] handLightnighs;
+
     // AudioClips for jumping
     [Header("Sounds")]
     [Tooltip("Chance to play sounds, 100% to play always")] [SerializeField] private float chanceToPlay = 80;
     [Tooltip("Audioclips for single jump")] [SerializeField] private List<AudioClip> jumpSounds;
     [Tooltip("Audioclips for double jump")] [SerializeField] private List<AudioClip> doublejumpSounds;
+    [Tooltip("Audioclips for attacks")] [SerializeField] private List<AudioClip> attackSounds;
     [Tooltip("Jump sounds that play always when player jumps")] [SerializeField] private List<AudioClip> alwaysPlayJumpSounds;
     [Tooltip("Doublejump sounds that play always when player jumps")] [SerializeField] private List<AudioClip> alwaysPlayDoubleJumpSounds;
+    [Tooltip("Attack sounds that play always when player attacks")] [SerializeField] private List<AudioClip> alwaysPlayAttackSounds;
+
 
 
 
@@ -47,6 +56,7 @@ public class PlayerMovement : MonoBehaviour
 
     // The direction the player should slide, ignoring momevent input
     private Vector3 slideDirection = Vector3.zero;
+    private float attackSlideSpeed = 0;
 
     // Whether or not the player is currently grounded
     private bool groundedPlayer;
@@ -66,6 +76,14 @@ public class PlayerMovement : MonoBehaviour
 
     private float coyoteTimer;
 
+    private float attackTimer;
+
+    private bool queueJump = false;
+
+    private bool queueAttack = false;
+
+    private bool rightAttackNext = true;
+
     private Transform cameraRig;
 
     private PlayerCarryCable carryCable;
@@ -74,6 +92,7 @@ public class PlayerMovement : MonoBehaviour
     public bool lifting = false;
     public bool pushing = false;
     public bool pushMoving = false;
+    public bool attacking = false;
 
 
     private void Start()
@@ -85,6 +104,12 @@ public class PlayerMovement : MonoBehaviour
         randomizer = GetComponent<RandomSoundPlayer>();
         cameraRig = Camera.main.GetComponentInParent<Transform>();
         carryCable = GetComponent<PlayerCarryCable>();
+        // Disable hand electricities
+        if (usesElectricity)
+        {
+            handLightnighs[0].Stop();
+            handLightnighs[1].Stop();
+        }
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -97,45 +122,122 @@ public class PlayerMovement : MonoBehaviour
     {
         if (context.performed)
         {
-            if (PlayerGrounded() && !steepSliding)
+            if (attacking && PlayerGrounded())
             {
-                coyoteTimer = 0;
-                // Play single jump sound
-                randomizer.Play(jumpSounds, chanceToPlay);
-                randomizer.Play(alwaysPlayJumpSounds);
-
-                // Set player velocity for single jump
-                playerVelocity.y = Mathf.Sqrt(jumpHeight * -2.0f * gravityValue);
-
-                // Allow double jump
-                canDoubleJump = true;
-                if (carryCable != null && carryCable.IsCarrying()) canDoubleJump = false;
-
-                animator.ResetTrigger("Idle");
-                animator.ResetTrigger("Walk");
-                animator.SetTrigger("Jump");
+                queueJump = true;
             }
-            else if (canDoubleJump)
+            else
             {
-                // Play double jump sound
-                randomizer.Play(doublejumpSounds, chanceToPlay);
-                randomizer.Play(alwaysPlayDoubleJumpSounds);
+                Jump();
+            }
+        }
+    }
 
-                // Set player velocity for double jump when going up
-                if (playerVelocity.y >= -1)
+    public void OnAttack(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if (attacking && attackTimer < 0.166)
+            {
+                queueAttack = true;
+            }
+            else if (!attacking)
+            {
+                Attack();
+            }
+        }
+    }
+
+    void Jump()
+    {
+        if (!attacking && PlayerGrounded() && !steepSliding)
+        {
+            queueJump = false;
+            coyoteTimer = 0;
+            // Play single jump sound
+            randomizer.Play(jumpSounds, chanceToPlay);
+            randomizer.Play(alwaysPlayJumpSounds);
+
+            // Set player velocity for single jump
+            playerVelocity.y = Mathf.Sqrt(jumpHeight * -2.0f * gravityValue);
+
+            // Allow double jump
+            canDoubleJump = true;
+            if (carryCable != null && carryCable.IsCarrying()) canDoubleJump = false;
+
+            animator.ResetTrigger("Idle");
+            animator.ResetTrigger("Walk");
+            animator.SetTrigger("Jump");
+        }
+        else if (canDoubleJump)
+        {
+            // Play double jump sound
+            randomizer.Play(doublejumpSounds, chanceToPlay);
+            randomizer.Play(alwaysPlayDoubleJumpSounds);
+
+            // Set player velocity for double jump when going up
+            if (playerVelocity.y >= -1)
+            {
+                playerVelocity.y = Mathf.Sqrt(jumpHeight * doublejumpRatio * -2.0f * gravityValue);
+            }
+            // Set player velocity for double jump when going down (only lowers downwards momentum to it's square root before adding the updwards momentum)
+            else
+            {
+                playerVelocity.y = -Mathf.Sqrt(-playerVelocity.y) + Mathf.Sqrt(jumpHeight * doublejumpRatio * -2.0f * gravityValue);
+            }
+
+            // Disable double jump until next grounded state
+            canDoubleJump = false;
+
+            animator.SetTrigger("Jump");
+        }
+    }
+
+    void Attack()
+    {
+        if (!attacking && PlayerGrounded() && !steepSliding)
+        {
+            queueAttack = false;
+            attacking = true;
+            attackTimer = 0.333f;
+            attackSlideSpeed = 2f;
+            rightAttackNext = !rightAttackNext;
+            randomizer.Play(attackSounds, chanceToPlay);
+            randomizer.Play(alwaysPlayAttackSounds);
+
+            if (usesElectricity)
+            {
+                if (rightAttackNext)
                 {
-                    playerVelocity.y = Mathf.Sqrt(jumpHeight * doublejumpRatio * -2.0f * gravityValue);
+                    handLightnighs[0].Play();
                 }
-                // Set player velocity for double jump when going down (only lowers downwards momentum to it's square root before adding the updwards momentum)
                 else
                 {
-                    playerVelocity.y = -Mathf.Sqrt(-playerVelocity.y) + Mathf.Sqrt(jumpHeight * doublejumpRatio * -2.0f * gravityValue);
+                    handLightnighs[1].Play();
                 }
+            }
 
-                // Disable double jump until next grounded state
-                canDoubleJump = false;
+            if (movementInput != Vector2.zero)
+            {
+                //Camera direction
+                Vector3 cameraForward = cameraRig.forward;
+                Vector3 cameraRight = cameraRig.right;
 
-                animator.SetTrigger("Jump");
+                cameraForward.y = 0;
+                cameraRight.y = 0;
+
+                //Relative camera direction
+                Vector3 relativeForward = movementInput.y * cameraForward;
+                Vector3 relativeRight = movementInput.x * cameraRight;
+
+                Vector3 relativeDirection = relativeForward + relativeRight;
+
+                slideDirection = relativeDirection; 
+                transform.rotation = Quaternion.LookRotation(relativeDirection);
+            }
+            else
+            {
+                slideDirection = transform.forward;
             }
         }
     }
@@ -193,7 +295,10 @@ public class PlayerMovement : MonoBehaviour
         if (groundedPlayer && playerVelocity.y <= 0 && !aboveOtherPlayerLastFrame && !steepSliding)
         {
             coyoteTimer = 0.1f;
-            slideDirection = Vector3.zero;
+            if (!attacking)
+            {
+                slideDirection = Vector3.zero;
+            }
         }
         if (coyoteTimer > 0)
         {
@@ -207,7 +312,39 @@ public class PlayerMovement : MonoBehaviour
             // Disable double jump until next jump
             canDoubleJump = false;
         }
-
+        // Modify the slidespeed and stop the attack once its duration is up
+        if (attacking)
+        {
+            attackTimer -= Time.deltaTime;
+            attackSlideSpeed -= Time.deltaTime * 6;
+            slideDirection = slideDirection.normalized * attackSlideSpeed;
+            if (attackTimer <= 0)
+            {
+                if (usesElectricity)
+                {
+                    handLightnighs[0].Stop();
+                    handLightnighs[1].Stop();
+                }
+                attacking = false;
+            }
+        }
+        // Call jump if it's queued once the attack finishes OR if the player becomes nongrounded while still attacking
+        if (queueJump && ((!attacking) || (!PlayerGrounded() && attacking)))
+        {
+            if (usesElectricity)
+            {
+                handLightnighs[0].Stop();
+                handLightnighs[1].Stop();
+            }
+            attacking = false;
+            slideDirection = Vector3.zero;
+            Jump();
+        }
+        // Call attack if another was queued while still attacking
+        if (queueAttack && !attacking)
+        {
+            Attack();
+        }
 
         //Camera direction
         Vector3 cameraForward = cameraRig.forward;
@@ -230,6 +367,11 @@ public class PlayerMovement : MonoBehaviour
             Physics.SyncTransforms();
             controller.Move(playerSpeed * Time.deltaTime * move);
         }
+        else if (attacking)
+        {
+            Physics.SyncTransforms();
+            controller.Move(playerSpeed * 0.8f * Time.deltaTime * slideDirection);
+        }
         else
         {
             Physics.SyncTransforms();
@@ -237,7 +379,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Face the player in the direction of movement
-        if (move != Vector3.zero)
+        if (move != Vector3.zero && !attacking)
         {
             transform.rotation = Quaternion.LookRotation(move);
         }
@@ -248,7 +390,7 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(playerVelocity * Time.deltaTime);
 
         // Movement animation
-        if (movementInput != Vector2.zero && PlayerGrounded() && !lifting && !pushing)
+        if (movementInput != Vector2.zero && PlayerGrounded() && !lifting && !pushing && !attacking)
         {
             if (carrying)
             {
@@ -256,12 +398,15 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
+                animator.ResetTrigger("Freefall");
+                animator.ResetTrigger("AttackRight");
+                animator.ResetTrigger("AttackLeft");
                 animator.SetTrigger("Walk");
             }
         }
 
         // Idle animation
-        if (movementInput == Vector2.zero && PlayerGrounded() && !lifting && !pushing)
+        if (movementInput == Vector2.zero && PlayerGrounded() && !lifting && !pushing && !attacking)
         {
             if (carrying)
             {
@@ -269,6 +414,9 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
+                animator.ResetTrigger("Freefall");
+                animator.ResetTrigger("AttackRight");
+                animator.ResetTrigger("AttackLeft");
                 animator.SetTrigger("Idle");
             }
         }
@@ -285,9 +433,27 @@ public class PlayerMovement : MonoBehaviour
 
 
         // Freefall animation
-        if (!PlayerGrounded())
+        if (!PlayerGrounded() && !attacking)
         {
             animator.SetTrigger("Freefall");
+        }
+
+        // Attack animation
+        if (attacking)
+        {
+            animator.ResetTrigger("Walk");
+            animator.ResetTrigger("Idle");
+
+            if (rightAttackNext)
+            {
+                animator.ResetTrigger("AttackLeft");
+                animator.SetTrigger("AttackRight");
+            }
+            else
+            {
+                animator.ResetTrigger("AttackRight");
+                animator.SetTrigger("AttackLeft");
+            }
         }
     }
 
