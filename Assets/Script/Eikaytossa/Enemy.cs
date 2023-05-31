@@ -1,6 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+// ©GameGurus - Heikkinen R., Hopeasaari J., Kantola J., Kettunen J., Kommio R, PC, Parviainen P., Rautiainen J.
+// Creator: PC, Phatchanon Chuchat
+// TODO:
+//  - Enemy 
+//
+// 
 
 public class Enemy : MonoBehaviour
 {
@@ -8,11 +14,6 @@ public class Enemy : MonoBehaviour
     private float dist;
     public float moveSpeed;
     public float howClose;
-
-    void Start()
-    {
-
-    }
 
     public float damageAmount = 10.0f;  // Vihollisen aiheuttama vahinko
 

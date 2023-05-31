@@ -1,6 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+// ©GameGurus - Heikkinen R., Hopeasaari J., Kantola J., Kettunen J., Kommio R, PC, Parviainen P., Rautiainen J.
+// Creator: PC, Phatchanon Chuchat
+// TODO:
+//  
+//
+// 
 
 public class MovePlatform: MonoBehaviour
 { 
